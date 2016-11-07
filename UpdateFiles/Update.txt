@@ -1,12 +1,12 @@
-﻿EasyBrailleEdit.exe       ; 2.0.2.0 '若 client 端版本比這裡指定的版本還要舊，則下載
-Txt2Brl.exe               ; 2.7.2.0 'Txt2Brl.exe 版本應該跟 EasyBrailleEdit 一致
-Huanlin.DLL               ; 2.0.5.0
-Huanlin.AppBlock.dll      ; 2.0.5.0
-Huanlin.Braille.dll       ; 2.0.5.0
-Huanlin.WinForms.dll      ; 2.0.5.0
-Huanlin.TextServices.dll  ; 2.0.5.0
-Huanlin.WinApi.dll        ; 2.0.5.0
+﻿EasyBrailleEdit.exe       ; 2.7.2 '若 client 端版本比這裡指定的版本還要舊，則下載
+Txt2Brl.exe               ; 2.7.2 'Txt2Brl.exe 版本應該跟 EasyBrailleEdit 一致
+Huanlin.DLL               ; 4.0.0
+Huanlin.AppBlock.dll      ; 4.0.0
+Huanlin.Braille.dll       ; 4.0.0
+Huanlin.WinForms.dll      ; 4.0.0
+Huanlin.TextServices.dll  ; 4.0.0
+Huanlin.WinApi.dll        ; 4.0.0
 AppConfig.Default.ini     ; ?     '若 client 端無此檔案才更新
 phrase.phf                ; ?     '若 client 端無此檔案才更新
-SourceGrid.DLL            ; 4.11
+SourceGrid.DLL            ; 4.40
 Nini.dll                  ; 1.1
