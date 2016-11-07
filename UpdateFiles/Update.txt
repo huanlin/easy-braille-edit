@@ -6,6 +6,7 @@ Huanlin.Braille.dll       ; 4.0.0
 Huanlin.WinForms.dll      ; 4.0.0
 Huanlin.TextServices.dll  ; 4.0.0
 Huanlin.WinApi.dll        ; 4.0.0
+ImeLib.dll                ; 4.0.0
 AppConfig.Default.ini     ; ?     '若 client 端無此檔案才更新
 phrase.phf                ; ?     '若 client 端無此檔案才更新
 SourceGrid.DLL            ; 4.40
