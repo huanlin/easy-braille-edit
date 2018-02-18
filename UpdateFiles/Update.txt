@@ -1,5 +1,5 @@
-﻿EasyBrailleEdit.exe       ; 2.7.2 '若 client 端版本比這裡指定的版本還要舊，則下載
-Txt2Brl.exe               ; 2.7.2 'Txt2Brl.exe 版本應該跟 EasyBrailleEdit 一致
+﻿EasyBrailleEdit.exe       ; 2.8.0 '若 client 端版本比這裡指定的版本還要舊，則下載
+Txt2Brl.exe               ; 2.8.0 'Txt2Brl.exe 版本應該跟 EasyBrailleEdit 一致
 Huanlin.DLL               ; 4.0.0
 Huanlin.AppBlock.dll      ; 4.0.0
 Huanlin.Braille.dll       ; 4.0.0
