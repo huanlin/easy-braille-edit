@@ -12,3 +12,5 @@ Features:
  - Print both text and braille files.
 
 If you are willing to help, feel free to improve the code and submit pull requests.
+
+[<img src="https://huanlin.visualstudio.com/_apis/public/build/definitions/4ea34b79-924b-4784-aca6-2668f8014439/1/badge" />](https://huanlin.visualstudio.com/Braille/_build/index?definitionId=1})
