@@ -1,6 +1,6 @@
-# Easy Braille Edit
+# EasyBrailleEdit
 
-Easy Braille Edit is a Windows desktop application for generating braille documents from text files. 
+EasyBrailleEdit is a Windows desktop application for generating braille documents from text files. 
 
 It was a commercial product since 2008, and now an open source project since 2018.
 
