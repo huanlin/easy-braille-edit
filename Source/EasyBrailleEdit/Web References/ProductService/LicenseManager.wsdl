@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetClientIP">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetClientIPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClientIPResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateUserReg">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userRegDataStr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateUserRegResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidateUserRegResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="productId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="licenseKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tel" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegisterUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterUserEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="productId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="licenseKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contactName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tel" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterUserExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegisterUserExResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DecryptRegData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="regText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DecryptRegDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DecryptRegDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WriteAutoUpdateLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="productName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="licenseKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="productVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileVersion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WriteAutoUpdateLogResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestEmail">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestEmailResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetClientIPSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClientIP" />
+  </wsdl:message>
+  <wsdl:message name="GetClientIPSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClientIPResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateUserRegSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidateUserReg" />
+  </wsdl:message>
+  <wsdl:message name="ValidateUserRegSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidateUserRegResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterUserSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterUser" />
+  </wsdl:message>
+  <wsdl:message name="RegisterUserSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterUserExSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterUserEx" />
+  </wsdl:message>
+  <wsdl:message name="RegisterUserExSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterUserExResponse" />
+  </wsdl:message>
+  <wsdl:message name="DecryptRegDataSoapIn">
+    <wsdl:part name="parameters" element="tns:DecryptRegData" />
+  </wsdl:message>
+  <wsdl:message name="DecryptRegDataSoapOut">
+    <wsdl:part name="parameters" element="tns:DecryptRegDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="WriteAutoUpdateLogSoapIn">
+    <wsdl:part name="parameters" element="tns:WriteAutoUpdateLog" />
+  </wsdl:message>
+  <wsdl:message name="WriteAutoUpdateLogSoapOut">
+    <wsdl:part name="parameters" element="tns:WriteAutoUpdateLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:TestEmail" />
+  </wsdl:message>
+  <wsdl:message name="TestEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:TestEmailResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LicenseManagerSoap">
+    <wsdl:operation name="GetClientIP">
+      <wsdl:input message="tns:GetClientIPSoapIn" />
+      <wsdl:output message="tns:GetClientIPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUserReg">
+      <wsdl:input message="tns:ValidateUserRegSoapIn" />
+      <wsdl:output message="tns:ValidateUserRegSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <wsdl:input message="tns:RegisterUserSoapIn" />
+      <wsdl:output message="tns:RegisterUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUserEx">
+      <wsdl:input message="tns:RegisterUserExSoapIn" />
+      <wsdl:output message="tns:RegisterUserExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DecryptRegData">
+      <wsdl:input message="tns:DecryptRegDataSoapIn" />
+      <wsdl:output message="tns:DecryptRegDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WriteAutoUpdateLog">
+      <wsdl:input message="tns:WriteAutoUpdateLogSoapIn" />
+      <wsdl:output message="tns:WriteAutoUpdateLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestEmail">
+      <wsdl:input message="tns:TestEmailSoapIn" />
+      <wsdl:output message="tns:TestEmailSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LicenseManagerSoap" type="tns:LicenseManagerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetClientIP">
+      <soap:operation soapAction="http://tempuri.org/GetClientIP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUserReg">
+      <soap:operation soapAction="http://tempuri.org/ValidateUserReg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <soap:operation soapAction="http://tempuri.org/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUserEx">
+      <soap:operation soapAction="http://tempuri.org/RegisterUserEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptRegData">
+      <soap:operation soapAction="http://tempuri.org/DecryptRegData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WriteAutoUpdateLog">
+      <soap:operation soapAction="http://tempuri.org/WriteAutoUpdateLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestEmail">
+      <soap:operation soapAction="http://tempuri.org/TestEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LicenseManagerSoap12" type="tns:LicenseManagerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetClientIP">
+      <soap12:operation soapAction="http://tempuri.org/GetClientIP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUserReg">
+      <soap12:operation soapAction="http://tempuri.org/ValidateUserReg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <soap12:operation soapAction="http://tempuri.org/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUserEx">
+      <soap12:operation soapAction="http://tempuri.org/RegisterUserEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptRegData">
+      <soap12:operation soapAction="http://tempuri.org/DecryptRegData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WriteAutoUpdateLog">
+      <soap12:operation soapAction="http://tempuri.org/WriteAutoUpdateLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestEmail">
+      <soap12:operation soapAction="http://tempuri.org/TestEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LicenseManager">
+    <wsdl:port name="LicenseManagerSoap" binding="tns:LicenseManagerSoap">
+      <soap:address location="http://innoobject.dyndns.org/ProductService/LicenseManager.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LicenseManagerSoap12" binding="tns:LicenseManagerSoap12">
+      <soap12:address location="http://innoobject.dyndns.org/ProductService/LicenseManager.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
