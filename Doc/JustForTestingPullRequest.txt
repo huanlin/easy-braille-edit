@@ -1,1 +1,0 @@
-For testing auto build with VSTS when a pull request is created.
