@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "©öÂIÂùµø"
-#define MyAppVersion "2.7.1"
-#define MyAppPublisher "MiniStep Studio"
+#define MyAppVersion "2.8.0"
+#define MyAppPublisher "Ministep Studio"
 #define MyAppExeName "EasyBrailleEdit.exe"
 
 [Setup]
@@ -31,6 +31,7 @@ Name: "traditional_chinese"; MessagesFile: "compiler:Languages\ChineseTraditiona
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
+Source: "Files\LICENSE.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\ReleaseNote.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\EasyBrailleEdit.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\AppConfig.Default.ini"; DestDir: "{app}"; Flags: ignoreversion
