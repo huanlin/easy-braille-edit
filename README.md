@@ -1,5 +1,7 @@
 # EasyBrailleEdit
 
+[<img src="https://huanlin.visualstudio.com/_apis/public/build/definitions/4ea34b79-924b-4784-aca6-2668f8014439/1/badge" />](https://huanlin.visualstudio.com/Braille/_build/index?definitionId=1})
+
 ## 簡介
 
 Easy Braille Edit（易點雙視）是一套運行於微軟視窗作業系統、用來製作雙視文件或雙視書的工具。您只要將書籍的內容依平常的習慣輸入，並搭配本系統提供的特殊控制標籤，便能夠完成一篇同時包含中文、英文、數學等各種文字符號的文件，然後然後利用本系統的點字轉換功能，即可將整篇用電腦輸入好的文字（明眼字）轉成點字，再將明眼字與點字分別透過一般的印表機以及點字印表機列印出來，完成點字書或雙視書的製作。
