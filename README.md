@@ -1,6 +1,4 @@
-# Easy Braille Edit
-
-[<img src="https://huanlin.visualstudio.com/_apis/public/build/definitions/4ea34b79-924b-4784-aca6-2668f8014439/1/badge" />](https://huanlin.visualstudio.com/Braille/_build/index?definitionId=1})
+# EasyBrailleEdit
 
 ## 簡介
 
