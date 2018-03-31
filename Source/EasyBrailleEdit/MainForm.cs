@@ -34,6 +34,7 @@ namespace EasyBrailleEdit
             InitializeComponent();
 
             Log.Logger = new LoggerConfiguration()
+                .ReadFrom.AppSettings()
                 .WriteTo.RollingFile("log-main-{Date}.txt")
                 .CreateLogger();
 
@@ -778,7 +779,7 @@ namespace EasyBrailleEdit
             {
                 if (!Huanlin.TextServices.ImeHelper.IFELanguageReady)
                 {
-                    MsgBoxHelper.ShowWarning("請注意！您的作業環境無法使用微軟智慧型注音判斷功能。\r\n轉點字功能雖可使用，但無法自動處理破音字，須手動調整。\r\n您可透過此電子郵件尋求協助: huanlin.tsai@gmail.com");
+                    MsgBoxHelper.ShowWarning("請注意！您的作業環境無法使用微軟智慧型注音判斷功能。\r\n轉點字功能雖可使用，但無法自動處理破音字，須手動調整。");
                 }
             }
             catch (Exception ex)
