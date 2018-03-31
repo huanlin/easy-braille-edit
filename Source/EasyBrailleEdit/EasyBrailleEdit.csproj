@@ -497,27 +497,27 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\HuanlinLib\src\Huanlin.AppBlock\Huanlin.AppBlock.csproj">
+    <ProjectReference Include="..\HuanlinLib\src\Huanlin.AppBlock\Huanlin.AppBlock.csproj">
       <Project>{c2d59bd4-0aeb-4c5c-8257-8e01762bd2b6}</Project>
       <Name>Huanlin.AppBlock</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\HuanlinLib\src\Huanlin.Braille\Huanlin.Braille.csproj">
+    <ProjectReference Include="..\HuanlinLib\src\Huanlin.Braille\Huanlin.Braille.csproj">
       <Project>{ffe6d448-5035-4a50-a0e1-e7b4152cb90a}</Project>
       <Name>Huanlin.Braille</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\HuanlinLib\src\Huanlin.TextServices\Huanlin.TextServices.csproj">
+    <ProjectReference Include="..\HuanlinLib\src\Huanlin.TextServices\Huanlin.TextServices.csproj">
       <Project>{71f8cc4c-95ae-4d88-a411-f9505829d992}</Project>
       <Name>Huanlin.TextServices</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\HuanlinLib\src\Huanlin.WinApi\Huanlin.WinApi.csproj">
+    <ProjectReference Include="..\HuanlinLib\src\Huanlin.WinApi\Huanlin.WinApi.csproj">
       <Project>{5c74e1eb-f364-485d-9a73-fbf6ecf716ac}</Project>
       <Name>Huanlin.WinApi</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\HuanlinLib\src\Huanlin.WinForms\Huanlin.WinForms.csproj">
+    <ProjectReference Include="..\HuanlinLib\src\Huanlin.WinForms\Huanlin.WinForms.csproj">
       <Project>{75572453-c3bc-4cb2-8cd3-d5460c2027a2}</Project>
       <Name>Huanlin.WinForms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\HuanlinLib\src\Huanlin\Huanlin.csproj">
+    <ProjectReference Include="..\HuanlinLib\src\Huanlin\Huanlin.csproj">
       <Project>{4c2793dc-4827-4dc4-af4c-f966d8290077}</Project>
       <Name>Huanlin</Name>
     </ProjectReference>
