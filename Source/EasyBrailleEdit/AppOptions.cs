@@ -342,8 +342,16 @@ namespace EasyBrailleEdit
 
         public void Save()
         {
+            if (IsInDesignMode()) // 防止設計時期無法開啟 forms。
+                return;
             string filename = GetOptionsFileName();
             AppGlobals.Options.WriteXml(filename, System.Data.XmlWriteMode.IgnoreSchema);
+        }
+
+        public static bool IsInDesignMode()
+        {
+            return System.Reflection.Assembly.GetExecutingAssembly()
+                 .Location.Contains("VisualStudio");
         }
     }
 }

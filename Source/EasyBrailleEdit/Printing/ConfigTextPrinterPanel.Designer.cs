@@ -53,7 +53,7 @@
             // 
             // btnPageSetup
             // 
-            this.btnPageSetup.Location = new System.Drawing.Point(359, 12);
+            this.btnPageSetup.Location = new System.Drawing.Point(359, 14);
             this.btnPageSetup.Name = "btnPageSetup";
             this.btnPageSetup.Size = new System.Drawing.Size(146, 30);
             this.btnPageSetup.TabIndex = 7;
@@ -64,9 +64,9 @@
             // cboPrinters
             // 
             this.cboPrinters.FormattingEnabled = true;
-            this.cboPrinters.Location = new System.Drawing.Point(87, 17);
+            this.cboPrinters.Location = new System.Drawing.Point(102, 17);
             this.cboPrinters.Name = "cboPrinters";
-            this.cboPrinters.Size = new System.Drawing.Size(266, 23);
+            this.cboPrinters.Size = new System.Drawing.Size(251, 27);
             this.cboPrinters.TabIndex = 6;
             // 
             // label4
@@ -74,7 +74,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(25, 20);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 15);
+            this.label4.Size = new System.Drawing.Size(71, 19);
             this.label4.TabIndex = 5;
             this.label4.Text = "印表機:";
             // 
@@ -86,9 +86,9 @@
             "無",
             "只印奇數頁",
             "只印偶數頁"});
-            this.cboDoubleSideEffect.Location = new System.Drawing.Point(87, 56);
+            this.cboDoubleSideEffect.Location = new System.Drawing.Point(102, 56);
             this.cboDoubleSideEffect.Name = "cboDoubleSideEffect";
-            this.cboDoubleSideEffect.Size = new System.Drawing.Size(113, 23);
+            this.cboDoubleSideEffect.Size = new System.Drawing.Size(113, 27);
             this.cboDoubleSideEffect.TabIndex = 9;
             // 
             // label3
@@ -96,13 +96,13 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(10, 59);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 15);
+            this.label3.Size = new System.Drawing.Size(90, 19);
             this.label3.TabIndex = 8;
             this.label3.Text = "雙面列印:";
             // 
             // ConfigTextPrinterPanel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
