@@ -8,10 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using EasyBrailleEdit.Printing;
-using Huanlin.AppBlock.Registration;
 using Huanlin.AppBlock.Updater;
 using Huanlin.Braille;
-using Huanlin.Helpers;
 using Huanlin.Sys;
 using Huanlin.WinForms;
 
@@ -1055,12 +1053,6 @@ namespace EasyBrailleEdit
         private void rtbOrg_SelectionChanged(object sender, EventArgs e)
         {
             UpdateCaretPosition();
-        }
-
-        private string GetRegFileName()
-        {
-            string filename = StrHelper.ExtractFilePath(Application.ExecutablePath) + UserRegData.GetFileName();
-            return filename;
         }
 
         /// <summary>
