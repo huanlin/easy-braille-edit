@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
-using System.Reflection;
-using System.IO;
+﻿using System.IO;
 using System.Windows.Forms;
-using Huanlin.Braille;
-using Huanlin.AppBlock.Registration;
 using Huanlin.Helpers;
 
 namespace EasyBrailleEdit
