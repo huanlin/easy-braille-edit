@@ -6,12 +6,14 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using EasyBrailleEdit.Printing;
 using Huanlin.AppBlock.Updater;
 using Huanlin.Braille;
 using Huanlin.Sys;
 using Huanlin.WinForms;
+using Serilog;
 
 namespace EasyBrailleEdit
 {
@@ -30,6 +32,10 @@ namespace EasyBrailleEdit
         public MainForm()
         {
             InitializeComponent();
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.RollingFile("log-main-{Date}.txt")
+                .CreateLogger();
 
             m_FileRunner = new FileRunner();
 
@@ -624,7 +630,7 @@ namespace EasyBrailleEdit
         /// 自動更新。
         /// </summary>
         /// <returns>傳回 true 表示更新成功，必須結束程式。</returns>
-        private bool AutoUpdate()
+        private async Task<bool> AutoUpdateAsync()
         {
             if (!AppConfig.Self.AutoUpdate)
             {
@@ -633,13 +639,13 @@ namespace EasyBrailleEdit
 
             if (SysInfo.IsNetworkConnected() && AppGlobals.ServeConnectable)
             {
-                return DoUpdate(true);	
+                return await DoUpdateAsync(true);	
             }
             return false;
             
         }
 
-        private void CheckUpdate()
+        private async Task CheckUpdateAsync()
         {
             if (!SysInfo.IsNetworkConnected())
             {
@@ -647,7 +653,7 @@ namespace EasyBrailleEdit
                 return;
             }
 
-            if (DoUpdate(false)) 
+            if (await DoUpdateAsync(false)) 
             {
                 string msg = "應用程式必須重新啟動才能完成更新程序，是否立即重新啟動？\r\n若您有資料尚未儲存，請選擇【否】。";
                 if (MsgBoxHelper.ShowYesNo(msg) == DialogResult.Yes)
@@ -659,18 +665,21 @@ namespace EasyBrailleEdit
             }
         }
 
-        private bool DoUpdate(bool autoMode)
+        private async Task<bool> DoUpdateAsync(bool autoMode)
         {
-            HttpUpdater updater = new HttpUpdater
+            HttpUpdater updater = new HttpUpdater(Log.Logger)
             {
                 ClientPath = Application.StartupPath,
                 ServerUri = AppConfig.Self.AppUpdateFilesUri,
                 ChangeLogFileName = "ChangeLog.txt"
             };
 
+            // debug using local update feed.
+            //updater.ServerUri = "http://localhost/ebeupdate/";
+
             try
-            {
-                updater.RetrieveUpdateList();
+            {                
+                await updater.GetUpdateListAsync();
             }
             catch (Exception ex)
             {
@@ -700,7 +709,7 @@ namespace EasyBrailleEdit
                         updater.FileUpdated += updForm.updator_FileUpdated;
                         updater.DownloadProgressChanged += updForm.updator_DownloadProgressChanged;
 
-                        if (updater.Update() > 0)
+                        if (await updater.UpdateAsync() > 0)
                         {
                             updForm.TopMost = false;
                             var fvi = FileVersionInfo.GetVersionInfo(Application.ExecutablePath);
@@ -731,19 +740,7 @@ namespace EasyBrailleEdit
             return false;
         }
 
-        private void SendMailWithGmail(string receiver, string subject, string content)
-        {
-            var encoding = System.Text.Encoding.UTF8;
-            using (var smtpClient = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587))
-            {
-                var pwd = Encoding.UTF8.GetString(Convert.FromBase64String("eGZpbGVzMTUwNQ=="));
-                smtpClient.Credentials = new System.Net.NetworkCredential("innoobject", pwd);
-                smtpClient.EnableSsl = true;
-                smtpClient.Send("innoobject@gmail.com", receiver, subject, content);
-            }
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object sender, EventArgs e)
         {
             AppGlobals.CheckServerConnectable();	// 檢查伺服器是否能夠連接。
 
@@ -754,7 +751,7 @@ namespace EasyBrailleEdit
             StatusText = "";
 
             // 自動檢查更新
-            if (AutoUpdate())
+            if (await AutoUpdateAsync())
             {
                 Process.Start(Application.ExecutablePath);
 
@@ -958,7 +955,7 @@ namespace EasyBrailleEdit
             }
         }
 
-        private void miHelpClick(object sender, EventArgs e)
+        private async void miHelpClick(object sender, EventArgs e)
         {
             ToolStripItem obj = (ToolStripItem)sender;
             switch (obj.Tag.ToString())
@@ -968,7 +965,7 @@ namespace EasyBrailleEdit
                     form.ShowDialog();
                     break;
                 case "CheckUpdate":
-                    CheckUpdate();
+                    await CheckUpdateAsync();
                     break;
                 case "Options":
                     ShowOptionsDialog();
