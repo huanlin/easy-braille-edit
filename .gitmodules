@@ -1,0 +1,3 @@
+[submodule "Source\\HuanlinLib"]
+	path = Source\\HuanlinLib
+	url = https://github.com/huanlin/HuanlinLib.git
