@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "©öÂIÂùµø"
-#define MyAppVersion "2.8.0"
+#define MyAppVersion "2.8.2"
 #define MyAppPublisher "Ministep Studio"
 #define MyAppExeName "EasyBrailleEdit.exe"
 
@@ -47,6 +47,10 @@ Source: "Files\x86\Huanlin.WinForms.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\ImeLib.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Nini.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Phrase.phf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\Serilog.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\Serilog.Settings.AppSettings.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\Serilog.Sinks.File.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\Serilog.Sinks.RollingFile.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\SourceGrid.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Txt2Brl.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Txt2Brl.exe.config"; DestDir: "{app}"; Flags: ignoreversion
