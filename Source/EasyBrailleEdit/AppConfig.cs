@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
 using System.Text;
 using Huanlin.Helpers;
@@ -12,7 +11,6 @@ namespace EasyBrailleEdit
     /// </summary>
     public class AppConfig
     {
-        private const string DefaultServerName = "www.braille.somee.com";
         private const string IniFileName = "AppConfig.ini";
         private const string IniFileNameDefault = "AppConfig.Default.ini";
 
@@ -45,7 +43,6 @@ namespace EasyBrailleEdit
                         StringBuilder sb = new StringBuilder();
                         sb.AppendLine(";應用程式組態檔");
                         sb.AppendLine("[Internet]");
-                        sb.AppendLine("AppServerName=");
                         sb.AppendLine($"AppUpdateFilesUri={AppConst.DefaultAppUpdateFilesUri}");
                         File.WriteAllText(m_FileName, sb.ToString(), Encoding.Default);
                     }
@@ -135,21 +132,6 @@ namespace EasyBrailleEdit
         }
 
         #endregion
-
-        /// <summary>
-        /// 應用程式伺服器名稱（網域名稱或 IP 位址）。
-        /// </summary>
-        public string AppServerName
-        {
-            get
-            {
-                return m_InternetCfg.GetString("AppServerName", DefaultServerName);
-            }
-            set
-            {
-                m_InternetCfg.Set("AppServerName", value);
-            }
-        }
 
         public string AppUpdateFilesUri
         {
