@@ -144,25 +144,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Huanlin, Version=4.0.0.40161, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\Huanlin.dll</HintPath>
-    </Reference>
-    <Reference Include="Huanlin.AppBlock">
-      <HintPath>..\..\Lib\Huanlin.AppBlock.dll</HintPath>
-    </Reference>
-    <Reference Include="Huanlin.Braille, Version=4.0.0.40162, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\Huanlin.Braille.dll</HintPath>
-    </Reference>
-    <Reference Include="Huanlin.TextServices, Version=4.0.0.40161, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\Huanlin.TextServices.dll</HintPath>
-    </Reference>
-    <Reference Include="Huanlin.WinApi, Version=4.0.0.40161, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\Huanlin.WinApi.dll</HintPath>
-    </Reference>
     <Reference Include="Nini, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Nini.dll</HintPath>
@@ -208,6 +189,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HuanlinLib\src\Huanlin.Braille\Huanlin.Braille.csproj">
+      <Project>{ffe6d448-5035-4a50-a0e1-e7b4152cb90a}</Project>
+      <Name>Huanlin.Braille</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HuanlinLib\src\Huanlin.TextServices\Huanlin.TextServices.csproj">
+      <Project>{71f8cc4c-95ae-4d88-a411-f9505829d992}</Project>
+      <Name>Huanlin.TextServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HuanlinLib\src\Huanlin\Huanlin.csproj">
+      <Project>{4c2793dc-4827-4dc4-af4c-f966d8290077}</Project>
+      <Name>Huanlin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
