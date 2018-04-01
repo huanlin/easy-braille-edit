@@ -1,17 +1,14 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
-using Huanlin.TextServices.Chinese;
-using Huanlin.Braille;
-using Huanlin.Helpers;
 using EasyBrailleEdit;
+using Huanlin.Braille;
+using Huanlin.TextServices.Chinese;
 
 namespace Txt2Brl
 {
-	public class BrailleConverterFacade 
+    public class BrailleConverterFacade 
 	{
 		BrailleDocument m_Doc;
 		BrailleProcessor m_Processor;

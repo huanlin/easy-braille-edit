@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Windows.Forms;
-using Huanlin.Helpers;
 
 namespace EasyBrailleEdit
 {
@@ -9,8 +8,6 @@ namespace EasyBrailleEdit
         private AppGlobals()
         {
         }
-
-		private static char m_SeverConnectable = '?';	// Y/N/? = 是/否/尚未偵測
 
         public static AppOptions Options = null;
 
@@ -70,30 +67,5 @@ namespace EasyBrailleEdit
 			}
 			return path;
 		}
-
-		public static bool ServeConnectable
-		{
-			get
-			{
-				if (m_SeverConnectable == '?')	
-				{
-					CheckServerConnectable();	// 只偵測一次。
-				}
-				return (m_SeverConnectable == 'Y');
-			}
-		}
-
-		public static void CheckServerConnectable() 
-		{
-			if (NetHelper.IsServerConnectable(AppConfig.Self.AppServerName, 80, 1))
-			{
-				m_SeverConnectable = 'Y';
-			}
-			else
-			{
-				m_SeverConnectable = 'N';
-			}
-		}
-
     }
 }

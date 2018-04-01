@@ -638,7 +638,7 @@ namespace EasyBrailleEdit
                 return false;
             }
 
-            if (SysInfo.IsNetworkConnected() && AppGlobals.ServeConnectable)
+            if (SysInfo.IsNetworkConnected())
             {
                 return await DoUpdateAsync(true);	
             }
@@ -743,8 +743,6 @@ namespace EasyBrailleEdit
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            AppGlobals.CheckServerConnectable();	// 檢查伺服器是否能夠連接。
-
             Width = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Width * 0.9);
             Height = Convert.ToInt32(Screen.PrimaryScreen.WorkingArea.Height * 0.9);
             CenterToScreen();
