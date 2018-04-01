@@ -9,8 +9,6 @@ namespace EasyBrailleEdit
         {
         }
 
-		private static char m_SeverConnectable = '?';	// Y/N/? = 是/否/尚未偵測
-
         public static AppOptions Options = null;
 
         // Class constructor.
