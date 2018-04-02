@@ -18,7 +18,7 @@ ImeLib.dll                       ; 4.0.0
 AppConfig.Default.ini            ; ?     '若 client 端無此檔案才更新
 phrase.phf                       ; ?     '若 client 端無此檔案才更新
 SourceGrid.dll                   ; 4.40
-Nini.dll                         ; 1.1
+SharpConfig.dll                  ; 3.2.7
 Serilog.dll                      ; 2.7.1
 Serilog.Sinks.File.dll           ; 4.0.1
 Serilog.Sinks.RollingFile.dll    ; 3.3.1
