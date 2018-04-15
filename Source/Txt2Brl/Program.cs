@@ -1,19 +1,23 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
+using Serilog;
 
 namespace Txt2Brl
 {
-	class Program
+    class Program
 	{
 		const int DefaultCellsPerLine = 40;
 
 		[STAThread]
 		static int Main(string[] args)
 		{
-			Console.WriteLine("Txt2Brl version 2.4 Copyright(c) 2007-2011 Huan-Lin Tsai\n");
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.AppSettings()
+                .WriteTo.RollingFile("log-txt2brl-{Date}.txt")
+                .CreateLogger();
+
+            Console.WriteLine("Txt2Brl version 2.9 Copyright(c) 2007-2018 Michael Tsai.\n");
 
 			List<string> switches = new List<string>();
 			string inFileName = null;
@@ -139,7 +143,7 @@ namespace Txt2Brl
 		private static void DoConvert(string inFileName, string outFileName, 
 			int cellsPerLine, bool verboseMode)
 		{
-			BrailleConverterFacade cvt = new BrailleConverterFacade();
+			BrailleConverter cvt = new BrailleConverter();
 
 			cvt.ConvertFile(inFileName, outFileName, cellsPerLine, verboseMode);
 		}

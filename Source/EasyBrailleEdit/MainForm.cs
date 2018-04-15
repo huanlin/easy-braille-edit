@@ -633,7 +633,7 @@ namespace EasyBrailleEdit
         /// <returns>傳回 true 表示更新成功，必須結束程式。</returns>
         private async Task<bool> AutoUpdateAsync()
         {
-            if (!AppConfig.Self.AutoUpdate)
+            if (!AppConfig.Instance.AutoUpdate)
             {
                 return false;
             }
@@ -671,7 +671,7 @@ namespace EasyBrailleEdit
             HttpUpdater updater = new HttpUpdater(Log.Logger)
             {
                 ClientPath = Application.StartupPath,
-                ServerUri = AppConfig.Self.AppUpdateFilesUri,
+                ServerUri = AppConfig.Instance.AppUpdateFilesUri,
                 ChangeLogFileName = "ChangeLog.txt"
             };
 
@@ -699,7 +699,7 @@ namespace EasyBrailleEdit
 
             if (updater.HasUpdates())
             {
-                if (MsgBoxHelper.ShowYesNo("「易點雙視」已經有新版本，是否立即更新？") == DialogResult.Yes)
+                if (MsgBoxHelper.ShowYesNo("「易點雙視」有新版本，是否立即更新？") == DialogResult.Yes)
                 {
                     UpdateProgressForm updForm = new UpdateProgressForm();
                     updForm.Show();
@@ -773,17 +773,6 @@ namespace EasyBrailleEdit
                 // return;
             }
 */
-            try
-            {
-                if (!Huanlin.TextServices.ImeHelper.IFELanguageReady)
-                {
-                    MsgBoxHelper.ShowWarning("請注意！您的作業環境無法使用微軟智慧型注音判斷功能。\r\n轉點字功能雖可使用，但無法自動處理破音字，須手動調整。");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("無法載入輸入法轉換元件! 可能的原因是您正在使用 64 位元的作業系統。\r\n錯誤訊息: " + ex.Message);
-            }
             Application.DoEvents();
 
             txtErrors.Visible = false;

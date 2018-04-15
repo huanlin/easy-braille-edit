@@ -162,7 +162,7 @@
     <Compile Include="..\EasyBrailleEdit\AppConst.cs">
       <Link>AppConst.cs</Link>
     </Compile>
-    <Compile Include="BrailleConverterFacade.cs" />
+    <Compile Include="BrailleConverter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -191,19 +191,35 @@
       <Project>{ffe6d448-5035-4a50-a0e1-e7b4152cb90a}</Project>
       <Name>Huanlin.Braille</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HuanlinLib\src\Huanlin.TextServices\Huanlin.TextServices.csproj">
-      <Project>{71f8cc4c-95ae-4d88-a411-f9505829d992}</Project>
-      <Name>Huanlin.TextServices</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HuanlinLib\src\Huanlin\Huanlin.csproj">
       <Project>{4c2793dc-4827-4dc4-af4c-f966d8290077}</Project>
       <Name>Huanlin</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="sharpconfig">
-      <Version>3.2.6.1</Version>
+    <PackageReference Include="NChinese">
+      <Version>0.3.4</Version>
     </PackageReference>
+    <PackageReference Include="NChinese.Imm">
+      <Version>0.3.4</Version>
+    </PackageReference>
+    <PackageReference Include="Serilog">
+      <Version>2.7.1-dev-00972</Version>
+    </PackageReference>
+    <PackageReference Include="Serilog.Settings.AppSettings">
+      <Version>2.2.0-dev-00048</Version>
+    </PackageReference>
+    <PackageReference Include="Serilog.Sinks.RollingFile">
+      <Version>3.3.1-dev-00771</Version>
+    </PackageReference>
+    <PackageReference Include="sharpconfig">
+      <Version>3.2.8</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
