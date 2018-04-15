@@ -4,21 +4,22 @@
 '也就是說，若這裡的檔名為 A.DLL，而主機上實際存放的檔案為 A.dll，
 '那麼應用程式在下載檔案時可能會發生找不到檔案的錯誤（404 error）。
 '===================================================================
-EasyBrailleEdit.exe              ; 2.8.2 '若 client 端版本比這裡指定的版本還要舊，則下載
+EasyBrailleEdit.exe              ; 2.9.0 '若 client 端版本比這裡指定的版本還要舊，則下載
 EasyBrailleEdit.exe.config       ; ?     '若 client 端無此檔案才更新
-Txt2Brl.exe                      ; 2.8.2 'Txt2Brl.exe 版本應該跟 EasyBrailleEdit 一致
+Txt2Brl.exe                      ; 2.9.0 'Txt2Brl.exe 版本應該跟 EasyBrailleEdit 一致
 Txt2Brl.exe.config               ; ?     '若 client 端無此檔案才更新
-Huanlin.dll                      ; 4.0.2
-Huanlin.AppBlock.dll             ; 4.0.2
-Huanlin.Braille.dll              ; 4.0.2
-Huanlin.WinForms.dll             ; 4.0.2
-Huanlin.TextServices.dll         ; 4.0.2
-Huanlin.WinApi.dll               ; 4.0.2
-ImeLib.dll                       ; 4.0.0
+Huanlin.dll                      ; 4.1.0
+Huanlin.AppBlock.dll             ; 4.1.0
+Huanlin.Braille.dll              ; 4.1.0
+Huanlin.WinForms.dll             ; 4.1.0
+Huanlin.WinApi.dll               ; 4.1.0
 AppConfig.Default.ini            ; ?     '若 client 端無此檔案才更新
 phrase.phf                       ; ?     '若 client 端無此檔案才更新
+System.ValueTuple.dll            ; 4.6.0
+NChinese.dll                     ; 0.3.4
+NChinese.Imm.dll                 ; 0.3.4
 SourceGrid.dll                   ; 4.40
-Nini.dll                         ; 1.1
+SharpConfig.dll                  ; 3.2.8
 Serilog.dll                      ; 2.7.1
 Serilog.Sinks.File.dll           ; 4.0.1
 Serilog.Sinks.RollingFile.dll    ; 3.3.1

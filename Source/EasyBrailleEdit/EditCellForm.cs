@@ -7,6 +7,7 @@ using Huanlin.Braille;
 using Huanlin.Braille.Converters;
 using Huanlin.Helpers;
 using Huanlin.WinForms;
+using NChinese.Phonetic;
 
 namespace EasyBrailleEdit
 {
@@ -87,7 +88,7 @@ namespace EasyBrailleEdit
 
                 if (m_BrWord.IsPolyphonic)
                 {
-                    string[] zhuyinCodes = Huanlin.TextServices.Chinese.ZhuyinQueryHelper.GetZhuyinSymbols(txtChar.Text, true);
+                    string[] zhuyinCodes = ZhuyinQueryHelper.GetZhuyinSymbols(txtChar.Text, true);
                     cboPhCode.Items.AddRange(zhuyinCodes);
                 }
                 

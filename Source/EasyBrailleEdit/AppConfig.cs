@@ -54,11 +54,11 @@ namespace EasyBrailleEdit
             }
         }
 
-        public static AppConfig Self
+        public static AppConfig Instance
         {
             get
             {
-                if (AppConfig.m_Self == null)
+                if (m_Self == null)
                 {
                     m_Self = new AppConfig();
                 }
@@ -77,11 +77,28 @@ namespace EasyBrailleEdit
         {
             get
             {
-                return m_Config[SectionNames.General]["AutoUpdate"].BoolValue;
+                var setting = m_Config[SectionNames.General][nameof(AutoUpdate)]; 
+                return setting.IsEmpty ? true : setting.BoolValue;
             }
             set
             {
-                m_Config[SectionNames.General]["AutoUpdate"].BoolValue = value;
+                m_Config[SectionNames.General][nameof(AutoUpdate)].BoolValue = value;
+            }
+        }
+
+        /// <summary>
+        /// 是否優先使用 IFELanguage API 來反查注音字根。預設為 False。
+        /// </summary>
+        public bool PreferIFELanguage
+        {
+            get
+            {
+                var setting = m_Config[SectionNames.General][nameof(PreferIFELanguage)];
+                return setting.IsEmpty ? false : setting.BoolValue;
+            }
+            set
+            {
+                m_Config[SectionNames.General][nameof(PreferIFELanguage)].BoolValue = value;
             }
         }
 
@@ -92,11 +109,11 @@ namespace EasyBrailleEdit
         {
             get
             {
-                return m_Config[SectionNames.General]["PhraseFiles"].StringValue;
+                return m_Config[SectionNames.General][nameof(PhraseFiles)].StringValue;
             }
             set
             {
-                m_Config[SectionNames.General]["PhraseFiles"].StringValue = value;
+                m_Config[SectionNames.General][nameof(PhraseFiles)].StringValue = value;
             }
         }
 
@@ -106,14 +123,14 @@ namespace EasyBrailleEdit
         {
             get
             {
-                var s = m_Config[SectionNames.Internet]["AppUpdateFilesUri"].StringValue;
+                var s = m_Config[SectionNames.Internet][nameof(AppUpdateFilesUri)].StringValue;
                 if (string.IsNullOrWhiteSpace(s))
                     s = AppConst.DefaultAppUpdateFilesUri;
                 return s;
             }
             set
             {
-                m_Config[SectionNames.Internet]["AppUpdateFilesUri"].StringValue = value;
+                m_Config[SectionNames.Internet][nameof(AppUpdateFilesUri)].StringValue = value;
             }
         }
     }
