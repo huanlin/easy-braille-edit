@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Huanlin.Braille.Data;
-using Huanlin.Helpers;
+using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
 
 namespace Huanlin.Braille

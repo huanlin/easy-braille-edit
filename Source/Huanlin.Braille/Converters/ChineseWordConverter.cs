@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Huanlin.Braille.Data;
-using Huanlin.Helpers;
+using Huanlin.Common.Helpers;
 using NChinese;
 using NChinese.Phonetic;
 

@@ -87,10 +87,6 @@
       <Project>{ffe6d448-5035-4a50-a0e1-e7b4152cb90a}</Project>
       <Name>Huanlin.Braille</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\HuanlinLib\src\Huanlin\Huanlin.csproj">
-      <Project>{4c2793dc-4827-4dc4-af4c-f966d8290077}</Project>
-      <Name>Huanlin</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NChinese">

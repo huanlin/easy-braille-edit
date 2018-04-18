@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using System.Text;
-using Huanlin.Helpers;
+using Huanlin.Common.Helpers;
 using SharpConfig;
 
 namespace EasyBrailleEdit

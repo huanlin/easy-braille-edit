@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Huanlin.WinForms;
+using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
 {

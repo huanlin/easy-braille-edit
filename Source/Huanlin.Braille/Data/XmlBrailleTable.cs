@@ -6,7 +6,7 @@ using System.Xml;
 using System.IO;
 using System.Globalization;
 using System.Reflection;
-using Huanlin.Helpers;
+using Huanlin.Common.Helpers;
 
 namespace Huanlin.Braille.Data
 {

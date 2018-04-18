@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using Huanlin.Helpers;
+using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
 using Serilog;
 
@@ -206,7 +206,7 @@ namespace Huanlin.Braille
             }
 
             string jsonStr = File.ReadAllText(filename);
-            brDoc = Huanlin.Helpers.JsonHelper.Deserialize<BrailleDocument>(jsonStr);
+            brDoc = JsonHelper.Deserialize<BrailleDocument>(jsonStr);
             return brDoc;
         }
 
@@ -252,7 +252,7 @@ namespace Huanlin.Braille
                 return;
             }
 
-            string jsonStr = Huanlin.Helpers.JsonHelper.Serialize<BrailleDocument>(this);
+            string jsonStr = JsonHelper.Serialize<BrailleDocument>(this);
             File.WriteAllText(filename, jsonStr);
         }
 

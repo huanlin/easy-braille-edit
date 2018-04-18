@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Globalization;
 using System.Runtime.Serialization;
-using Huanlin.Helpers;
+using Huanlin.Common.Helpers;
 
 namespace Huanlin.Braille
 {

@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Text;
 using System.Drawing.Printing;
-using Huanlin.WinForms;
+using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
 {

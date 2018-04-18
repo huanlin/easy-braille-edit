@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
-using Huanlin.Helpers;
+using Huanlin.Common.Helpers;
 using SharpConfig;
 
 namespace Huanlin.Braille

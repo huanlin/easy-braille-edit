@@ -35,10 +35,10 @@ namespace EasyBrailleEdit
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.rtbFormatted = new Huanlin.WinForms.RichTextBoxHL();
-			this.rtbBraille = new Huanlin.WinForms.RichTextBoxHL();
+			this.rtbFormatted = new Huanlin.Windows.Forms.RichTextBoxHL();
+			this.rtbBraille = new Huanlin.Windows.Forms.RichTextBoxHL();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
-			this.rtbMixed = new Huanlin.WinForms.RichTextBoxHL();
+			this.rtbMixed = new Huanlin.Windows.Forms.RichTextBoxHL();
 			this.panel1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
@@ -227,9 +227,9 @@ namespace EasyBrailleEdit
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.SplitContainer splitContainer1;
-		private Huanlin.WinForms.RichTextBoxHL rtbFormatted;
-		private Huanlin.WinForms.RichTextBoxHL rtbBraille;
+		private Huanlin.Windows.Forms.RichTextBoxHL rtbFormatted;
+		private Huanlin.Windows.Forms.RichTextBoxHL rtbBraille;
 		private System.Windows.Forms.TabPage tabPage2;
-		private Huanlin.WinForms.RichTextBoxHL rtbMixed;
+		private Huanlin.Windows.Forms.RichTextBoxHL rtbMixed;
 	}
 }

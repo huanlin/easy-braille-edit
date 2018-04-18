@@ -240,12 +240,6 @@
     <EmbeddedResource Include="Data\PhoneticBrailleTable.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HuanlinLib\src\Huanlin\Huanlin.csproj">
-      <Project>{4C2793DC-4827-4DC4-AF4C-F966D8290077}</Project>
-      <Name>Huanlin</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -272,6 +266,12 @@
     <PackageReference Include="sharpconfig">
       <Version>3.2.8</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HuanlinLib\src\Huanlin.Common\Huanlin.Common.csproj">
+      <Project>{babd85e6-cfdb-4cf9-afff-4ac85ea159f9}</Project>
+      <Name>Huanlin.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

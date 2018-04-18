@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using EasyBrailleEdit.Printing;
 using Huanlin.Braille;
+using Huanlin.Common.Helpers;
 using Huanlin.Http;
 using Huanlin.Sys;
-using Huanlin.WinForms;
+using Huanlin.Windows.Forms;
 using Serilog;
 
 namespace EasyBrailleEdit
@@ -90,7 +91,7 @@ namespace EasyBrailleEdit
                     if (File.Exists(s))
                     {
                         this.FileName = s;
-                        if (Huanlin.Helpers.FileHelper.IsUTF8Encoded(FileName))
+                        if (FileHelper.IsUTF8Encoded(FileName))
                         {
                             rtbOrg.Text = File.ReadAllText(FileName, Encoding.UTF8);
                         }
@@ -102,7 +103,7 @@ namespace EasyBrailleEdit
                 else
                 {
                     this.FileName = dlg.FileName;
-                    if (Huanlin.Helpers.FileHelper.IsUTF8Encoded(FileName))
+                    if (FileHelper.IsUTF8Encoded(FileName))
                     {
                         rtbOrg.Text = File.ReadAllText(FileName, Encoding.UTF8);
                     }

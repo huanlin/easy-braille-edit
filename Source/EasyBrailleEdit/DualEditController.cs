@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
-using Huanlin.WinForms;
+using Huanlin.Windows.Forms;
 using Huanlin.Braille;
 using Huanlin.Braille.Converters;
-using Huanlin.Helpers;
+using Huanlin.Common.Helpers;
 
 namespace EasyBrailleEdit
 {

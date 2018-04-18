@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using Huanlin.Helpers;
-using Huanlin.WinForms;
+using Huanlin.Common.Helpers;
+using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
 {

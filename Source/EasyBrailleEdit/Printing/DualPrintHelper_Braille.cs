@@ -3,9 +3,9 @@ using System.Text;
 using System.Windows.Forms;
 using Huanlin.Braille;
 using Huanlin.Braille.Converters;
-using Huanlin.Helpers;
-using Huanlin.WinApi;
-using Huanlin.WinForms;
+using Huanlin.Common.Helpers;
+using Huanlin.Windows.WinApi;
+using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
 {

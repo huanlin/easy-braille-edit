@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Huanlin.Braille.Converters;
 using Huanlin.Braille.Data;
-using Huanlin.Helpers;
+using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
 
 namespace Huanlin.Braille

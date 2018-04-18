@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Huanlin.Helpers;
+using Huanlin.Common.Helpers;
 using Huanlin.Braille.Data;
 
 namespace Huanlin.Braille
