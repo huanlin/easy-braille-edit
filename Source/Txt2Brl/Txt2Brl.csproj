@@ -187,7 +187,7 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HuanlinLib\src\Huanlin.Braille\Huanlin.Braille.csproj">
+    <ProjectReference Include="..\Huanlin.Braille\Huanlin.Braille.csproj">
       <Project>{ffe6d448-5035-4a50-a0e1-e7b4152cb90a}</Project>
       <Name>Huanlin.Braille</Name>
     </ProjectReference>
