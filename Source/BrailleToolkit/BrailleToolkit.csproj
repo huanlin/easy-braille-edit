@@ -103,6 +103,9 @@
     <None Include="類別圖.cd" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="GitVersionTask">
+      <Version>4.0.0-beta0012</Version>
+    </PackageReference>
     <PackageReference Include="NChinese">
       <Version>0.3.4</Version>
     </PackageReference>

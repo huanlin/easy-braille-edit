@@ -41,7 +41,7 @@ class Build : NukeBuild
             .Requires(() => GitVersion != null)
             .Executes(() =>
             {
-                GitVersionTasks.DefaultGitVersion.EnableUpdateAssemblyInfo();
+                //GitVersionTasks.DefaultGitVersion.EnableUpdateAssemblyInfo();
                 MSBuild(s => DefaultMSBuildCompile);
             });
 }
