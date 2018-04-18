@@ -1,14 +1,9 @@
-﻿using System;
-using System.Linq;
-using Nuke.Common;
-using Nuke.Common.Git;
+﻿using Nuke.Common.Git;
 using Nuke.Common.Tools.GitVersion;
-using Nuke.Common.Tools.MSBuild;
 using Nuke.Core;
 using static Nuke.Common.Tools.MSBuild.MSBuildTasks;
 using static Nuke.Core.IO.FileSystemTasks;
 using static Nuke.Core.IO.PathConstruction;
-using static Nuke.Core.EnvironmentInfo;
 
 class Build : NukeBuild
 {
@@ -20,7 +15,7 @@ class Build : NukeBuild
     [GitVersion] readonly GitVersion GitVersion;
     // Semantic versioning. Must have 'GitVersion.CommandLine' referenced.
 
-    // [GitRepository] readonly GitRepository GitRepository;
+    [GitRepository] readonly GitRepository GitRepository;
     // Parses origin, branch name and head from git config.
 
     // [Parameter] readonly string MyGetApiKey;
@@ -43,6 +38,7 @@ class Build : NukeBuild
 
     Target Compile => _ => _
             .DependsOn(Restore)
+            .Requires(() => GitVersion != null)
             .Executes(() =>
             {
                 MSBuild(s => DefaultMSBuildCompile);
