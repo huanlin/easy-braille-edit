@@ -492,13 +492,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Huanlin.Braille\Huanlin.Braille.csproj">
-      <Project>{ffe6d448-5035-4a50-a0e1-e7b4152cb90a}</Project>
-      <Name>Huanlin.Braille</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HuanlinLib\src\Huanlin.AppBlock\Huanlin.AppBlock.csproj">
-      <Project>{c2d59bd4-0aeb-4c5c-8257-8e01762bd2b6}</Project>
-      <Name>Huanlin.AppBlock</Name>
+    <ProjectReference Include="..\BrailleToolkit\BrailleToolkit.csproj">
+      <Project>{34a66b1a-70f1-4be9-ae58-885e6c27e58e}</Project>
+      <Name>BrailleToolkit</Name>
     </ProjectReference>
     <ProjectReference Include="..\HuanlinLib\src\Huanlin.Common\Huanlin.Common.csproj">
       <Project>{babd85e6-cfdb-4cf9-afff-4ac85ea159f9}</Project>

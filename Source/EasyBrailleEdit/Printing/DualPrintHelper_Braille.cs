@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using Huanlin.Braille;
-using Huanlin.Braille.Converters;
+using BrailleToolkit;
+using BrailleToolkit.Converters;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.WinApi;
 using Huanlin.Windows.Forms;

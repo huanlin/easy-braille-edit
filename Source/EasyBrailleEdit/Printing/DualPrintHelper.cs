@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
-using Huanlin.Braille;
+using BrailleToolkit;
 
 namespace EasyBrailleEdit
 {

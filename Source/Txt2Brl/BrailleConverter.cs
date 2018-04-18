@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using EasyBrailleEdit;
-using Huanlin.Braille;
+using BrailleToolkit;
 using NChinese;
 using NChinese.Imm;
 using NChinese.Phonetic;

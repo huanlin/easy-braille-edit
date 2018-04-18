@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Huanlin.Braille;
+using BrailleToolkit;
 
 namespace EasyBrailleEdit
 {

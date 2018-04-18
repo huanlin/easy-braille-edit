@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Huanlin.Braille;
+using BrailleToolkit;
 
 namespace EasyBrailleEdit
 {
