@@ -14,7 +14,7 @@ namespace Txt2Brl
 		{
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.AppSettings()
-                .WriteTo.RollingFile("log-txt2brl-{Date}.txt")
+                .WriteTo.RollingFile(@"Logs\log-txt2brl-{Date}.txt")
                 .CreateLogger();
 
             Console.WriteLine("Txt2Brl version 2.9 Copyright(c) 2007-2018 Michael Tsai.\n");
