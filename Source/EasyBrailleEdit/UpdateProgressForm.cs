@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using Huanlin.AppBlock.Updater;
+using Huanlin.Http;
 
 namespace EasyBrailleEdit
 {
-	public partial class UpdateProgressForm : Form
+    public partial class UpdateProgressForm : Form
 	{
 		public UpdateProgressForm()
 		{
