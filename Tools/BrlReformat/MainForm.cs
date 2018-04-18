@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
-using System.Xml;
-using Huanlin.Helpers;
 using Huanlin.Braille;
+using Huanlin.Helpers;
 
 namespace BrlReformat
 {
@@ -29,8 +24,8 @@ namespace BrlReformat
             // 只需設定一次，且必須最早進行的初始化動作：建立點字轉換器物件，並指定點字對應表物件。            
             string filePath = StrHelper.AppendSlash(Application.StartupPath);
 
-            ChineseWordConverter chtCvt = new ChineseWordConverter(filePath + "BrailleTableCht.xml");
-            EnglishWordConverter engCvt = new EnglishWordConverter(filePath + "BrailleTableEng.xml");
+            ChineseWordConverter chtCvt = new ChineseWordConverter(filePath + "ChineseBrailleTable.xml");
+            EnglishWordConverter engCvt = new EnglishWordConverter(filePath + "EnglishBrailleTable.xml");
 
             m_Processer = new BrailleProcessor();
             m_Processer.AddWordConverter(chtCvt);
@@ -40,7 +35,6 @@ namespace BrlReformat
 		private void btnOpenFile_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog dlg = new OpenFileDialog();
-            dlg.InitialDirectory = @"D:\Doc\淑萍的文件\";
 			if (dlg.ShowDialog() != DialogResult.OK)
 				return;
 
