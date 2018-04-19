@@ -1,125 +1,50 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{34A66B1A-70F1-4BE9-AE58-885E6C27E58E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net452</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <RootNamespace>BrailleToolkit</RootNamespace>
-    <AssemblyName>BrailleToolkit</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <IsPackable>False</IsPackable>
+    <NoWarn>CS0649;CS0169</NoWarn>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <None Remove="Data\BrailleCharTbl.txt" />
+    <None Remove="Data\BrailleFontTbl.txt" />
+    <None Remove="Data\ChineseBrailleTable.xml" />
+    <None Remove="Data\CoordinateBrailleTable.xml" />
+    <None Remove="Data\EnglishBrailleTable.xml" />
+    <None Remove="Data\MathBrailleTable.xml" />
+    <None Remove="Data\PhoneticBrailleTable.xml" />
+    <None Remove="Data\TableBrailleTable.xml" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="BrailleCell.cs" />
-    <Compile Include="BrailleCellList.cs" />
-    <Compile Include="BrailleConfig.cs" />
-    <Compile Include="BrailleConst.cs" />
-    <Compile Include="BrailleDocument.cs" />
-    <Compile Include="BrailleGlobals.cs" />
-    <Compile Include="BrailleLine.cs" />
-    <Compile Include="BraillePageTitle.cs" />
-    <Compile Include="BrailleProcessor.cs" />
-    <Compile Include="BrailleWord.cs" />
-    <Compile Include="ChineseBrailleRule.cs" />
-    <Compile Include="ContextTag.cs" />
-    <Compile Include="ContextTagManager.cs" />
-    <Compile Include="Converters\BrailleCharConverter.cs" />
-    <Compile Include="Converters\BrailleFontConverter.cs" />
-    <Compile Include="Converters\ChineseWordConverter.cs" />
-    <Compile Include="Converters\ConextTagConverter.cs" />
-    <Compile Include="Converters\CoordinateConverter.cs" />
-    <Compile Include="Converters\EnglishWordConverter.cs" />
-    <Compile Include="Converters\MathConverter.cs" />
-    <Compile Include="Converters\PhoneticConverter.cs" />
-    <Compile Include="Converters\TableConverter.cs" />
-    <Compile Include="Converters\WordConverter.cs" />
-    <Compile Include="Data\BrailleTableBase.cs" />
-    <Compile Include="Data\ChineseBrailleTable.cs" />
-    <Compile Include="Data\CoordinateBrailleTable.cs" />
-    <Compile Include="Data\EnglishBrailleTable.cs" />
-    <Compile Include="Data\MathBrailleTable.cs" />
-    <Compile Include="Data\PhoneticBrailleTable.cs" />
-    <Compile Include="Data\TableBrailleTable.cs" />
-    <Compile Include="Data\XmlBrailleTable.cs" />
-    <Compile Include="EnglishBrailleRule.cs" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Data\BrailleCharTbl.txt" />
     <EmbeddedResource Include="Data\BrailleFontTbl.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\ChineseBrailleTable.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\CoordinateBrailleTable.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\EnglishBrailleTable.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\MathBrailleTable.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\PhoneticBrailleTable.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\TableBrailleTable.xml" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="Braille.ini">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="類別圖.cd" />
+    <PackageReference Include="NChinese" Version="0.3.4" />
+    <PackageReference Include="Serilog" Version="2.7.1-dev-00972" />
+    <PackageReference Include="sharpconfig" Version="3.2.8" />
   </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="NChinese">
-      <Version>0.3.4</Version>
-    </PackageReference>
-    <PackageReference Include="Serilog">
-      <Version>2.7.1-dev-00972</Version>
-    </PackageReference>
-    <PackageReference Include="sharpconfig">
-      <Version>3.2.8</Version>
-    </PackageReference>
+    <ProjectReference Include="..\HuanlinLib\src\Huanlin.Common\Huanlin.Common.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HuanlinLib\src\Huanlin.Common\Huanlin.Common.csproj">
-      <Project>{babd85e6-cfdb-4cf9-afff-4ac85ea159f9}</Project>
-      <Name>Huanlin.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-</Project>
+
+</Project> 
