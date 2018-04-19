@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
+using EasyBrailleEdit.Core;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 
@@ -77,7 +78,7 @@ namespace EasyBrailleEdit
 			set
 			{
 				// 如果是暫存的輸出檔名，則視為尚未存檔。
-				if (value.ToLower().IndexOf(AppConst.CvtOutputTempFileName.ToLower()) >= 0)
+				if (value.ToLower().IndexOf(Constant.Files.CvtOutputTempFileName.ToLower()) >= 0)
 				{
 					m_IsDirty = true;
 				}
@@ -174,7 +175,7 @@ namespace EasyBrailleEdit
 				return true;
 
 			string fname = StrHelper.ExtractFileName(m_FileName);
-			if (fname.Equals(AppConst.CvtOutputTempFileName, StringComparison.CurrentCultureIgnoreCase))
+			if (fname.Equals(Constant.Files.CvtOutputTempFileName, StringComparison.CurrentCultureIgnoreCase))
 				return true;
 
 			return false;
@@ -660,7 +661,7 @@ namespace EasyBrailleEdit
 					brGrid[row + 2, col].ColumnSpan = brFontText.Length;
 					if (brWord.IsPolyphonic)
 					{
-						if (AppGlobals.Options.ErrorProneWords.IndexOf(brWord.Text) >= 0)
+						if (AppGlobals.Config.Braille.ErrorProneWords.IndexOf(brWord.Text) >= 0)
 						{
 							// 容易判斷錯誤的破音字用顯眼的紅色標示。
 							brGrid[row + 2, col].View = m_PhonView3;
@@ -760,9 +761,9 @@ namespace EasyBrailleEdit
 		private void RefreshRowNumbers()
 		{
 			int rowNum = 1;
-			int linesPerPage = AppGlobals.Options.LinesPerPage;
+			int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
 
-			if (AppGlobals.Options.PrintPageFoot)
+			if (AppGlobals.Config.Printing.PrintPageFoot)
 			{
 				linesPerPage--; // 頁碼佔一列，所以每頁實際的點字列數少一列。
 			}
@@ -1138,7 +1139,7 @@ namespace EasyBrailleEdit
 			{
 				pageNum = 1;
 			}
-			int lineNum = (pageNum - 1) * (AppGlobals.Options.LinesPerPage - 1)+ 1;
+			int lineNum = (pageNum - 1) * (AppGlobals.Config.Braille.LinesPerPage - 1)+ 1;
 
 			GotoLine(lineNum);
 		}
@@ -1279,8 +1280,8 @@ namespace EasyBrailleEdit
 				return;
 
 			int lineIdx = m_Form.GetBrailleLineIndex(row);
-			int linesPerPage = AppGlobals.Options.LinesPerPage;
-			bool needPageFoot = AppGlobals.Options.PrintPageFoot;
+			int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
+			bool needPageFoot = AppGlobals.Config.Printing.PrintPageFoot;
 			int currPage = AppGlobals.CalcCurrentPage(lineIdx, linesPerPage, needPageFoot) + 1;
 			int totalPages = AppGlobals.CalcTotalPages(m_Form.BrailleDoc.Lines.Count, linesPerPage, needPageFoot);
 			m_Form.PageNumberText = currPage.ToString() + "/" + totalPages.ToString();

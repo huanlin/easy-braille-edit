@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing.Printing;
+using EasyBrailleEdit.Core;
 
 namespace EasyBrailleEdit
 {
@@ -32,7 +33,7 @@ namespace EasyBrailleEdit
             PrintPageFoot = true;
             ReassignStartPageNumber = false;
             StartPageNumber = 1;
-            LinesPerPage = AppConst.DefaultLinesPerPage;
+            LinesPerPage = Constant.DefaultLinesPerPage;
             DoubleSideEffect = DoubleSideEffect.None;
 
             PaperSourceName = "";

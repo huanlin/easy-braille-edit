@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing.Text;
 using System.Drawing.Printing;
+using System.Drawing.Text;
+using System.Windows.Forms;
+using EasyBrailleEdit.Core;
 using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
@@ -176,12 +173,12 @@ namespace EasyBrailleEdit
                 if (cboFontName.Items.IndexOf(ff.Name) < 0)
                     cboFontName.Items.Add(ff.Name);
             }
-            cboFontName.SelectedIndex = cboFontName.Items.IndexOf(AppGlobals.Options.PrintTextFontName);
+            cboFontName.SelectedIndex = cboFontName.Items.IndexOf(AppGlobals.Config.Printing.PrintTextFontName);
             if (cboFontName.SelectedIndex < 0)
             {
                 cboFontName.SelectedIndex = 0;
             }
-            numFontSize.Value = (decimal)AppGlobals.Options.PrintTextFontSize;
+            numFontSize.Value = (decimal)AppGlobals.Config.Printing.PrintTextFontSize;
         }
 
         private void rdoUserDefinedPaper_CheckedChanged(object sender, EventArgs e)

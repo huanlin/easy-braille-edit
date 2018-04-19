@@ -1,9 +1,0 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EasyBrailleEdit.Properties" GeneratedClassName="Settings">
-  <Profiles />
-  <Settings>
-    <Setting Name="EasyBrailleEdit_ProductService_LicenseManager" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://220.135.177.90/ProductService/LicenseManager.asmx</Value>
-    </Setting>
-  </Settings>
-</SettingsFile>

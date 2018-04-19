@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
-using Huanlin.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
-using Huanlin.Common.Helpers;
+using EasyBrailleEdit.Core;
+using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
 {
-	/// <summary>
-	/// 儲存格內容修改的情況。
-	/// </summary>
-	internal enum CellChangedType
+    /// <summary>
+    /// 儲存格內容修改的情況。
+    /// </summary>
+    internal enum CellChangedType
 	{
 		None,       // 完全沒有變動。
 		Text,       // 修改了明眼字。
@@ -104,16 +102,20 @@ namespace EasyBrailleEdit
 			// 標題欄
 			if (m_HeaderView == null)
 			{
-				m_HeaderView = new SourceGrid.Cells.Views.Header();
-				m_HeaderView.Font = new Font(brGrid.Font, FontStyle.Regular);
-			}
+                m_HeaderView = new SourceGrid.Cells.Views.Header
+                {
+                    Font = new Font(brGrid.Font, FontStyle.Regular)
+                };
+            }
 
 			if (m_HeaderView2 == null)
 			{
 				m_HeaderView2 = new SourceGrid.Cells.Views.RowHeader();
-				DevAge.Drawing.VisualElements.RowHeader backHeader = new DevAge.Drawing.VisualElements.RowHeader();
-				backHeader.BackColor = Color.Blue;
-				m_HeaderView2.Background = backHeader;
+                DevAge.Drawing.VisualElements.RowHeader backHeader = new DevAge.Drawing.VisualElements.RowHeader
+                {
+                    BackColor = Color.Blue
+                };
+                m_HeaderView2.Background = backHeader;
 				m_HeaderView2.Font = m_HeaderView.Font;
 			}
 
@@ -131,10 +133,12 @@ namespace EasyBrailleEdit
 			// view for 明眼字
 			if (m_MingView == null)
 			{
-				m_MingView = new SourceGrid.Cells.Views.Cell();
-				m_MingView.BackColor = Color.Snow;
-				m_MingView.Font = new Font("Arial Unicode MS", DefaultTextFontSize, FontStyle.Regular, GraphicsUnit.Point, 1);
-			}
+                m_MingView = new SourceGrid.Cells.Views.Cell
+                {
+                    BackColor = Color.Snow,
+                    Font = new Font("Arial Unicode MS", DefaultTextFontSize, FontStyle.Regular, GraphicsUnit.Point, 1)
+                };
+            }
             if (m_MingViewCJK == null)
             {
                 m_MingViewCJK = new SourceGrid.Cells.Views.Cell();
@@ -151,28 +155,34 @@ namespace EasyBrailleEdit
 
 			if (m_PhonView == null)
 			{
-				m_PhonView = new SourceGrid.Cells.Views.Cell();
-				m_PhonView.BackColor = Color.YellowGreen;
-				m_PhonView.Font = m_PhonFont;
-				m_PhonView.TrimmingMode = SourceGrid.TrimmingMode.None;
-			}
+                m_PhonView = new SourceGrid.Cells.Views.Cell
+                {
+                    BackColor = Color.YellowGreen,
+                    Font = m_PhonFont,
+                    TrimmingMode = SourceGrid.TrimmingMode.None
+                };
+            }
 
 			// view for 破音字的注音符號
 			if (m_PhonView2 == null)
 			{
-				m_PhonView2 = new SourceGrid.Cells.Views.Cell();
-				m_PhonView2.BackColor = Color.Yellow;
-				m_PhonView2.Font = m_PhonFont;
-				m_PhonView2.TrimmingMode = SourceGrid.TrimmingMode.None;
-			}
+                m_PhonView2 = new SourceGrid.Cells.Views.Cell
+                {
+                    BackColor = Color.Yellow,
+                    Font = m_PhonFont,
+                    TrimmingMode = SourceGrid.TrimmingMode.None
+                };
+            }
 			// view for 容易判斷錯誤的破音字注音符號
 			if (m_PhonView3 == null)
 			{
-				m_PhonView3 = new SourceGrid.Cells.Views.Cell();
-				m_PhonView3.BackColor = Color.Red;
-				m_PhonView3.Font = m_PhonFont;
-				m_PhonView3.TrimmingMode = SourceGrid.TrimmingMode.None;
-			}
+                m_PhonView3 = new SourceGrid.Cells.Views.Cell
+                {
+                    BackColor = Color.Red,
+                    Font = m_PhonFont,
+                    TrimmingMode = SourceGrid.TrimmingMode.None
+                };
+            }
 
 			// 設置 controllers
 			if (m_MenuController == null && popupMenuClickHandler != null)
@@ -231,9 +241,9 @@ namespace EasyBrailleEdit
 		public void RefreshRowNumbers() 
 		{
 			int rowNum = 1;
-			int linesPerPage = AppGlobals.Options.LinesPerPage;
+			int linesPerPage = AppGlobals.Config.Braille.LinesPerPage;
 
-			if (AppGlobals.Options.PrintPageFoot)
+			if (AppGlobals.Config.Printing.PrintPageFoot)
 			{
 				linesPerPage--; // 頁碼佔一列，所以每頁實際的點字列數少一列。
 			}
@@ -347,7 +357,7 @@ namespace EasyBrailleEdit
 					brGrid[row + 2, col].ColumnSpan = brFontText.Length;
 					if (brWord.IsPolyphonic)
 					{
-						if (AppGlobals.Options.ErrorProneWords.IndexOf(brWord.Text) >= 0)
+						if (AppGlobals.Config.Braille.ErrorProneWords.IndexOf(brWord.Text) >= 0)
 						{
 							// 容易判斷錯誤的破音字用顯眼的紅色標示。
 							brGrid[row + 2, col].View = m_PhonView3;

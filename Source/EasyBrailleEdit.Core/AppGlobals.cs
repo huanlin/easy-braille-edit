@@ -1,21 +1,18 @@
-﻿using System.IO;
-using System.Windows.Forms;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using EasyBrailleEdit.Core.Config;
 
-namespace EasyBrailleEdit
+namespace EasyBrailleEdit.Core
 {
-    internal class AppGlobals
+    public static class AppGlobals
     {
-        private AppGlobals()
-        {
-        }
-
-        public static AppOptions Options = null;
+        public static IAppConfig Config { get; private set; } = ConfigHelper.CreateConfig();
+        public static string TempPath { get; private set; } = GetTempPath();
 
         // Class constructor.
         static AppGlobals()
         {
-            AppGlobals.Options = new AppOptions();           
-            Options.Load();
         }
 
         /// <summary>
@@ -60,7 +57,14 @@ namespace EasyBrailleEdit
 
 		public static string GetTempPath()
 		{
-			string path = Application.StartupPath + @"\Temp\";
+            Assembly asmb = Assembly.GetExecutingAssembly();
+            if (asmb == null)
+            {
+                throw new Exception("Assembly.GetExecutingAssembly() 無法取得組件!");
+            }
+
+            string path = Path.Combine(Path.GetDirectoryName(asmb.Location), @"\Temp\");
+           
 			if (!Directory.Exists(path))
 			{
 				Directory.CreateDirectory(path);

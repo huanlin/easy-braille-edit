@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using EasyBrailleEdit.Core;
 
 namespace EasyBrailleEdit.Printing
 {
@@ -20,45 +21,43 @@ namespace EasyBrailleEdit.Printing
 
         public void LoadSettings()
         {
-            AppOptions opt = AppGlobals.Options;
+            var cfg = AppGlobals.Config.Printing;
 
-            m_PaperSourceName = opt.PrintTextPaperSourceName;
-            m_PaperName = opt.PrintTextPaperName;
-            m_TextFontName = opt.PrintTextFontName;
-            m_TextFontSize = opt.PrintTextFontSize;
-            m_OddPageMargins = new Margins(opt.PrintTextMarginLeft, opt.PrintTextMarginRight, opt.PrintTextMarginTop, opt.PrintTextMarginBottom);
-            m_EvenPageMargins = new Margins(opt.PrintTextMarginLeft2, opt.PrintTextMarginRight2, opt.PrintTextMarginTop2, opt.PrintTextMarginBottom2);
+            m_PaperSourceName = cfg.PrintTextPaperSourceName;
+            m_PaperName = cfg.PrintTextPaperName;
+            m_TextFontName = cfg.PrintTextFontName;
+            m_TextFontSize = cfg.PrintTextFontSize;
+            m_OddPageMargins = new Margins(cfg.PrintTextMarginLeft, cfg.PrintTextMarginRight, cfg.PrintTextMarginTop, cfg.PrintTextMarginBottom);
+            m_EvenPageMargins = new Margins(cfg.PrintTextMarginLeft2, cfg.PrintTextMarginRight2, cfg.PrintTextMarginTop2, cfg.PrintTextMarginBottom2);
 
             cboPrinters.Items.Clear();
             foreach (string s in PrinterSettings.InstalledPrinters)
             {
                 cboPrinters.Items.Add(s);
             }
-            if (!String.IsNullOrEmpty(opt.DefaultTextPrinter))
+            if (!String.IsNullOrEmpty(cfg.DefaultTextPrinter))
             {
-                cboPrinters.SelectedIndex = cboPrinters.Items.IndexOf(opt.DefaultTextPrinter);
+                cboPrinters.SelectedIndex = cboPrinters.Items.IndexOf(cfg.DefaultTextPrinter);
             }
         }
 
         public void SaveSettings()
         {
-            AppOptions opt = AppGlobals.Options;
+            var cfg = AppGlobals.Config.Printing;
 
-            opt.DefaultTextPrinter = cboPrinters.Text;
-            opt.PrintTextPaperSourceName = m_PaperSourceName;
-            opt.PrintTextPaperName = m_PaperName;
-            opt.PrintTextMarginLeft = m_OddPageMargins.Left;
-            opt.PrintTextMarginTop = m_OddPageMargins.Top;
-            opt.PrintTextMarginRight = m_OddPageMargins.Right;
-            opt.PrintTextMarginBottom = m_OddPageMargins.Bottom;
-            opt.PrintTextMarginLeft2 = m_EvenPageMargins.Left;
-            opt.PrintTextMarginTop2 = m_EvenPageMargins.Top;
-            opt.PrintTextMarginRight2 = m_EvenPageMargins.Right;
-            opt.PrintTextMarginBottom2 = m_EvenPageMargins.Bottom;
-            opt.PrintTextFontName = m_TextFontName;
-            opt.PrintTextFontSize = m_TextFontSize;
-
-            opt.Save();
+            cfg.DefaultTextPrinter = cboPrinters.Text;
+            cfg.PrintTextPaperSourceName = m_PaperSourceName;
+            cfg.PrintTextPaperName = m_PaperName;
+            cfg.PrintTextMarginLeft = m_OddPageMargins.Left;
+            cfg.PrintTextMarginTop = m_OddPageMargins.Top;
+            cfg.PrintTextMarginRight = m_OddPageMargins.Right;
+            cfg.PrintTextMarginBottom = m_OddPageMargins.Bottom;
+            cfg.PrintTextMarginLeft2 = m_EvenPageMargins.Left;
+            cfg.PrintTextMarginTop2 = m_EvenPageMargins.Top;
+            cfg.PrintTextMarginRight2 = m_EvenPageMargins.Right;
+            cfg.PrintTextMarginBottom2 = m_EvenPageMargins.Bottom;
+            cfg.PrintTextFontName = m_TextFontName;
+            cfg.PrintTextFontSize = m_TextFontSize;
         }
         
 
@@ -74,13 +73,15 @@ namespace EasyBrailleEdit.Printing
                 MessageBox.Show("請先選擇印表機!");
                 return;
             }
-            TextPageSetupDialog dlg = new TextPageSetupDialog(cboPrinters.Text);
-            dlg.PaperSourceName = m_PaperSourceName;
-            dlg.PaperName = m_PaperName;
-            dlg.FontName = m_TextFontName;
-            dlg.FontSize = m_TextFontSize;
-            dlg.OddPageMargins = m_OddPageMargins;
-            dlg.EvenPageMargins = m_EvenPageMargins;
+            TextPageSetupDialog dlg = new TextPageSetupDialog(cboPrinters.Text)
+            {
+                PaperSourceName = m_PaperSourceName,
+                PaperName = m_PaperName,
+                FontName = m_TextFontName,
+                FontSize = m_TextFontSize,
+                OddPageMargins = m_OddPageMargins,
+                EvenPageMargins = m_EvenPageMargins
+            };
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {

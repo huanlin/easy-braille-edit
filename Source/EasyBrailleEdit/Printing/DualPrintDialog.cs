@@ -2,6 +2,7 @@
 using System.Drawing.Printing;
 using System.Windows.Forms;
 using BrailleToolkit;
+using EasyBrailleEdit.Core;
 using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
@@ -38,70 +39,68 @@ namespace EasyBrailleEdit
 
         private void LoadSettings()
         {			
-            AppOptions opt = AppGlobals.Options;
+            var cfg = AppGlobals.Config.Printing;
 
-            chkPrintPageFoot.Checked = opt.PrintPageFoot;
+            chkPrintPageFoot.Checked = cfg.PrintPageFoot;
             chkChangeStartPageNum.Checked = false;
             txtStartPageNumber.Text = "1";
             cboPrintTextManualDoubleSide.SelectedIndex = 0;
-            chkPrintBraille.Checked = opt.PrintBrailleToBrailler;
-            chkPrintBrailleToFile.Checked = opt.PrintBrailleToFile;
-            txtBrailleFileName.TextBox.Text = opt.PrintBrailleToFileName;
-            chkSendPageBreakAtEof.Checked = opt.PrintBrailleSendPageBreakAtEndOfDoc;
-            lblLinesPerPage.Text = AppGlobals.Options.LinesPerPage.ToString();
+            chkPrintBraille.Checked = cfg.PrintBrailleToBrailler;
+            chkPrintBrailleToFile.Checked = cfg.PrintBrailleToFile;
+            txtBrailleFileName.TextBox.Text = cfg.PrintBrailleToFileName;
+            chkSendPageBreakAtEof.Checked = cfg.PrintBrailleSendPageBreakAtEndOfDoc;
+            lblLinesPerPage.Text = AppGlobals.Config.Braille.LinesPerPage.ToString();
             lblCellsPerLine.Text = m_BrDoc.CellsPerLine.ToString();
 
-            m_PaperSourceName = opt.PrintTextPaperSourceName;
-            m_PaperName = opt.PrintTextPaperName;
-            m_TextFontName = opt.PrintTextFontName;
-            m_TextFontSize = opt.PrintTextFontSize;
-            m_OddPageMargins = new Margins(opt.PrintTextMarginLeft, opt.PrintTextMarginRight, opt.PrintTextMarginTop, opt.PrintTextMarginBottom);
-            m_EvenPageMargins = new Margins(opt.PrintTextMarginLeft2, opt.PrintTextMarginRight2, opt.PrintTextMarginTop2, opt.PrintTextMarginBottom2);
+            m_PaperSourceName = cfg.PrintTextPaperSourceName;
+            m_PaperName = cfg.PrintTextPaperName;
+            m_TextFontName = cfg.PrintTextFontName;
+            m_TextFontSize = cfg.PrintTextFontSize;
+            m_OddPageMargins = new Margins(cfg.PrintTextMarginLeft, cfg.PrintTextMarginRight, cfg.PrintTextMarginTop, cfg.PrintTextMarginBottom);
+            m_EvenPageMargins = new Margins(cfg.PrintTextMarginLeft2, cfg.PrintTextMarginRight2, cfg.PrintTextMarginTop2, cfg.PrintTextMarginBottom2);
 
             cboPrinters.Items.Clear();
             cboPrintersForBraille.Items.Clear();
-            cboPrintersForBraille.Items.Add(AppGlobals.Options.BraillePrinterPort);
+            cboPrintersForBraille.Items.Add(AppGlobals.Config.Printing.BraillePrinterPort);
             foreach (string s in PrinterSettings.InstalledPrinters)
             {
                 cboPrinters.Items.Add(s);
                 cboPrintersForBraille.Items.Add(s);
             }
-            if (!String.IsNullOrEmpty(opt.DefaultTextPrinter))
+            if (!String.IsNullOrEmpty(cfg.DefaultTextPrinter))
             {
-                cboPrinters.SelectedIndex = cboPrinters.Items.IndexOf(opt.DefaultTextPrinter);
+                cboPrinters.SelectedIndex = cboPrinters.Items.IndexOf(cfg.DefaultTextPrinter);
             }
-            if (!String.IsNullOrWhiteSpace(opt.BraillePrinterName))
+            if (!String.IsNullOrWhiteSpace(cfg.BraillePrinterName))
             {
-                cboPrintersForBraille.Text = opt.BraillePrinterName;
+                cboPrintersForBraille.Text = cfg.BraillePrinterName;
             }
         }
 
         private void SaveSettings()
         {
-            AppOptions opt = AppGlobals.Options;
+            var cfgPrint = AppGlobals.Config.Printing;
 
-            opt.PrintPageFoot = chkPrintPageFoot.Checked;
-            opt.DefaultTextPrinter = cboPrinters.Text;
-            opt.BraillePrinterName = cboPrintersForBraille.Text;
-            opt.PrintBrailleToBrailler = chkPrintBraille.Checked;
-            opt.PrintBrailleToFile = chkPrintBrailleToFile.Checked;
-            opt.PrintBrailleToFileName = txtBrailleFileName.TextBox.Text;
-            opt.PrintTextPaperSourceName = m_PaperSourceName;
-            opt.PrintTextPaperName = m_PaperName;
-            opt.PrintTextMarginLeft = m_OddPageMargins.Left;
-            opt.PrintTextMarginTop = m_OddPageMargins.Top;
-            opt.PrintTextMarginRight = m_OddPageMargins.Right;
-            opt.PrintTextMarginBottom = m_OddPageMargins.Bottom;
-            opt.PrintTextMarginLeft2 = m_EvenPageMargins.Left;
-            opt.PrintTextMarginTop2 = m_EvenPageMargins.Top;
-            opt.PrintTextMarginRight2 = m_EvenPageMargins.Right;
-            opt.PrintTextMarginBottom2 = m_EvenPageMargins.Bottom;
-            opt.PrintTextFontName = m_TextFontName;
-            opt.PrintTextFontSize = m_TextFontSize;
+            cfgPrint.PrintPageFoot = chkPrintPageFoot.Checked;
+            cfgPrint.DefaultTextPrinter = cboPrinters.Text;
+            cfgPrint.BraillePrinterName = cboPrintersForBraille.Text;
+            cfgPrint.PrintBrailleToBrailler = chkPrintBraille.Checked;
+            cfgPrint.PrintBrailleToFile = chkPrintBrailleToFile.Checked;
+            cfgPrint.PrintBrailleToFileName = txtBrailleFileName.TextBox.Text;
+            cfgPrint.PrintTextPaperSourceName = m_PaperSourceName;
+            cfgPrint.PrintTextPaperName = m_PaperName;
+            cfgPrint.PrintTextMarginLeft = m_OddPageMargins.Left;
+            cfgPrint.PrintTextMarginTop = m_OddPageMargins.Top;
+            cfgPrint.PrintTextMarginRight = m_OddPageMargins.Right;
+            cfgPrint.PrintTextMarginBottom = m_OddPageMargins.Bottom;
+            cfgPrint.PrintTextMarginLeft2 = m_EvenPageMargins.Left;
+            cfgPrint.PrintTextMarginTop2 = m_EvenPageMargins.Top;
+            cfgPrint.PrintTextMarginRight2 = m_EvenPageMargins.Right;
+            cfgPrint.PrintTextMarginBottom2 = m_EvenPageMargins.Bottom;
+            cfgPrint.PrintTextFontName = m_TextFontName;
+            cfgPrint.PrintTextFontSize = m_TextFontSize;
 
-            opt.PrintBrailleSendPageBreakAtEndOfDoc = chkSendPageBreakAtEof.Checked;
-
-            opt.Save();
+            cfgPrint.PrintBrailleSendPageBreakAtEndOfDoc = chkSendPageBreakAtEof.Checked;
         }
 
         private void DualPrintDialog_Load(object sender, EventArgs e)
@@ -115,13 +114,15 @@ namespace EasyBrailleEdit
 
         void SelectBrailleFileNameButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.DefaultExt = ".BRP";
-            dlg.CheckFileExists = false;
-            dlg.CheckPathExists = true;
-            dlg.FileName = txtBrailleFileName.TextBox.Text;
-            dlg.Title = "指定要輸出的檔案名稱";
-            dlg.Filter = "*.BRP|*BRP";  // Braille for Print.
+            OpenFileDialog dlg = new OpenFileDialog
+            {
+                DefaultExt = ".BRP",
+                CheckFileExists = false,
+                CheckPathExists = true,
+                FileName = txtBrailleFileName.TextBox.Text,
+                Title = "指定要輸出的檔案名稱",
+                Filter = "*.BRP|*BRP"  // Braille for Print.
+            };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 txtBrailleFileName.TextBox.Text = dlg.FileName;
@@ -133,15 +134,15 @@ namespace EasyBrailleEdit
         /// </summary>
         /// <returns></returns>
         private PrintOptions GetPrintOptions()
-        {            
-            PrintOptions prnOpt = new PrintOptions();
+        {
+            PrintOptions prnOpt = new PrintOptions
+            {
+                LinesPerPage = AppGlobals.Config.Braille.LinesPerPage,
+                PrintPageFoot = chkPrintPageFoot.Checked,
 
-            prnOpt.LinesPerPage = AppGlobals.Options.LinesPerPage;
-
-            prnOpt.PrintPageFoot = chkPrintPageFoot.Checked;
-
-            // 列印範圍
-            prnOpt.AllPages = rdoPrintAll.Checked;
+                // 列印範圍
+                AllPages = rdoPrintAll.Checked
+            };
             if (!prnOpt.AllPages) 
             {
                 string[] pageRange = txtPageRange.Text.Split(new char[] {'-'});

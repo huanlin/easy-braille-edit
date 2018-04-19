@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using EasyBrailleEdit.Core;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 
@@ -23,11 +24,11 @@ namespace EasyBrailleEdit
 
         private void ConvertionDialog_Load(object sender, EventArgs e)
         {
-            numLinesPerPage.Value = AppGlobals.Options.LinesPerPage;
-            numCellsPerLine.Value = AppGlobals.Options.CellsPerLine;
+            numLinesPerPage.Value = AppGlobals.Config.Braille.LinesPerPage;
+            numCellsPerLine.Value = AppGlobals.Config.Braille.CellsPerLine;
 
             List<KeyValuePair<string, string>> fileUsages = StrHelper.SplitKeyValuePairs(
-                AppConfig.Instance.PhraseFiles, PhraseFileNameSeparator, '=');
+                AppGlobals.Config.PhraseFiles, PhraseFileNameSeparator, '=');
 
             clbPhraseTbl.Items.Clear();
             AddPhraseFiles(fileUsages);
@@ -107,12 +108,10 @@ namespace EasyBrailleEdit
                 {
                     sb.Remove(sb.Length - 1, 1);
                 }
-                AppConfig.Instance.PhraseFiles = sb.ToString();
-                AppConfig.Instance.Save();
+                AppGlobals.Config.PhraseFiles = sb.ToString();
 
-                AppGlobals.Options.LinesPerPage = (int) numLinesPerPage.Value;
-                AppGlobals.Options.CellsPerLine = (int) numCellsPerLine.Value;
-                AppGlobals.Options.Save();
+                AppGlobals.Config.Braille.LinesPerPage = (int) numLinesPerPage.Value;
+                AppGlobals.Config.Braille.CellsPerLine = (int) numCellsPerLine.Value;                
             }
         }
 

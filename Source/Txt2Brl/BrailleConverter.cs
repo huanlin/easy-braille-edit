@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using System.Windows.Forms;
-using EasyBrailleEdit;
 using BrailleToolkit;
+using EasyBrailleEdit.Core;
 using NChinese;
 using NChinese.Imm;
 using NChinese.Phonetic;
@@ -42,7 +41,7 @@ namespace Txt2Brl
 
         public BrailleConverter()
 		{
-            _zhuyinConverter = CreateZhuyinConverter(AppConfig.Instance.PreferIFELanguage);
+            _zhuyinConverter = CreateZhuyinConverter(AppGlobals.Config.PreferIFELanguage);
             _processor = BrailleProcessor.GetInstance(_zhuyinConverter);
 			_doc = new BrailleDocument(_processor);
 
@@ -51,8 +50,8 @@ namespace Txt2Brl
 
 			//m_Processor.ChineseConverter = null;	// 保護
 
-			m_CvtResultFileName = GetTempPath() + AppConst.CvtResultFileName;
-			m_CvtErrorCharFileName = GetTempPath() + AppConst.CvtErrorCharFileName;
+			m_CvtResultFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtResultFileName);
+            m_CvtErrorCharFileName = Path.Combine(AppGlobals.TempPath + Constant.Files.CvtErrorCharFileName);
 
 			_verboseMode = false;
 
@@ -67,7 +66,7 @@ namespace Txt2Brl
 		/// </summary>
 		private void LoadPhraseFiles()
 		{
-			string phraseListFileName = GetTempPath() + AppConst.CvtInputPhraseListFileName;
+			string phraseListFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtInputPhraseListFileName);
 			if (!File.Exists(phraseListFileName))
 			{
 				return;
@@ -231,20 +230,6 @@ namespace Txt2Brl
 			{
 				Console.Write(".");
 			}
-		}
-
-		/// <summary>
-		/// NOTE: 此函式的邏輯必須跟 EasyBrailleEdit\AppGlobals 的一樣！
-		/// </summary>
-		/// <returns></returns>
-		public string GetTempPath()
-		{
-			string path = Application.StartupPath + @"\Temp\";
-			if (!Directory.Exists(path))
-			{
-				Directory.CreateDirectory(path);
-			}
-			return path;
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using BrailleToolkit;
+using EasyBrailleEdit.Core;
 using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
@@ -29,8 +30,8 @@ namespace EasyBrailleEdit
 
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = false;
-            dlg.Filter = AppConst.FileNameFilter;
-            dlg.FilterIndex = AppConst.FileNameFilterIndex;
+            dlg.Filter = Constant.Files.FileNameFilter;
+            dlg.FilterIndex = Constant.Files.FileNameFilterIndex;
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -109,9 +110,9 @@ namespace EasyBrailleEdit
         private bool DoSaveFileAs()
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.DefaultExt = AppConst.DefaultBrailleFileExt;
-            dlg.Filter = AppConst.SaveAsFileNameFilter;
-            dlg.FilterIndex = AppConst.SaveAsFileNameFilterIndex;
+            dlg.DefaultExt = Constant.Files.DefaultBrailleFileExt;
+            dlg.Filter = Constant.Files.SaveAsFileNameFilter;
+            dlg.FilterIndex = Constant.Files.SaveAsFileNameFilterIndex;
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {

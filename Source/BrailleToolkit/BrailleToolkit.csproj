@@ -73,7 +73,6 @@
     <Compile Include="Data\TableBrailleTable.cs" />
     <Compile Include="Data\XmlBrailleTable.cs" />
     <Compile Include="EnglishBrailleRule.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\BrailleFontTbl.txt" />
@@ -103,9 +102,6 @@
     <None Include="類別圖.cd" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="GitVersionTask">
-      <Version>4.0.0-beta0012</Version>
-    </PackageReference>
     <PackageReference Include="NChinese">
       <Version>0.3.4</Version>
     </PackageReference>
@@ -117,11 +113,13 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\HuanlinLib\src\Huanlin.Common\Huanlin.Common.csproj">
       <Project>{babd85e6-cfdb-4cf9-afff-4ac85ea159f9}</Project>
       <Name>Huanlin.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

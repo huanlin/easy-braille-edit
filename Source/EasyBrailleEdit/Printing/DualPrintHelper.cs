@@ -4,6 +4,7 @@ using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
 using BrailleToolkit;
+using EasyBrailleEdit.Core;
 
 namespace EasyBrailleEdit
 {
@@ -179,9 +180,9 @@ namespace EasyBrailleEdit
 
             // 初始化列印明眼字所需之物件
             m_TextBrush = new SolidBrush(Color.Black);
-            m_TextFont = new Font("新細明體", (float)AppGlobals.Options.PrintTextFontSize);
+            m_TextFont = new Font("新細明體", (float)AppGlobals.Config.Printing.PrintTextFontSize);
             m_TextHeight = m_TextFont.GetHeight();
-            m_LineHeight = AppGlobals.Options.PrintTextLineHeight;
+            m_LineHeight = AppGlobals.Config.Printing.PrintTextLineHeight;
         }
 
         void BrailleText_EndPrint(object sender, PrintEventArgs e)
@@ -220,7 +221,6 @@ namespace EasyBrailleEdit
 
         private void SetEvenPageMargins(QueryPageSettingsEventArgs e)
         {
-            AppOptions opt = AppGlobals.Options;
             e.PageSettings.Margins.Left = m_PrintOptions.EvenPageMargins.Left;
             e.PageSettings.Margins.Top = m_PrintOptions.EvenPageMargins.Top;
             e.PageSettings.Margins.Right = m_PrintOptions.EvenPageMargins.Right;

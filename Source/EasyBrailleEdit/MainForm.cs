@@ -8,8 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using EasyBrailleEdit.Printing;
 using BrailleToolkit;
+using EasyBrailleEdit.Core;
+using EasyBrailleEdit.Printing;
 using Huanlin.Common.Helpers;
 using Huanlin.Http;
 using Huanlin.Sys;
@@ -199,7 +200,7 @@ namespace EasyBrailleEdit
             StringBuilder arg = new StringBuilder();
 
             // switches
-            arg.Append("-C" + AppGlobals.Options.CellsPerLine);
+            arg.Append("-C" + AppGlobals.Config.Braille.CellsPerLine);
 
             // input file name
             arg.Append(" ");
@@ -241,9 +242,9 @@ namespace EasyBrailleEdit
         /// </summary>
         private string DoConvert(string content)
         {
-            string inFileName = AppGlobals.GetTempPath() + AppConst.CvtInputTempFileName;
-            string outFileName = AppGlobals.GetTempPath() + AppConst.CvtOutputTempFileName;
-            string phraseFileName = AppGlobals.GetTempPath() + AppConst.CvtInputPhraseListFileName;
+            string inFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtInputTempFileName);
+            string outFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtOutputTempFileName);
+            string phraseFileName = Path.Combine(AppGlobals.TempPath, Constant.Files.CvtInputPhraseListFileName);
 
             // 建立輸入檔案
             File.WriteAllText(inFileName, content, Encoding.UTF8);	
@@ -350,13 +351,13 @@ namespace EasyBrailleEdit
 
         private bool HasDefaultTextPrinter()
         {
-            AppOptions opt = AppGlobals.Options;
-            if (String.IsNullOrEmpty(opt.DefaultTextPrinter))
+            string defaultPrinter = AppGlobals.Config.Printing.DefaultTextPrinter;
+            if (String.IsNullOrWhiteSpace(defaultPrinter))
             {
                 return false;
             }           
             var hasDefaultPrinter = PrinterSettings.InstalledPrinters.Cast<string>()
-                .Any(printerName => opt.DefaultTextPrinter.Equals(printerName, StringComparison.InvariantCultureIgnoreCase));
+                .Any(printerName => defaultPrinter.Equals(printerName, StringComparison.InvariantCultureIgnoreCase));
             return hasDefaultPrinter;
         }
 
@@ -468,7 +469,7 @@ namespace EasyBrailleEdit
             invalidChars.Clear();
 
             // 取得結果旗號以及錯誤訊息（如果有的話）
-            fname = AppGlobals.GetTempPath() + AppConst.CvtResultFileName;
+            fname = AppGlobals.GetTempPath() + Constant.Files.CvtResultFileName;
 
             if (!File.Exists(fname))
                 return false;
@@ -492,7 +493,7 @@ namespace EasyBrailleEdit
                 return false;
 
             // 取得所有轉換失敗的字元
-            fname = AppGlobals.GetTempPath() + AppConst.CvtErrorCharFileName;
+            fname = AppGlobals.GetTempPath() + Constant.Files.CvtErrorCharFileName;
 
             if (!File.Exists(fname))
                 return hasError;
@@ -585,7 +586,7 @@ namespace EasyBrailleEdit
 
         private void UpdateCaption()
         {
-            StringBuilder sb = new StringBuilder(AppConst.AppName);
+            StringBuilder sb = new StringBuilder(Constant.AppName);
             if (String.IsNullOrEmpty(m_FileName))
             {
                 sb.Append(" - 未命名");
@@ -634,7 +635,7 @@ namespace EasyBrailleEdit
         /// <returns>傳回 true 表示更新成功，必須結束程式。</returns>
         private async Task<bool> AutoUpdateAsync()
         {
-            if (!AppConfig.Instance.AutoUpdate)
+            if (!AppGlobals.Config.AutoUpdate)
             {
                 return false;
             }
@@ -672,7 +673,7 @@ namespace EasyBrailleEdit
             HttpUpdater updater = new HttpUpdater(Log.Logger)
             {
                 ClientPath = Application.StartupPath,
-                ServerUri = AppConfig.Instance.AppUpdateFilesUri,
+                ServerUri = AppGlobals.Config.AutoUpdateFilesUrl,
                 ChangeLogFileName = "ChangeLog.txt"
             };
 
@@ -936,8 +937,6 @@ namespace EasyBrailleEdit
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            AppGlobals.Options.Save();
-
             if (m_FileRunner != null)
             {
                 m_FileRunner.Dispose();

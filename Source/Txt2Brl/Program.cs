@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using EasyBrailleEdit.Core;
 using Serilog;
 
 namespace Txt2Brl
@@ -90,7 +91,7 @@ namespace Txt2Brl
 			}
 			if (String.IsNullOrEmpty(outFileName)) 
 			{
-				outFileName = Path.ChangeExtension(inFileName, EasyBrailleEdit.AppConst.DefaultBrailleFileExt);
+				outFileName = Path.ChangeExtension(inFileName, Constant.Files.DefaultBrailleFileExt);
 			}
 
 			return true;

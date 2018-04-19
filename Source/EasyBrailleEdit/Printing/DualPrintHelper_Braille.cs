@@ -3,9 +3,10 @@ using System.Text;
 using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
+using EasyBrailleEdit.Core;
 using Huanlin.Common.Helpers;
-using Huanlin.Windows.WinApi;
 using Huanlin.Windows.Forms;
+using Huanlin.Windows.WinApi;
 
 namespace EasyBrailleEdit
 {
@@ -248,11 +249,11 @@ namespace EasyBrailleEdit
 
         private void WriteToBrailler(StringBuilder brailleData)
         {
-            if (m_PrintOptions.PrinterNameForBraille.Equals(AppGlobals.Options.BraillePrinterPort))
+            if (m_PrintOptions.PrinterNameForBraille.Equals(AppGlobals.Config.Printing.BraillePrinterPort))
             {
                 // 輸出至 LPT port
                 LptPrintHelper lpt = new LptPrintHelper();
-                lpt.OpenPrinter(AppGlobals.Options.BraillePrinterPort);
+                lpt.OpenPrinter(AppGlobals.Config.Printing.BraillePrinterPort);
                 lpt.Print(brailleData.ToString());
                 lpt.ClosePrinter();
             }
