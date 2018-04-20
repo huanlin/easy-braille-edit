@@ -19,7 +19,7 @@ namespace EasyBrailleEdit.Common.Config
             Assembly asmb = Assembly.GetExecutingAssembly();
             if (asmb == null)
             {
-                throw new Exception("Assembly.GetEntryAssembly() 無法取得組件!");
+                throw new Exception("Assembly.GetExecutingAssembly() 無法取得組件!");
             }
             string path = Path.GetDirectoryName(asmb.Location);
             string filename = Path.Combine(path, IniFileName);
@@ -36,6 +36,7 @@ namespace EasyBrailleEdit.Common.Config
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine(";應用程式組態檔");
                     sb.AppendLine("[General}]");
+                    sb.AppendLine($"AutoUpdate=true");
                     sb.AppendLine($"AutoUpdateFilesUrl={Constant.DefaultAutoUpdateFilesUrl}");
                     File.WriteAllText(filename, sb.ToString(), Encoding.UTF8);
                 }
