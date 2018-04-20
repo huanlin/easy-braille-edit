@@ -13,8 +13,8 @@ using EasyBrailleEdit.Common;
 using EasyBrailleEdit.Printing;
 using Huanlin.Common.Helpers;
 using Huanlin.Http;
-using Huanlin.Sys;
 using Huanlin.Windows.Forms;
+using Huanlin.Windows.Sys;
 using Serilog;
 
 namespace EasyBrailleEdit
@@ -670,7 +670,7 @@ namespace EasyBrailleEdit
 
         private async Task<bool> DoUpdateAsync(bool autoMode)
         {
-            HttpUpdater updater = new HttpUpdater(Log.Logger)
+            HttpUpdater updater = new HttpUpdater()
             {
                 ClientPath = Application.StartupPath,
                 ServerUri = AppGlobals.Config.AutoUpdateFilesUrl,

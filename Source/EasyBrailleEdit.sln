@@ -23,13 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{CECA7BC5-3A2
 		ReadMe\ReleaseNote.txt = ReadMe\ReleaseNote.txt
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HuanlinLib", "HuanlinLib", "{5A304C62-4D01-48EF-860F-B22D7C6B665B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{564D6238-5E27-47A8-82F8-5E924565757A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Huanlin.Common", "HuanlinLib\src\Huanlin.Common\Huanlin.Common.csproj", "{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Huanlin.Windows", "HuanlinLib\src\Huanlin.Windows\Huanlin.Windows.csproj", "{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UpdateFiles", "UpdateFiles", "{3B090672-873A-453F-8F76-3C784E0C893C}"
 	ProjectSection(SolutionItems) = preProject
@@ -40,7 +34,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrailleToolkit", "BrailleTo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.BrailleToolkit", "..\Tests\Test.BrailleKit\Test.BrailleToolkit.csproj", "{A67E0D18-8A3D-4A47-9A34-17A280EF7508}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyBrailleEdit.Common", "EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj", "{AA5CB6BC-CE6C-4132-B932-32B646584921}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyBrailleEdit.Common", "EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj", "{AA5CB6BC-CE6C-4132-B932-32B646584921}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,30 +78,6 @@ Global
 		{FFAC9544-90F3-4441-B776-24FAF4F325BE}.Release|x64.ActiveCfg = Release|Any CPU
 		{FFAC9544-90F3-4441-B776-24FAF4F325BE}.Release|x86.ActiveCfg = Release|Any CPU
 		{FFAC9544-90F3-4441-B776-24FAF4F325BE}.Release|x86.Build.0 = Release|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Debug|x64.Build.0 = Debug|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Debug|x86.Build.0 = Debug|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Release|x64.ActiveCfg = Release|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Release|x64.Build.0 = Release|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Release|x86.ActiveCfg = Release|Any CPU
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9}.Release|x86.Build.0 = Release|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Debug|x64.Build.0 = Debug|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Debug|x86.Build.0 = Debug|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Release|x64.ActiveCfg = Release|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Release|x64.Build.0 = Release|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Release|x86.ActiveCfg = Release|Any CPU
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2}.Release|x86.Build.0 = Release|Any CPU
 		{34A66B1A-70F1-4BE9-AE58-885E6C27E58E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{34A66B1A-70F1-4BE9-AE58-885E6C27E58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34A66B1A-70F1-4BE9-AE58-885E6C27E58E}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -149,8 +119,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BABD85E6-CFDB-4CF9-AFFF-4AC85EA159F9} = {5A304C62-4D01-48EF-860F-B22D7C6B665B}
-		{65E0BFA7-C86C-4A5B-A37A-084C2B3BAFB2} = {5A304C62-4D01-48EF-860F-B22D7C6B665B}
 		{A67E0D18-8A3D-4A47-9A34-17A280EF7508} = {564D6238-5E27-47A8-82F8-5E924565757A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
