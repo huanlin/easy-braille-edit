@@ -1,4 +1,5 @@
-﻿using Nuke.Common.Git;
+﻿using System;
+using Nuke.Common.Git;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Core;
 using static Nuke.Common.Tools.MSBuild.MSBuildTasks;
@@ -22,10 +23,18 @@ class Build : NukeBuild
     // Returns command-line arguments and environment variables.
 
     Target Clean => _ => _
-            .OnlyWhen(() => false) // Disabled for safety.
+            //.OnlyWhen(() => false) // Disabled for safety.
             .Executes(() =>
             {
-                DeleteDirectories(GlobDirectories(SourceDirectory, "**/bin", "**/obj"));
+                try
+                {
+                    // note: 當 Visual Studio 已經開啟應用程式專案，以下刪除操作會因為目錄被鎖住而失敗。
+                    DeleteDirectories(GlobDirectories(SourceDirectory, "**/bin", "**/obj"));
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"刪除原始碼目錄下的 **/bin 和 **/obj 時發生錯誤: {ex.Message}");
+                }
                 EnsureCleanDirectory(OutputDirectory);
             });
 

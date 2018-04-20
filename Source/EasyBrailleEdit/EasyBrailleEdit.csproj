@@ -35,5 +35,11 @@
     <ProjectReference Include="..\EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Phrase.phf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
  
