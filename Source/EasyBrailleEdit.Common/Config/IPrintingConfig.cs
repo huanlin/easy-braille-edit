@@ -4,71 +4,71 @@ namespace EasyBrailleEdit.Common.Config
 {
     public interface IPrintingConfig
     {
-        [Option(Alias = "Printing.BraillePrinterName", DefaultValue = "")]
+        [Option(DefaultValue = "")]
         string BraillePrinterName { get; set; }
 
-        [Option(Alias = "Printing.BraillePrinterPort", DefaultValue = "LPT1")]
+        [Option(DefaultValue = "LPT1")]
         string BraillePrinterPort { get; set; }
 
-        [Option(Alias = "Printing.DefaultTextPrinter", DefaultValue = "")]
+        [Option(DefaultValue = "")]
         string DefaultTextPrinter { get; set; }
 
-        [Option(Alias = "Printing.PrintBrailleSendPageBreakAtEndOfDoc", DefaultValue = false)]
+        [Option(DefaultValue = false)]
         bool PrintBrailleSendPageBreakAtEndOfDoc { get; set; }
 
-        [Option(Alias = "Printing.PrintBrailleToBrailler", DefaultValue = true)]
+        [Option(DefaultValue = true)]
         bool PrintBrailleToBrailler { get; set; }
 
-        [Option(Alias = "Printing.PrintBrailleToFile", DefaultValue = false)]
+        [Option(DefaultValue = false)]
         bool PrintBrailleToFile { get; set; }
 
-        [Option(Alias = "Printing.PrintBrailleToFileName", DefaultValue = "")]
+        [Option(DefaultValue = "")]
         string PrintBrailleToFileName { get; set; }
 
-        [Option(Alias = "Printing.PrintPageFoot", DefaultValue = true)]
+        [Option(DefaultValue = true)]
         bool PrintPageFoot { get; set; }
 
-        [Option(Alias = "Printing.PrintTextFontName", DefaultValue = "新細明體")]
+        [Option(DefaultValue = "新細明體")]
         string PrintTextFontName { get; set; }
 
-        [Option(Alias = "Printing.PrintTextFontSize", DefaultValue = Constant.DefaultPrintTextFontSize)]
+        [Option(DefaultValue = Constant.DefaultPrintTextFontSize)]
         double PrintTextFontSize { get; set; }
 
-        [Option(Alias = "Printing.PrintTextLineHeight", DefaultValue = 40.0975)]
+        [Option(DefaultValue = 40.0975)]
         double PrintTextLineHeight { get; set; }
 
-        [Option(Alias = "Printing.PrintTextMarginLeft", DefaultValue = Constant.DefaultPrintTextMarginLeft)]
+        [Option(DefaultValue = Constant.DefaultPrintTextMarginLeft)]
         int PrintTextMarginLeft { get; set; }
 
-        [Option(Alias = "Printing.PrintTextMarginTop", DefaultValue = Constant.DefaultPrintTextMarginTop)]
+        [Option(DefaultValue = Constant.DefaultPrintTextMarginTop)]
         int PrintTextMarginTop { get; set; }
 
-        [Option(Alias = "Printing.PrintTextMarginRight", DefaultValue = Constant.DefaultPrintTextMarginRight)]
+        [Option(DefaultValue = Constant.DefaultPrintTextMarginRight)]
         int PrintTextMarginRight { get; set; }
 
-        [Option(Alias = "Printing.PrintTextMarginBottom", DefaultValue = Constant.DefaultPrintTextMarginBottom)]
+        [Option(DefaultValue = Constant.DefaultPrintTextMarginBottom)]
         int PrintTextMarginBottom { get; set; }
 
         #region 偶數頁的明眼字列印邊界
 
-        [Option(Alias = "Printing.PrintTextMarginLeft2", DefaultValue = Constant.DefaultPrintTextMarginLeft2)]
+        [Option(DefaultValue = Constant.DefaultPrintTextMarginLeft2)]
         int PrintTextMarginLeft2 { get; set; }
 
-        [Option(Alias = "Printing.PrintTextMarginTop2", DefaultValue = Constant.DefaultPrintTextMarginTop2)]
+        [Option(DefaultValue = Constant.DefaultPrintTextMarginTop2)]
         int PrintTextMarginTop2 { get; set; }
 
-        [Option(Alias = "Printing.PrintTextMarginRight2", DefaultValue = Constant.DefaultPrintTextMarginRight2)]
+        [Option(DefaultValue = Constant.DefaultPrintTextMarginRight2)]
         int PrintTextMarginRight2 { get; set; }
 
-        [Option(Alias = "Printing.PrintTextMarginBottom2", DefaultValue = Constant.DefaultPrintTextMarginBottom2)]
+        [Option(DefaultValue = Constant.DefaultPrintTextMarginBottom2)]
         int PrintTextMarginBottom2 { get; set; }
 
         #endregion
 
-        [Option(Alias = "Printing.PrintTextPaperName", DefaultValue = "")]
+        [Option(DefaultValue = "")]
         string PrintTextPaperName { get; set; }
 
-        [Option(Alias = "Printing.PrintTextPaperSourceName", DefaultValue = "")]
+        [Option(DefaultValue = "")]
         string PrintTextPaperSourceName { get; set; }
     }
 }
