@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using BrailleToolkit.Converters;
 using BrailleToolkit.Data;
+using EasyBrailleEdit.Common;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
 
@@ -1063,7 +1064,7 @@ namespace BrailleToolkit
         /// <returns>縮排格數。</returns>
         private static int CalcNewLineIndents(BrailleLine brLine)
         {
-			if (BrailleConfig.Activated && BrailleConfig.AutoIndentNumberedLine)
+            if (AppGlobals.Config.Braille.AutoIndentNumberedLine)
 			{
 				int count = 0;
 				bool foundOrderedItem = false;

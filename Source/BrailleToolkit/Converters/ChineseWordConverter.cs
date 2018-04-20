@@ -434,8 +434,7 @@ namespace BrailleToolkit.Converters
         /// <param name="brWord"></param>
         private void ApplyBrailleConfig(BrailleWord brWord)
         {
-            if (!BrailleConfig.Activated)
-                return;
+            // Note: use AppGlobals.Config.Braille.[property-name] to access braille configuration items.
 
             /* 秋華 2009-6-22：水平箭頭不用加 1246 點，其他箭頭固定都要。
              * 所以直接用 ChineseBrailleTable.xml 中定義的就可以了，毋需根據組態檔調整。

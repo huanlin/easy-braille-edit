@@ -13,10 +13,17 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>..\..\Output\net452</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Config.Net" Version="4.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AppConfig.Default.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project> 
