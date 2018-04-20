@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using BrailleToolkit;
 using BrailleToolkit.Converters;
-using EasyBrailleEdit.Core;
+using EasyBrailleEdit.Common;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 

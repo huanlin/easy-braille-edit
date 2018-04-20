@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using EasyBrailleEdit.Core;
+using EasyBrailleEdit.Common;
 using Huanlin.Common.Helpers;
 using Huanlin.Windows.Forms;
 

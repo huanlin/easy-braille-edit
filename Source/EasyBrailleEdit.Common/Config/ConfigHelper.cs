@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text;
 using Config.Net;
 
-namespace EasyBrailleEdit.Core.Config
+namespace EasyBrailleEdit.Common.Config
 {
     /// <summary>
     /// 此類別是用來封裝應用程式組態檔。

@@ -4,7 +4,7 @@ using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
 using BrailleToolkit;
-using EasyBrailleEdit.Core;
+using EasyBrailleEdit.Common;
 
 namespace EasyBrailleEdit
 {

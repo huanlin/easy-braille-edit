@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using EasyBrailleEdit.Core;
+using EasyBrailleEdit.Common;
 using Serilog;
 
 namespace Txt2Brl

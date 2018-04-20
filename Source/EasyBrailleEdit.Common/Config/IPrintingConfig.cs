@@ -1,6 +1,6 @@
 ﻿using Config.Net;
 
-namespace EasyBrailleEdit.Core.Config
+namespace EasyBrailleEdit.Common.Config
 {
     public interface IPrintingConfig
     {

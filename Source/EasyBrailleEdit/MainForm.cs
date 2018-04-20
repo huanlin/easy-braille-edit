@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrailleToolkit;
-using EasyBrailleEdit.Core;
+using EasyBrailleEdit.Common;
 using EasyBrailleEdit.Printing;
 using Huanlin.Common.Helpers;
 using Huanlin.Http;

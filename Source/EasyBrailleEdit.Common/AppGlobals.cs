@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using EasyBrailleEdit.Core.Config;
+using EasyBrailleEdit.Common.Config;
 
-namespace EasyBrailleEdit.Core
+namespace EasyBrailleEdit.Common
 {
     public static class AppGlobals
     {

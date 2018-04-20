@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing.Printing;
-using EasyBrailleEdit.Core;
+using EasyBrailleEdit.Common;
 
 namespace EasyBrailleEdit
 {

@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BrailleToolkit\BrailleToolkit.csproj" />
-    <ProjectReference Include="..\EasyBrailleEdit.Core\EasyBrailleEdit.Core.csproj" />
+    <ProjectReference Include="..\EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj" />
     <ProjectReference Include="..\HuanlinLib\src\Huanlin.Common\Huanlin.Common.csproj" />
     <ProjectReference Include="..\HuanlinLib\src\Huanlin.Windows\Huanlin.Windows.csproj" />
   </ItemGroup>

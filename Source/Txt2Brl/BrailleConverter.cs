@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 using BrailleToolkit;
-using EasyBrailleEdit.Core;
+using EasyBrailleEdit.Common;
 using NChinese;
 using NChinese.Imm;
 using NChinese.Phonetic;

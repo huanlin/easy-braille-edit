@@ -1,4 +1,4 @@
-﻿namespace EasyBrailleEdit.Core
+﻿namespace EasyBrailleEdit.Common
 {
     public static class Constant
     {

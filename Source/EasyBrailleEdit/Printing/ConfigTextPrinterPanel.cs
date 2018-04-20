@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using EasyBrailleEdit.Core;
+using EasyBrailleEdit.Common;
 
 namespace EasyBrailleEdit.Printing
 {
