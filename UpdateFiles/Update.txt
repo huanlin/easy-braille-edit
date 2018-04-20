@@ -6,7 +6,7 @@
 '===================================================================
 AppConfig.Default.ini            ; ?     '若 client 端無此檔案才更新
 BrailleToolkit.dll               ; 3.1.0 '若 client 端版本比這裡指定的版本還要舊，則下載
-Castle.Core                      ; 4.2.1
+Castle.Core.dll                  ; 4.2.1
 Config.Net.dll                   ; 4.8.0
 EasyBrailleEdit.Common.dll       ; 3.1.0
 EasyBrailleEdit.exe              ; 3.1.0 
