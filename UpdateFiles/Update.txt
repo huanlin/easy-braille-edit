@@ -5,11 +5,11 @@
 '那麼應用程式在下載檔案時可能會發生找不到檔案的錯誤（404 error）。
 '===================================================================
 AppConfig.Default.ini            ; ?     '若 client 端無此檔案才更新
-BrailleToolkit.dll               ; 3.1.1 '若 client 端版本比這裡指定的版本還要舊，則下載
+BrailleToolkit.dll               ; 3.2.0 '若 client 端版本比這裡指定的版本還要舊，則下載
 Castle.Core.dll                  ; 4.2.1
 Config.Net.dll                   ; 4.8.0
-EasyBrailleEdit.Common.dll       ; 3.1.1
-EasyBrailleEdit.exe              ; 3.1.1 
+EasyBrailleEdit.Common.dll       ; 3.2.0
+EasyBrailleEdit.exe              ; 3.2.0 
 EasyBrailleEdit.exe.config       ; ?     
 Huanlin.Common.dll               ; 4.5.4
 Huanlin.Windows.dll              ; 4.5.4
@@ -22,5 +22,5 @@ Serilog.Sinks.File.dll           ; 4.0.1
 Serilog.Sinks.RollingFile.dll    ; 3.3.1
 System.ValueTuple.dll            ; 4.6.0
 SourceGrid.dll                   ; 4.40
-Txt2Brl.exe                      ; 3.1.1 'Txt2Brl.exe 版本應該跟 EasyBrailleEdit 一致
+Txt2Brl.exe                      ; 3.2.0 'Txt2Brl.exe 版本應該跟 EasyBrailleEdit 一致
 Txt2Brl.exe.config               ; ?     '若 client 端無此檔案才更新

@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "©öÂIÂùµø"
-#define MyAppVersion "2.9.0"
-#define MyAppPublisher "Ministep Studio"
+#define MyAppVersion "3.2.0"
+#define MyAppPublisher "Michael Tsai"
 #define MyAppExeName "EasyBrailleEdit.exe"
 
 [Setup]
@@ -15,13 +15,17 @@ AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
-DefaultDirName=C:\EasyBrailleEdit
+DefaultDirName=C:\EasyBrailleEdit3
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 OutputDir=.
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
+UsePreviousAppDir=False
+AllowRootDirectory=True
+AllowUNCPath=False
+VersionInfoCopyright=Copyright (c) 2008-2018 Michael Tsai
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -33,17 +37,15 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "Files\LICENSE.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\ReleaseNote.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\x86\EasyBrailleEdit.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\AppConfig.Default.ini"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\x86\Braille.ini"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\ChangeLog.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\Castle.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\Config.Net.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\EasyBrailleEdit.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\EasyBrailleEdit.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\EasyBrailleEdit.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\x86\Huanlin.AppBlock.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\x86\Huanlin.Braille.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\x86\Huanlin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\x86\Huanlin.WinApi.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\x86\Huanlin.WinForms.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Files\x86\System.ValueTuple.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\Huanlin.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\Huanlin.Windows.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\NChinese.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\NChinese.Imm.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Phrase.phf"; DestDir: "{app}"; Flags: ignoreversion
@@ -52,6 +54,7 @@ Source: "Files\x86\Serilog.Settings.AppSettings.dll"; DestDir: "{app}"; Flags: i
 Source: "Files\x86\Serilog.Sinks.File.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Serilog.Sinks.RollingFile.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\SourceGrid.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\System.ValueTuple.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Txt2Brl.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Txt2Brl.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
@@ -65,3 +68,4 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: 
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+
