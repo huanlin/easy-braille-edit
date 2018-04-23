@@ -1,6 +1,8 @@
-﻿namespace EasyBrailleEdit
+﻿using System.Windows.Forms;
+
+namespace EasyBrailleEdit
 {
-    partial class AboutForm
+    public partial class AboutForm : Form
     {
         /// <summary>
         /// Required designer variable.

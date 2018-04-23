@@ -36,10 +36,214 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Phrase.phf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+    <Compile Update="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="PhoneticForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PhoneticForm.Designer.cs">
+      <DependentUpon>PhoneticForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Printing\ConfigTextPrinterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Printing\ConfigTextPrinterForm.Designer.cs">
+      <DependentUpon>ConfigTextPrinterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Printing\ConfigTextPrinterPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Printing\ConfigTextPrinterPanel.Designer.cs">
+      <DependentUpon>ConfigTextPrinterPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Update="RemindTrialForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RemindTrialForm.Designer.cs">
+      <DependentUpon>RemindTrialForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ConvertionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ConvertionDialog.Designer.cs">
+      <DependentUpon>ConvertionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ConvertionProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ConvertionProgressForm.Designer.cs">
+      <DependentUpon>ConvertionProgressForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="BusyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="BusyForm.Designer.cs">
+      <DependentUpon>BusyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="DualEditFindForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DualEditFindForm.Designer.cs">
+      <DependentUpon>DualEditFindForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="DualEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DualEditForm.Designer.cs">
+      <DependentUpon>DualEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="DualEditForm_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DualEditForm_File.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DualEditGotoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DualEditGotoForm.Designer.cs">
+      <DependentUpon>DualEditGotoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="DualEditTitleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DualEditTitleForm.Designer.cs">
+      <DependentUpon>DualEditTitleForm.cs</DependentUpon>
+    </Compile>    
+    <Compile Update="InvalidCharForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="InvalidCharForm.Designer.cs">
+      <DependentUpon>InvalidCharForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Printing\DualPrintDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Printing\DualPrintDialog.Designer.cs">
+      <DependentUpon>DualPrintDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="EditCellForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EditCellForm.Designer.cs">
+      <DependentUpon>EditCellForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="FormattedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormattedForm.Designer.cs">
+      <DependentUpon>FormattedForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="PickBrailleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PickBrailleForm.Designer.cs">
+      <DependentUpon>PickBrailleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="UpdateProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UpdateProgressForm.Designer.cs">
+      <DependentUpon>UpdateProgressForm.cs</DependentUpon>
+    </Compile>
 
+    <EmbeddedResource Update="AboutForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PhoneticForm.resx">
+      <DependentUpon>PhoneticForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Printing\ConfigTextPrinterForm.resx">
+      <DependentUpon>ConfigTextPrinterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Printing\ConfigTextPrinterPanel.resx">
+      <DependentUpon>ConfigTextPrinterPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="RemindTrialForm.resx">
+      <DependentUpon>RemindTrialForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ConvertionDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConvertionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ConvertionProgressForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConvertionProgressForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BusyForm.resx">
+      <DependentUpon>BusyForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="DualEditFindForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DualEditFindForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="DualEditForm.resx">
+      <DependentUpon>DualEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="DualEditGotoForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DualEditGotoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="InvalidCharForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InvalidCharForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Printing\DualPrintDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DualPrintDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EditCellForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EditCellForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="FormattedForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormattedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PickBrailleForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PickBrailleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="RegForm.resx">
+      <DependentUpon>RegForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Printing\TextPageSetupDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TextPageSetupDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="DualEditTitleForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DualEditTitleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UpdateProgressForm.resx">
+      <DependentUpon>UpdateProgressForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>      
+  </ItemGroup>
 </Project>
  
