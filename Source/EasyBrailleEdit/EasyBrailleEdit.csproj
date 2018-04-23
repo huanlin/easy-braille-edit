@@ -245,5 +245,11 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>      
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Phrase.phf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
  

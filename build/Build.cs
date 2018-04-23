@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Nuke.Common.Git;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Core;
@@ -51,6 +52,27 @@ class Build : NukeBuild
             .Executes(() =>
             {
                 //GitVersionTasks.DefaultGitVersion.EnableUpdateAssemblyInfo();
+
                 MSBuild(s => DefaultMSBuildCompile);
+
+                string outputDir = OutputDirectory / "net452";
+
+                if (GitRepository.Branch.Equals(Shared.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    string srcFileName = Path.Combine(outputDir, "AppConfig.ForBlind.ini");
+                    string dstFileName = Path.Combine(outputDir, "AppConfig.Default.ini");
+
+                    Logger.Info(Environment.NewLine + "**********<<< 額外處理 >>>****************");
+                    Logger.Info($"使用特定分支版本的預設應用程式組態檔：'{Shared.ProductBranches.TaipeiForBlind}'");
+                    File.Copy(srcFileName, dstFileName, true);
+                    File.Delete(srcFileName);
+
+                    // Removing unnecessary files.
+                    var dir = new DirectoryInfo(outputDir);
+                    foreach (var file in dir.EnumerateFiles("*.pdb"))
+                    {
+                        file.Delete();
+                    }
+                }
             });
 }
