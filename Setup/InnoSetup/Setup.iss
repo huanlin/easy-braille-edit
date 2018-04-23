@@ -41,6 +41,7 @@ Source: "Files\x86\AppConfig.Default.ini"; DestDir: "{app}"; Flags: ignoreversio
 Source: "Files\x86\ChangeLog.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Castle.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\Config.Net.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Files\x86\BrailleToolkit.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\EasyBrailleEdit.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\EasyBrailleEdit.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Files\x86\EasyBrailleEdit.exe.config"; DestDir: "{app}"; Flags: ignoreversion
