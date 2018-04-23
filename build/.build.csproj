@@ -24,4 +24,8 @@
     <None Remove="*.csproj.DotSettings;*.ref.*.txt" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Source\EasyBrailleEdit.Common\EasyBrailleEdit.Common.csproj" />
+  </ItemGroup>
+
 </Project>

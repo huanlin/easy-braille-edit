@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
+using EasyBrailleEdit.Common;
 
 namespace EasyBrailleEdit
 {
@@ -16,6 +17,9 @@ namespace EasyBrailleEdit
         {
 			string fileVer = " v" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             lblVesion.Text = "易點雙視 " + fileVer;
+
+            lblLicense.Text = AppGlobals.GetProductLicense();
+            picTaipeiForBlind.Visible = AppGlobals.IsLicensedFor_TaipeiForBlind();
         }
 
 		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -28,7 +32,7 @@ namespace EasyBrailleEdit
 			{
 				Process process = new Process();
 				process.StartInfo.FileName = "iexplore.exe";
-				process.StartInfo.Arguments = linkLabel1.Text;
+				process.StartInfo.Arguments = Constant.FacebookGroup;
 				process.StartInfo.UseShellExecute = true;
 				process.Start();
 			}

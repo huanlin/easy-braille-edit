@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using EasyBrailleEdit.Common;
 using Nuke.Common.Git;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Core;
@@ -57,13 +58,13 @@ class Build : NukeBuild
 
                 string outputDir = OutputDirectory / "net452";
 
-                if (GitRepository.Branch.Equals(Shared.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase))
+                if (GitRepository.Branch.Equals(Constant.ProductBranches.TaipeiForBlind, StringComparison.CurrentCultureIgnoreCase))
                 {
                     string srcFileName = Path.Combine(outputDir, "AppConfig.ForBlind.ini");
                     string dstFileName = Path.Combine(outputDir, "AppConfig.Default.ini");
 
                     Logger.Info(Environment.NewLine + "**********<<< 額外處理 >>>****************");
-                    Logger.Info($"使用特定分支版本的預設應用程式組態檔：'{Shared.ProductBranches.TaipeiForBlind}'");
+                    Logger.Info($"使用特定分支版本的預設應用程式組態檔：'{Constant.ProductBranches.TaipeiForBlind}'");
                     File.Copy(srcFileName, dstFileName, true);
                     File.Delete(srcFileName);
 

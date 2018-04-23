@@ -3,6 +3,13 @@
     public static class Constant
     {
         public const string AppName = "EasyBrailleEdit";
+        public const string FacebookGroup = "https://www.facebook.com/groups/204319040172163/";
+
+        public static class ProductBranches
+        {
+            public const string Community = "master";         // 社群版  
+            public const string TaipeiForBlind = "forblind";  // 台北市視障者家長協會
+        }
 
         // 預設一行最大方數
         public const int DefaultCellsPerLine = 40;
