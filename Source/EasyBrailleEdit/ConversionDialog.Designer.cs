@@ -1,6 +1,6 @@
 ﻿namespace EasyBrailleEdit
 {
-    partial class ConvertionDialog
+    partial class ConversionDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -109,7 +109,7 @@
             this.clbPhraseTbl.Location = new System.Drawing.Point(12, 32);
             this.clbPhraseTbl.Name = "clbPhraseTbl";
             this.helpProvider1.SetShowHelp(this.clbPhraseTbl, true);
-            this.clbPhraseTbl.Size = new System.Drawing.Size(352, 144);
+            this.clbPhraseTbl.Size = new System.Drawing.Size(352, 124);
             this.clbPhraseTbl.TabIndex = 0;
             this.clbPhraseTbl.SelectedIndexChanged += new System.EventHandler(this.clbPhraseTbl_SelectedIndexChanged);
             // 
@@ -119,9 +119,9 @@
             this.chkRemember.AutoSize = true;
             this.chkRemember.Checked = true;
             this.chkRemember.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRemember.Location = new System.Drawing.Point(12, 308);
+            this.chkRemember.Location = new System.Drawing.Point(12, 304);
             this.chkRemember.Name = "chkRemember";
-            this.chkRemember.Size = new System.Drawing.Size(131, 19);
+            this.chkRemember.Size = new System.Drawing.Size(164, 23);
             this.chkRemember.TabIndex = 5;
             this.chkRemember.Text = "記住這次的設定";
             this.chkRemember.UseVisualStyleBackColor = true;
@@ -158,25 +158,25 @@
             // 
             // numLinesPerPage
             // 
-            this.numLinesPerPage.Location = new System.Drawing.Point(95, 21);
+            this.numLinesPerPage.Location = new System.Drawing.Point(114, 21);
             this.numLinesPerPage.Name = "numLinesPerPage";
-            this.numLinesPerPage.Size = new System.Drawing.Size(60, 25);
+            this.numLinesPerPage.Size = new System.Drawing.Size(60, 29);
             this.numLinesPerPage.TabIndex = 1;
             // 
             // numCellsPerLine
             // 
-            this.numCellsPerLine.Location = new System.Drawing.Point(247, 21);
+            this.numCellsPerLine.Location = new System.Drawing.Point(303, 21);
             this.numCellsPerLine.Name = "numCellsPerLine";
-            this.numCellsPerLine.Size = new System.Drawing.Size(60, 25);
+            this.numCellsPerLine.Size = new System.Drawing.Size(60, 29);
             this.numCellsPerLine.TabIndex = 3;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("PMingLiU", 11F);
-            this.label7.Location = new System.Drawing.Point(170, 23);
+            this.label7.Location = new System.Drawing.Point(207, 23);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 15);
+            this.label7.Size = new System.Drawing.Size(90, 19);
             this.label7.TabIndex = 2;
             this.label7.Text = "每列幾方:";
             // 
@@ -186,14 +186,14 @@
             this.label5.Font = new System.Drawing.Font("PMingLiU", 11F);
             this.label5.Location = new System.Drawing.Point(18, 23);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 15);
+            this.label5.Size = new System.Drawing.Size(90, 19);
             this.label5.TabIndex = 0;
             this.label5.Text = "每頁幾列:";
             // 
             // ConvertionDialog
             // 
             this.AcceptButton = this.btnConvert;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(472, 335);

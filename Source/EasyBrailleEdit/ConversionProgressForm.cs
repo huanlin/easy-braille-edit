@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace EasyBrailleEdit
 {
-	public partial class ConvertionProgressForm : Form
+	public partial class ConversionProgressForm : Form
 	{
 		private StringBuilder m_InvalidChars;
 
-		public ConvertionProgressForm()
+		public ConversionProgressForm()
 		{
 			InitializeComponent();
 

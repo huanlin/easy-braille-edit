@@ -88,19 +88,49 @@ namespace Txt2Brl
 			}
 		}
 
-		/// <summary>
-		/// 執行點字轉檔。
-		/// </summary>
-		/// <param name="inFileName">輸入的明眼字檔名。</param>
-		/// <param name="outFileName">輸出的點字檔名。</param>
-		/// <param name="cellsPerLine">每列最大方數。</param>
-		/// <param name="verboseMode">冗長資訊模式。</param>
-		public void ConvertFile(string inFileName, string outFileName, 
+        public void Convert(string inputText, string outputFile, int cellsPerLine, bool verboseMode)
+        {
+            m_OutFileName = outputFile;
+
+            PrepareConversion();
+
+            try
+            {
+                _doc.CellsPerLine = cellsPerLine;
+
+                _doc.Convert(inputText);
+
+                if (!_processor.HasError)   // 轉換過程都沒錯誤才輸出點字檔
+                {
+                    _doc.SaveBrailleFile(outputFile);
+                }
+
+                _doc.Clear();
+                _doc = null;
+
+                WriteInvalidCharsToFile();
+
+                WriteResultToFile();
+            }
+            finally
+            {
+                FinalizeConversion();
+            }
+        }
+
+        /// <summary>
+        /// 執行點字轉檔。
+        /// </summary>
+        /// <param name="inFileName">輸入的明眼字檔名。</param>
+        /// <param name="outFileName">輸出的點字檔名。</param>
+        /// <param name="cellsPerLine">每列最大方數。</param>
+        /// <param name="verboseMode">冗長資訊模式。</param>
+        public void ConvertFile(string inFileName, string outFileName, 
 			int cellsPerLine, bool verboseMode) 
 		{
 			m_OutFileName = outFileName;
 
-			PrepareConvertion();
+			PrepareConversion();
 
 			try
 			{
@@ -170,7 +200,7 @@ namespace Txt2Brl
 			}
 		}
 
-		private void PrepareConvertion()
+		private void PrepareConversion()
 		{
 			if (File.Exists(m_OutFileName)) 
 			{

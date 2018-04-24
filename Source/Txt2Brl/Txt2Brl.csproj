@@ -6,7 +6,7 @@
     <Company>Michael Tsai</Company>
     <Copyright>Copyright (c) 2008-2018 Michael Tsai</Copyright>
     <ApplicationIcon />
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <StartupObject />
   </PropertyGroup>
 
@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.2.1" />
     <PackageReference Include="Config.Net" Version="4.8.0" />
     <PackageReference Include="Huanlin.Common" Version="4.5.4" />
     <PackageReference Include="NChinese" Version="0.3.6" />
@@ -33,6 +34,12 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="sample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

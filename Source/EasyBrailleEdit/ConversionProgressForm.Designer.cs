@@ -1,6 +1,6 @@
 namespace EasyBrailleEdit
 {
-	partial class ConvertionProgressForm
+	partial class ConversionProgressForm
 	{
 		/// <summary>
 		/// Required designer variable.

@@ -95,14 +95,7 @@ namespace BrailleToolkit
             }
             using (StreamReader sr = new StreamReader(m_FileName, enc, true))
             {
-                try
-                {
-                    LoadAndConvert(sr);
-                }
-                finally
-                {
-                    sr.Close();
-                }
+                LoadAndConvert(sr);
             }
         }
 
@@ -110,14 +103,7 @@ namespace BrailleToolkit
         {
             using (StringReader sr = new StringReader(text))
             {
-                try
-                {
-                    LoadAndConvert(sr);
-                }
-                finally
-                {
-                    sr.Close();
-                }
+                LoadAndConvert(sr);
             }
         }
 

@@ -10,12 +10,12 @@ using Huanlin.Windows.Forms;
 
 namespace EasyBrailleEdit
 {
-    public partial class ConvertionDialog : Form
+    public partial class ConversionDialog : Form
     {
         private ArrayList m_SelectedPhraseFileNames;
         private const char PhraseFileNameSeparator = '|';
 
-        public ConvertionDialog()
+        public ConversionDialog()
         {
             m_SelectedPhraseFileNames = new ArrayList();
 

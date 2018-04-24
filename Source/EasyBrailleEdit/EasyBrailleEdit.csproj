@@ -79,17 +79,17 @@
     <Compile Update="RemindTrialForm.Designer.cs">
       <DependentUpon>RemindTrialForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="ConvertionDialog.cs">
+    <Compile Update="ConversionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ConvertionDialog.Designer.cs">
-      <DependentUpon>ConvertionDialog.cs</DependentUpon>
+    <Compile Update="ConversionDialog.Designer.cs">
+      <DependentUpon>ConversionDialog.cs</DependentUpon>
     </Compile>
-    <Compile Update="ConvertionProgressForm.cs">
+    <Compile Update="ConversionProgressForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ConvertionProgressForm.Designer.cs">
-      <DependentUpon>ConvertionProgressForm.cs</DependentUpon>
+    <Compile Update="ConversionProgressForm.Designer.cs">
+      <DependentUpon>ConversionProgressForm.cs</DependentUpon>
     </Compile>
     <Compile Update="BusyForm.cs">
       <SubType>Form</SubType>
@@ -188,13 +188,13 @@
       <DependentUpon>RemindTrialForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="ConvertionDialog.resx">
+    <EmbeddedResource Update="ConversionDialog.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>ConvertionDialog.cs</DependentUpon>
+      <DependentUpon>ConversionDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="ConvertionProgressForm.resx">
+    <EmbeddedResource Update="ConversionProgressForm.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>ConvertionProgressForm.cs</DependentUpon>
+      <DependentUpon>ConversionProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="BusyForm.resx">
       <DependentUpon>BusyForm.cs</DependentUpon>

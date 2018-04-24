@@ -2,9 +2,9 @@
 
 namespace BrailleToolkit
 {
-    public sealed class ChineseBrailleRule
+    public static class ChineseBrailleRule
     {
-        private ChineseBrailleRule() { }
+        const string ClosingSymbols = "」』）】｝＂’";  // 右封閉符號。
 
         /// <summary>
         /// 根據標點符號規則調整一整行點字。
@@ -89,7 +89,7 @@ namespace BrailleToolkit
                         break;
                     case "！":  // 驚嘆號、問號的規則相同。
                     case "？":
-                        wordIdx += ApplyQuestionRule(brLine, wordIdx);
+                        wordIdx += EnsureOneSpaceFollowed_ExceptNextWordIsClosingSymbol(brLine, wordIdx);
                         break;
                     case "）":  // 後面要加一空方。
                     case "∘":      // 溫度符號
@@ -238,13 +238,25 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// 套用問號、驚嘆號的點字規則。
-        /// 規則：後面要加一空方，若後面跟著下引號（'」'），則不加空方。
+        /// 如果下一個字元不是下引號、右括弧，則加一空方。
+        /// 適用於：當前字元是問號、驚嘆號。
         /// </summary>
         /// <param name="brLine"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        private static int ApplyQuestionRule(BrailleLine brLine, int index)
+        private static int EnsureOneSpaceFollowed_ExceptNextWordIsClosingSymbol(BrailleLine brLine, int index)
+        {
+            return EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(brLine, index, ClosingSymbols);
+        }
+
+        /// <summary>
+        /// 確保下一個字是空方，除非下一個字元是指定排除的字元。
+        /// </summary>
+        /// <param name="brLine"></param>
+        /// <param name="index"></param>
+        /// <param name="exceptCharacters"></param>
+        /// <returns></returns>
+        private static int EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(BrailleLine brLine, int index, string exceptedWords)
         {
             index++;
             if (index >= brLine.WordCount)  // 如果已經到結尾或超過，就不加空方。
@@ -255,13 +267,13 @@ namespace BrailleToolkit
 
             if (!BrailleWord.IsBlank(brWord))  // 若原本已有空方，就不再多加。
             {
-                if (!brWord.Text.Equals("」"))
+                if (exceptedWords.IndexOf(brWord.Text) < 0)
                 {
                     brLine.Words.Insert(index, BrailleWord.NewBlank());
                     wordOffset = 1;
                 }
             }
-            return wordOffset;        
+            return wordOffset;
         }
 
         private static int ApplyCommaRule(BrailleLine brLine, int index)

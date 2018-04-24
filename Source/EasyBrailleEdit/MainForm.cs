@@ -27,7 +27,7 @@ namespace EasyBrailleEdit
         private InvalidCharForm m_InvalidCharForm;
         private BusyForm m_BusyForm;
 
-        private ConvertionDialog m_ConvertDialog;
+        private ConversionDialog m_ConvertDialog;
         
         private FileRunner m_FileRunner;
 
@@ -199,16 +199,10 @@ namespace EasyBrailleEdit
         {
             StringBuilder arg = new StringBuilder();
 
+            arg.Append($" -i {inFileName} -o {outFileName} ");
+
             // switches
-            arg.Append("-C" + AppGlobals.Config.Braille.CellsPerLine);
-
-            // input file name
-            arg.Append(" ");
-            arg.Append(inFileName);
-
-            // output file name
-            arg.Append(" ");
-            arg.Append(outFileName);
+            arg.Append($"-c{AppGlobals.Config.Braille.CellsPerLine} ");
 
             m_FileRunner.NeedWait = true;		// 不要等待程式結束，立刻返回
             m_FileRunner.ShowWindow = true;
@@ -264,7 +258,7 @@ namespace EasyBrailleEdit
             return outFileName;
         }
 
-        private void PrepareForConvertion()
+        private void PrepareForConversion()
         {
             m_InvalidCharForm.Hide();	// 隱藏轉換失敗字元視窗。
             txtErrors.Visible = false;	// 隱藏轉換時的錯誤訊息面板。
@@ -284,7 +278,7 @@ namespace EasyBrailleEdit
                 return;
             }
 
-            PrepareForConvertion();
+            PrepareForConversion();
 
             // 決定要轉換的輸入文字
             string content;
@@ -550,7 +544,7 @@ namespace EasyBrailleEdit
 
         private bool ConvertTextToBraille(string content, out string outFileName)
         {
-            PrepareForConvertion();
+            PrepareForConversion();
 
             this.Enabled = false;
             txtErrors.Visible = true;
@@ -779,7 +773,7 @@ namespace EasyBrailleEdit
 
             txtErrors.Visible = false;
 
-            m_ConvertDialog = new ConvertionDialog();
+            m_ConvertDialog = new ConversionDialog();
 
             m_InvalidCharForm = new InvalidCharForm(this);
 
