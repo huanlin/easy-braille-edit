@@ -21,12 +21,10 @@ namespace Test.BrailleToolkit
         ///A test for Load ()
         ///</summary>
         [Test]
-		public void LoadTest()
+		public void Should_LoadFromFileAndConvert_Succeed()
 		{
 			BrailleProcessor processor = 
-                BrailleProcessor.GetInstance(
-                    new ZhuyinReverseConverter(
-                        new ZhuyinReverseConversionProvider()));
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
 
             string filename = Shared.TestDataPath + "TestData_Braille.txt";
 			BrailleDocument brDoc = new BrailleDocument(filename, processor, 32);
@@ -34,7 +32,18 @@ namespace Test.BrailleToolkit
 			brDoc.LoadAndConvert();
 		}
 
-	}
+        [Test]
+        public void Should_ConvertString_Succeed()
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleDocument brDoc = new BrailleDocument(processor, 32);
+
+            brDoc.Convert("小明說：(今天)是好天氣。");
+            
+        }
+    }
 
 
 }
