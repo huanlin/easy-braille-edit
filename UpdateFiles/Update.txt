@@ -14,8 +14,8 @@ Txt2Brl.exe.config               ; ?     '若 client 端無此檔案才更新
 Phrase.phf                       ; ?     '若 client 端無此檔案才更新
 Huanlin.Common.dll               ; 4.5.4
 Huanlin.Windows.dll              ; 4.5.4
-NChinese.dll                     ; 0.3.5
-NChinese.Imm.dll                 ; 0.3.5
+NChinese.dll                     ; 0.3.6
+NChinese.Imm.dll                 ; 0.3.6
 Castle.Core.dll                  ; 4.2.1
 CommandLine.dll                  ; 2.2.1
 Config.Net.dll                   ; 4.8.0
