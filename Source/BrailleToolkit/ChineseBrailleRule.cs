@@ -4,6 +4,7 @@ namespace BrailleToolkit
 {
     public static class ChineseBrailleRule
     {
+        const string OpeningSymbols = "「『（【｛＂‘";    // 左開放符號。
         const string ClosingSymbols = "」』）】｝＂’";  // 右封閉符號。
 
         /// <summary>
@@ -227,8 +228,9 @@ namespace BrailleToolkit
             BrailleWord brWord = brLine[index];
             if (!BrailleWord.IsBlank(brWord))  // 若原本已有空方，就不再多加。
             {
-                // 句號可與標點符號連書而無須加空方。
-                if (!BrailleWord.IsChinesePunctuation(brWord))  
+                // 句號可與標點符號連書而無須加空方。例外：句號後面接前引號 "「" 時需加空方。
+                if (OpeningSymbols.IndexOf(brWord.Text) >= 0 || 
+                    BrailleGlobals.ChinesePunctuations.IndexOf(brWord.Text) < 0)  
                 {
                     brLine.Words.Insert(index, BrailleWord.NewBlank());
                     wordOffset = 1;

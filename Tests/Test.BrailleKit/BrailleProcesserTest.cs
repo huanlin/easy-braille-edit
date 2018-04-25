@@ -266,6 +266,38 @@ namespace Test.BrailleToolkit
             Assert.AreEqual(result, expectedPositionNumbers);
         }
 
+
+        [TestCase("。我", "(36)()(25 4)")]
+        [TestCase("。「", "(36)()(56 36)")]
+        [TestCase("」我", "(36 23)()(25 4)")]
+        [TestCase("」「", "(36 23)()(56 36)")]
+        [TestCase("！我", "(123)()(25 4)")]
+        [TestCase("！「", "(123)()(56 36)")]
+        [TestCase("？我", "(135)()(25 4)")]
+        [TestCase("？「", "(135)()(56 36)")]
+        public void Should_HaveSpace_AfterSpecificPunctuations(string inputText, string expectedPositionNumbers)
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(result, expectedPositionNumbers);
+        }
+
+
+        [TestCase("<私名號>台北</私名號>。", "(56 56)(124 2456 2)(135 356 4)(36)")]
+        public void Should_NoSpace_BetweenSpecificNameAndPunctuation(string inputText, string expectedPositionNumbers)
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(result, expectedPositionNumbers);
+        }
     }
 
 

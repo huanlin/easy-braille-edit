@@ -21,5 +21,11 @@ namespace EasyBrailleEdit.Common.Config
         /// </summary>
         [Option(DefaultValue = "為")]
         string ErrorProneWords { get; set; }
+
+        /// <summary>
+        /// ; 原書頁碼的數字都使用上位點，且不加數符。
+        /// </summary>
+        [Option(DefaultValue = true)]
+        bool UseUpperPositionForOrgPageNumber { get; set; }
     }
 }

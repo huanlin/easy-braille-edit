@@ -9,8 +9,8 @@ namespace BrailleToolkit.Converters
     /// <summary>
     /// 情境標籤轉換器。
     /// 
-    /// NOTE: 此轉換器必須是第一個呼叫得轉換器。因為它會把情境標籤先處理掉，
-    /// 這樣的話，後續的轉換器在碰到半形小於、大於符號時，就可以當作是一般的
+    /// NOTE: 此轉換器必須是第一個呼叫的轉換器。因為它會把情境標籤先處理掉，
+    /// 這樣的話，後續的轉換器在碰到半形的小於、大於符號時，就可以當作是一般的
     /// 字元處理（由 EnglishBrailleConverter 處理）。
     /// </summary>
     public sealed class ContextTagConverter : WordConverter
