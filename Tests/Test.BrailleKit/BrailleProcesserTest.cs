@@ -66,13 +66,6 @@ namespace Test.BrailleToolkit
             brLine = target.ConvertLine(line);
             actual = brLine.ToString();
             Assert.AreEqual(expected, actual, msg + line);
-
-            // 測試私名號、書名號。
-            line = "<私名號>蔡煥麟</私名號>，<書名號>倚天屠龍記</書名號>";
-            expected = "╴╴蔡煥麟 ，﹏﹏倚天屠龍記 ";
-            brLine = target.ConvertLine(line);
-            actual = brLine.ToString();
-            Assert.AreEqual(expected, actual, msg + line);
         }
 
         public void ConvertLineTestEnglish(BrailleProcessor target)
@@ -290,11 +283,32 @@ namespace Test.BrailleToolkit
         [TestCase("<私名號>台北</私名號>。", "(56 56)(124 2456 2)(135 356 4)(36)")]
         public void Should_NoSpace_BetweenSpecificNameAndPunctuation(string inputText, string expectedPositionNumbers)
         {
+            /*
+             *
+            測試私名號、書名號。
+            line = "<私名號>蔡煥麟</私名號>，<書名號>倚天屠龍記</書名號>";
+            expected = "╴╴蔡煥麟 ，﹏﹏倚天屠龍記 ";
+            brLine = target.ConvertLine(line);
+            actual = brLine.ToString();
+            Assert.AreEqual(expected, actual, msg + line);
+             */
+
             BrailleProcessor processor =
                 BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);
 
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(result, expectedPositionNumbers);
+        }
+
+        [TestCase("<分數>1/2</分數>。", "(1456 2)(34)(23 3456)(36)")]
+        public void Should_ConvertFraction_Succeed(string inputText, string expectedPositionNumbers)
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleLine brLine = processor.ConvertLine(inputText);
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(result, expectedPositionNumbers);
         }

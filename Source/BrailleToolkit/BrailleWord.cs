@@ -151,6 +151,11 @@ namespace BrailleToolkit
 
         public string ToPositionNumberString(bool useParenthesis)
         {
+            if (IsContextTag)
+            {
+                return String.Empty;
+            }
+
             var sb = new StringBuilder();
             sb.Append("(");
             foreach (var cell in Cells)
