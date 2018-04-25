@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BrailleToolkit;
+using NChinese.Phonetic;
 using NUnit.Framework;
 
 namespace Test.BrailleToolkit
@@ -140,7 +141,7 @@ namespace Test.BrailleToolkit
         ///A test for BreakLine (BrailleLine, int)
         ///</summary>
         [Test]
-        public void BreakLineTest()
+        public void Should_BreakLine_Succeed()
         {
             string msg = "BrailleProcesser.BreakLine 測試失敗!";
 
@@ -221,7 +222,7 @@ namespace Test.BrailleToolkit
         ///A test for PreprocessTags (string)
         ///</summary>
         [Test]
-        public void PreprocessTagsTest()
+        public void Should_ConvertPreprocessTags_Succeed()
         {
             BrailleProcessor target = BrailleProcessor.GetInstance();
 
@@ -231,6 +232,40 @@ namespace Test.BrailleToolkit
 
             Assert.AreEqual(expected, actual, "BrailleProcesser.PreprocessTags 測試失敗!");
         }
+
+        [TestCase(
+            "小明說：（今天）下雨。",
+            "(15 246 4)(134 13456 2)(24 25 3)(25 25)(246)(13 1456 3)(124 2345 3)(135)()(15 23456 5)(1256 4)(36)")]
+        public void Should_ConvertString_Succeed(string inputText, string expectedDotNumbers)
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(result, expectedDotNumbers);
+        }
+
+
+        [TestCase("）。", "(135)(36)")]
+        [TestCase("），", "(135)(23)")]
+        [TestCase("）；", "(135)(56)")]
+        [TestCase("）：", "(135)(25 25)")]
+        [TestCase("）！", "(135)(123)")]
+        [TestCase("）？", "(135)(135)")]
+        [TestCase("）」", "(135)(36 23)")]
+        public void Should_NoSpace_BetweenRightParenthesisAndPunctuation(string inputText, string expectedPositionNumbers)
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleLine brLine = processor.ConvertLine(inputText);
+
+            var result = brLine.ToPositionNumberString();
+            Assert.AreEqual(result, expectedPositionNumbers);
+        }
+
     }
 
 

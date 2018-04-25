@@ -1,6 +1,6 @@
 ﻿namespace BrailleToolkit
 {
-    public class BrailleConst
+    public static class BrailleConst
     {
         public const int DefaultCellsPerLine = 40;        
     }

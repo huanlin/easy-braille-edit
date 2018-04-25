@@ -167,7 +167,7 @@ namespace BrailleToolkit
             return m_Value.ToString("X2", CultureInfo.CurrentUICulture);
         }
 
-        public string ToDotNumberString()
+        public string ToPositionNumberString()
         {
             var sb = new StringBuilder();
             byte x = Value;

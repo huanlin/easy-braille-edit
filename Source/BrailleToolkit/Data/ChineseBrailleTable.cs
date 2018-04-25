@@ -118,5 +118,19 @@ namespace BrailleToolkit.Data
 				return rows[0]["code"].ToString();
 			return null;
 		}
+
+        public string GetAllPunctuations()
+        {
+            CheckLoaded();
+
+            string filter = "type='Punctuation'";
+            DataRow[] rows = m_Table.Select(filter);
+            var sb = new StringBuilder();
+            foreach (var row in rows)
+            {
+                sb.Append(row["text"]).ToString();
+            }
+            return sb.ToString();
+        }
 	}
 }

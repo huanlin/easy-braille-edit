@@ -149,13 +149,13 @@ namespace BrailleToolkit
             return m_Text;
         }
 
-        public string ToDotNumberString(bool useParenthesis)
+        public string ToPositionNumberString(bool useParenthesis)
         {
             var sb = new StringBuilder();
             sb.Append("(");
             foreach (var cell in Cells)
             {
-                sb.Append(cell.ToDotNumberString());
+                sb.Append(cell.ToPositionNumberString());
                 sb.Append(" ");
             }
             return sb.ToString().TrimEnd() + ")";

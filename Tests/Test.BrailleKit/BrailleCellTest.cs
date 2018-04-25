@@ -38,7 +38,7 @@ namespace Test.BrailleToolkit
         public void Should_GetDotNumberString(byte brailleValue, string expectedDots)
         {
             var brCell = BrailleCell.GetInstance(brailleValue);
-            Assert.AreEqual(brCell.ToDotNumberString(), expectedDots);
+            Assert.AreEqual(brCell.ToPositionNumberString(), expectedDots);
         }
 
     }

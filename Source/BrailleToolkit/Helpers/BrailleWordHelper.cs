@@ -32,7 +32,7 @@ namespace BrailleToolkit.Extensions
             var sb = new StringBuilder();
             foreach (var brWord in brWordList)
             {
-                sb.Append(brWord.ToDotNumberString(useParenthesis: true));
+                sb.Append(brWord.ToPositionNumberString(useParenthesis: true));
             }
             return sb.ToString();
         }

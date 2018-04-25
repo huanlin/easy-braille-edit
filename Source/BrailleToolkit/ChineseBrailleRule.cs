@@ -94,7 +94,7 @@ namespace BrailleToolkit
                     case "）":  // 後面要加一空方。
                     case "∘":      // 溫度符號
                     case "℃":
-                        wordIdx += PostfixBlankCell(brLine, wordIdx);
+                        wordIdx += EnsureOneSpaceFollowed_ExceptNextWordIsPunctuation(brLine, wordIdx);
                         break;
                     case "※":  // 前後要加一空方。
                     case "◎":
@@ -247,6 +247,11 @@ namespace BrailleToolkit
         private static int EnsureOneSpaceFollowed_ExceptNextWordIsClosingSymbol(BrailleLine brLine, int index)
         {
             return EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(brLine, index, ClosingSymbols);
+        }
+
+        private static int EnsureOneSpaceFollowed_ExceptNextWordIsPunctuation(BrailleLine brLine, int index)
+        {
+            return EnsureOneSpaceFollowed_UnlessNextWordIsExcepted(brLine, index, BrailleGlobals.ChinesePunctuations);
         }
 
         /// <summary>

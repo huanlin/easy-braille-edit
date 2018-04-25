@@ -33,21 +33,6 @@ namespace Test.BrailleToolkit
 			brDoc.LoadAndConvert();
 		}
 
-        [TestCase(
-            "小明說：（今天）下雨。",
-            "(15 246 4)(134 13456 2)(24 25 3)(25 25)(246)(13 1456 3)(124 2345 3)(135)()(15 23456 5)(1256 4)(36)")]
-        public void Should_ConvertString_Succeed(string inputText, string expectedDotNumbers)
-        {
-            BrailleProcessor processor =
-                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
-
-            BrailleDocument brDoc = new BrailleDocument(processor, 32);
-
-            brDoc.Convert(inputText);
-
-            var result = brDoc.Lines[0].ToDotNumberString();
-            Assert.AreEqual(result, expectedDotNumbers);            
-        }
     }
 
 }

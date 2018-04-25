@@ -233,12 +233,12 @@ namespace BrailleToolkit
         /// 將本串列中的所有點字轉成以點位組成的字串。各點字以一個空白字元隔開。
         /// </summary>
         /// <returns></returns>
-        public string ToDotNumberString()
+        public string ToPositionNumberString()
         {
             var sb = new StringBuilder();
             foreach (var brWord in Words)
             {
-                sb.Append(brWord.ToDotNumberString(useParenthesis: true));
+                sb.Append(brWord.ToPositionNumberString(useParenthesis: true));
             }
             return sb.ToString();
         }

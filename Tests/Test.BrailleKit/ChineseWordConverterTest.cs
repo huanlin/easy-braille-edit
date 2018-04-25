@@ -46,13 +46,9 @@ namespace Test.BrailleToolkit
 			List<BrailleWord> actual = target.Convert(charStack, context);
             
 			CollectionAssert.AreEqual(expected, actual);
-           
-
-            // 測試無法轉換的字元：／
-            text = "／";
         }
 
-        [TestCase("／")]   // 測試簡體字。
+        [TestCase("／")]   // 測試無法轉換的字元：/
         public void Should_ConvertInvalidWord_Fail(string text)
         {
             var target = new ChineseWordConverter(new ZhuyinReverseConverter(null));
@@ -69,7 +65,8 @@ namespace Test.BrailleToolkit
         {
             new object[]
             {
-                "（氣象局。）",       // 測試句號接右括弧，兩者中間不可加空方。
+                // 測試句號接右括弧，兩者中間不可加空方；以及右括弧右邊接標點符號時，中間也不加空方。
+                "（氣象局。）。",       
                 new List<BrailleWord>
                 {
                     new BrailleWord("（", "", "2A"),
@@ -77,7 +74,8 @@ namespace Test.BrailleToolkit
                     new BrailleWord("象", "ㄒㄧㄤˋ", "112810"),
                     new BrailleWord("局", "ㄐㄩ　ˊ", "053302"),
                     new BrailleWord("。", "", "24"),
-                    new BrailleWord("）", "", "15")
+                    new BrailleWord("）", "", "15"),
+                    new BrailleWord("。", "", "24")
                 }
             },
             new object[]
