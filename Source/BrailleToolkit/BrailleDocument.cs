@@ -420,6 +420,7 @@ namespace BrailleToolkit
             return lines;
         }
 
+
         #region 序列化事件
 
         [OnDeserialized]

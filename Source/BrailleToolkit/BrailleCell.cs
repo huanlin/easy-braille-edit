@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Globalization;
 using System.Runtime.Serialization;
+using System.Text;
 using Huanlin.Common.Helpers;
 
 namespace BrailleToolkit
@@ -30,7 +31,7 @@ namespace BrailleToolkit
         private static BrailleCell[] m_AllCells;
 
         // 點字值。六點是以從上到下，由左至右的順序分別對應到 byte 的
-        // 高位元至低位元。最低兩個位元沒有用到，固定為 0。
+        // 低位元至高位元。最高兩個位元沒有用到，固定為 0。
         private byte m_Value;
 
         static BrailleCell()
@@ -158,7 +159,29 @@ namespace BrailleToolkit
 
         public override string ToString()
         {
+            return ToHexString();
+        }
+
+        public string ToHexString()
+        {
             return m_Value.ToString("X2", CultureInfo.CurrentUICulture);
+        }
+
+        public string ToDotNumberString()
+        {
+            var sb = new StringBuilder();
+            byte x = Value;
+            int dot = 1;
+            while (dot <= 6)
+            {
+                if ((x & 1) == 1)
+                {
+                    sb.Append(dot.ToString());
+                }
+                x = (byte)(x >> 1);
+                dot++;
+            }
+            return sb.ToString();
         }
     }
 }

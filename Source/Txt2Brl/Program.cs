@@ -8,12 +8,12 @@ using Serilog;
 namespace Txt2Brl
 {
     class Program
-	{
-		const int DefaultCellsPerLine = 40;
+    {
+        const int DefaultCellsPerLine = 40;
 
-		[STAThread]
-		static int Main(string[] args)
-		{
+        [STAThread]
+        static int Main(string[] args)
+        {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.AppSettings()
                 .WriteTo.RollingFile(@"Logs\log-txt2brl-{Date}.txt")
@@ -24,8 +24,8 @@ namespace Txt2Brl
             CommandLine.Parser.Default.ParseArguments<Options>(args)
                .WithParsed<Options>(opts => RunOptionsAndReturnExitCode(opts));
            
-			return 0;
-		}
+            return 0;
+        }
 
         private static void RunOptionsAndReturnExitCode(Options opts)
         {
@@ -93,24 +93,24 @@ namespace Txt2Brl
         }
 
         private static void ShowUsage()
-		{
-			Console.WriteLine("使用方法: Txt2Brl -i <輸入檔名> -o [輸出檔名] [選項]\n");
-			Console.WriteLine("選項:\n");
+        {
+            Console.WriteLine("使用方法: Txt2Brl -i <輸入檔名> -o [輸出檔名] [選項]\n");
+            Console.WriteLine("選項:\n");
             Console.WriteLine("    -i, --input         : 輸入檔案名稱。\n");
             Console.WriteLine("    -o, --output        : 輸出檔案名稱。若未指定，則會以輸入檔名作為輸出檔案的主檔名。\n");
             Console.WriteLine("    --stdin             : 讓你輸入欲轉換的文字。若同時使用了 -i 來指定輸入檔名，會優先採用此選項。\n");
             Console.WriteLine("    -cn, --cellsperline : 每列最大方數。\n");
-			Console.WriteLine("    -v, --verbose       : 冗長訊息模式。\n");
-		}
+            Console.WriteLine("    -v, --verbose       : 冗長訊息模式。\n");
+        }
 
 
-		private static void DoConvertFile(string inputFile, string outputFile, 
-			int cellsPerLine, bool verboseMode)
-		{
-			BrailleConverter cvt = new BrailleConverter();
+        private static void DoConvertFile(string inputFile, string outputFile, 
+            int cellsPerLine, bool verboseMode)
+        {
+            BrailleConverter cvt = new BrailleConverter();
 
-			cvt.ConvertFile(inputFile, outputFile, cellsPerLine, verboseMode);
-		}
+            cvt.ConvertFile(inputFile, outputFile, cellsPerLine, verboseMode);
+        }
 
         private static void DoConvertString(string inputText, string outputFile,
             int cellsPerLine, bool verboseMode)

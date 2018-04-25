@@ -12,7 +12,7 @@
   <symbol text="F" code="0B" type="Letter" />
   <symbol text="G" code="1B" type="Letter" />
   <symbol text="H" code="13" type="Letter" />
-  <symbol text="I" code="4A" type="Letter" />
+  <symbol text="I" code="0A" type="Letter" />  <!-- 2018/4/25 從 4A 改成 0A -->
   <symbol text="J" code="1A" type="Letter" />
   <symbol text="K" code="05" type="Letter" />
   <symbol text="L" code="07" type="Letter" />
@@ -23,7 +23,7 @@
   <symbol text="Q" code="1F" type="Letter" />
   <symbol text="R" code="17" type="Letter" />
   <symbol text="S" code="0E" type="Letter" />
-  <symbol text="T" code="4E" type="Letter" />
+  <symbol text="T" code="1E" type="Letter" />  <!-- 2018/4/25 從 4E 改成 1E -->
   <symbol text="U" code="25" type="Letter" />
   <symbol text="V" code="27" type="Letter" />
   <symbol text="W" code="3A" type="Letter" />
@@ -40,7 +40,7 @@
   <symbol text="6" code="0B" code2="16" type="Digit" />
   <symbol text="7" code="1B" code2="36" type="Digit" />
   <symbol text="8" code="13" code2="26" type="Digit" />
-  <symbol text="9" code="4A" code2="14" type="Digit" />
+  <symbol text="9" code="0A" code2="14" type="Digit" />  <!-- 2018/4/25 Code 從 4A 改成 0A -->
   <symbol text="0" code="1A" code2="34" type="Digit" />
 
   <!-- 英文標點符號 -->

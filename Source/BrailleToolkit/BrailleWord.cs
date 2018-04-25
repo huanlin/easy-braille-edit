@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text;
 using BrailleToolkit.Data;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
@@ -15,18 +16,18 @@ namespace BrailleToolkit
     };
 
 
-	/// <summary>
-	/// 代表一個中文字，內含注音碼與點字值。
-	/// </summary>
+    /// <summary>
+    /// 代表一個中文字，內含注音碼與點字值。
+    /// </summary>
     [Serializable]
     [DataContract]
-	public class BrailleWord
-	{
+    public class BrailleWord
+    {
         private static BrailleWord m_Blank;
 
-		private string m_Text;	// 字元。可能是一個英數字、中文字、全形標點符號、或雙字元標點符號，例如：破折號。
+        private string m_Text;	// 字元。可能是一個英數字、中文字、全形標點符號、或雙字元標點符號，例如：破折號。
         private BrailleLanguage m_Language;     // 語言國別。用來識別是中文還是英文。
-		private BrailleCellList m_CellList;	    // 點字。        
+        private BrailleCellList m_CellList;	    // 點字。        
         private List<string> m_PhoneticCodes;   // 所有注音組字字根（以支援破音字）。
         private int m_ActivePhoneticIndex;      // 目前使用的注音組字字根索引。
         private bool m_DontBreakLineHere;       // 設定/判別在斷行時是否能斷在這個字。
@@ -43,10 +44,10 @@ namespace BrailleToolkit
         [NonSerialized]
         private bool m_NoDigitCell;             // 是否不加數符。
 
-		[NonSerialized]
-		private bool m_IsEngPhonetic;			// 是否為英語音標（用來判斷不要加空方）.
+        [NonSerialized]
+        private bool m_IsEngPhonetic;			// 是否為英語音標（用來判斷不要加空方）.
 
-		//private bool m_QuotationResolved;	// 是否已經識別出左右引號（英文的單引號和雙引號都是同一個符號，但點字不同）
+        //private bool m_QuotationResolved;	// 是否已經識別出左右引號（英文的單引號和雙引號都是同一個符號，但點字不同）
 
         static BrailleWord()
         {
@@ -67,11 +68,11 @@ namespace BrailleToolkit
             return brWord;
         }
 
-		public BrailleWord()
-		{
-			m_Text = "";
+        public BrailleWord()
+        {
+            m_Text = "";
             m_Language = BrailleLanguage.Neutral;
-			m_CellList = new BrailleCellList();
+            m_CellList = new BrailleCellList();
 
             m_PhoneticCodes = new List<string>();
             m_ActivePhoneticIndex = -1;
@@ -80,8 +81,8 @@ namespace BrailleToolkit
 
             m_IsContextTag = false;
             m_NoDigitCell = false;
-			m_IsEngPhonetic = false;
-		}
+            m_IsEngPhonetic = false;
+        }
 
         public BrailleWord(string aWord, BrailleCellCode brCode)
             : this()
@@ -96,82 +97,104 @@ namespace BrailleToolkit
             AddCell(brCode);
         }
 
-		public BrailleWord(string aWord, byte brCode) : this()
-		{
-			m_Text = aWord;
-			m_CellList.Add(BrailleCell.GetInstance(brCode));
-		}
+        public BrailleWord(string aWord, byte brCode) : this()
+        {
+            m_Text = aWord;
+            m_CellList.Add(BrailleCell.GetInstance(brCode));
+        }
 
-		public BrailleWord(string aWord, string phCode, string brCode) : this(aWord, brCode)
-		{
+        public BrailleWord(string aWord, string phCode, string brCode) : this(aWord, brCode)
+        {
             m_Language = BrailleLanguage.Chinese;
-			m_PhoneticCodes.Add(phCode);
+            m_PhoneticCodes.Add(phCode);
             m_ActivePhoneticIndex = 0;
-		}
+        }
 
-		public override int GetHashCode()
-		{
-			return m_Text.GetHashCode();
-		}
+        public override int GetHashCode()
+        {
+            return m_Text.GetHashCode();
+        }
 
-		public override bool Equals(object obj)
-		{
-			if (base.Equals(obj))
-				return true;
+        public override bool Equals(object obj)
+        {
+            if (base.Equals(obj))
+                return true;
 
-			BrailleWord brWord = (BrailleWord)obj;
+            BrailleWord brWord = (BrailleWord)obj;
 
-			if (m_CellList.Count != brWord.Cells.Count)
-				return false;
-			for (int i = 0; i < m_CellList.Count; i++)
-			{				
-				if (!m_CellList[i].Equals(brWord.Cells[i]))
-					return false;
-			}
+            if (m_CellList.Count != brWord.Cells.Count)
+                return false;
+            for (int i = 0; i < m_CellList.Count; i++)
+            {				
+                if (!m_CellList[i].Equals(brWord.Cells[i]))
+                    return false;
+            }
 
-			// 不比對注音，因為一聲常常和全形空白搞混。
-			//if (m_PhoneticCode != brWord.PhoneticCode)
-			//    return false;
+            // 不比對注音，因為一聲常常和全形空白搞混。
+            //if (m_PhoneticCode != brWord.PhoneticCode)
+            //    return false;
 
-			// 不比對文字，因為全形空白和半形空白其實應視為相等，比較 cells 就夠了。
-			//if (m_Text != brWord.Text)
-			//
-			//{
-			//    return false;
-			//}
+            // 不比對文字，因為全形空白和半形空白其實應視為相等，比較 cells 就夠了。
+            //if (m_Text != brWord.Text)
+            //
+            //{
+            //    return false;
+            //}
 
-			return true;
-		}
+            return true;
+        }
 
-		public override string ToString()
-		{
-			return m_Text;
-		}
+        public override string ToString()
+        {
+            return m_Text;
+        }
 
-		public void Clear()
-		{
-			m_CellList.Clear();
-		}
+        public string ToDotNumberString(bool useParenthesis)
+        {
+            var sb = new StringBuilder();
+            sb.Append("(");
+            foreach (var cell in Cells)
+            {
+                sb.Append(cell.ToDotNumberString());
+                sb.Append(" ");
+            }
+            return sb.ToString().TrimEnd() + ")";
+        }
+
+        public string ToHexSting()
+        {
+            var sb = new StringBuilder();
+            foreach (var cell in Cells)
+            {
+                sb.Append(cell.ToHexString());
+            }
+            return sb.ToString();
+        }
+
+        public void Clear()
+        {
+            m_CellList.Clear();
+        }
 
         [DataMember]
-		public string Text
-		{
-			get { return m_Text; }
-			set { m_Text = value; }			
-		}
+        public string Text
+        {
+            get { return m_Text; }
+            set { m_Text = value; }			
+        }
 
         public int CellCount
         {
             get { return m_CellList.Count; }
         }
         
-		public List<BrailleCell> Cells
-		{
-			get
-			{
-				return m_CellList.Items;
-			}
-		}
+        public List<BrailleCell> Cells
+        {
+            get
+            {
+                return m_CellList.Items;
+            }
+        }
 
         [DataMember]
         public BrailleCellList CellList
@@ -187,10 +210,10 @@ namespace BrailleToolkit
         }
 
         [DataMember]
-		public string PhoneticCode
-		{
-			get
-			{
+        public string PhoneticCode
+        {
+            get
+            {
                 if (String.IsNullOrEmpty(m_PhoneticCode))   // 這是為了向下相容，舊版沒有 PhoneticCode 屬性。
                 {
                     // 若沒有注音字根，則傳回空字串。
@@ -201,7 +224,7 @@ namespace BrailleToolkit
                     return m_PhoneticCodes[m_ActivePhoneticIndex];
                 }
                 return m_PhoneticCode;
-			}
+            }
             set
             {
                 if (m_PhoneticCode == value)
@@ -227,7 +250,7 @@ namespace BrailleToolkit
                 }
 */
             }
-		}
+        }
 
         [DataMember]
         public bool IsPolyphonic
@@ -298,13 +321,13 @@ namespace BrailleToolkit
         /// 建立一個新的 BrailleWord 物件，並將自己的內容完整複製到新的物件。
         /// </summary>
         /// <returns></returns>
-		public BrailleWord Copy()
-		{
-			BrailleWord newBrWord = new BrailleWord();
-			newBrWord.Text = m_Text;
+        public BrailleWord Copy()
+        {
+            BrailleWord newBrWord = new BrailleWord();
+            newBrWord.Text = m_Text;
             newBrWord.Language = m_Language;
-			newBrWord.DontBreakLineHere = m_DontBreakLineHere;
-			newBrWord.NoDigitCell = m_NoDigitCell;
+            newBrWord.DontBreakLineHere = m_DontBreakLineHere;
+            newBrWord.NoDigitCell = m_NoDigitCell;
 
             foreach (BrailleCell brCell in m_CellList.Items)
             {
@@ -319,8 +342,8 @@ namespace BrailleToolkit
             newBrWord.PhoneticCodes.AddRange(m_PhoneticCodes);
             newBrWord.ActivePhoneticIndex = m_ActivePhoneticIndex;
 */
-			return newBrWord;
-		}
+            return newBrWord;
+        }
 
         /// <summary>
         /// 將指定的 BrailleWord 內容完整複製給自己。
@@ -387,8 +410,8 @@ namespace BrailleToolkit
             }
         }
 
-		public bool IsLetter
-		{
+        public bool IsLetter
+        {
             get
             {
                 if (m_Text.Length == 1)
@@ -400,10 +423,10 @@ namespace BrailleToolkit
                 }
                 return false;
             }
-		}
+        }
 
-		public bool IsDigit
-		{
+        public bool IsDigit
+        {
             get
             {
                 if (m_Text.Length == 1)
@@ -415,10 +438,10 @@ namespace BrailleToolkit
                 }
                 return false;
             }
-		}
+        }
 
-		public bool IsLetterOrDigit
-		{
+        public bool IsLetterOrDigit
+        {
             get
             {
                 if (m_Text.Length == 1)
@@ -430,7 +453,7 @@ namespace BrailleToolkit
                 }
                 return false;
             }
-		}
+        }
 
 
         /// <summary>
@@ -475,20 +498,20 @@ namespace BrailleToolkit
             return false;
         }
 
-		/// <summary>
-		/// 檢查指定的 BrailleWord 物件是否沒有包含任何有意義的資料（空方算有意義的資料）。
-		/// </summary>
-		/// <param name="brWord"></param>
-		/// <returns></returns>
-		public static bool IsEmpty(BrailleWord brWord)
-		{
-			if (StrHelper.IsEmpty(brWord.Text) && brWord.CellCount < 1) 
-			{
-				// 文字為空字串，且沒有任何點字物件，即視為空的 BrailleWord 物件.
-				return true;
-			}
-			return false;
-		}
+        /// <summary>
+        /// 檢查指定的 BrailleWord 物件是否沒有包含任何有意義的資料（空方算有意義的資料）。
+        /// </summary>
+        /// <param name="brWord"></param>
+        /// <returns></returns>
+        public static bool IsEmpty(BrailleWord brWord)
+        {
+            if (StrHelper.IsEmpty(brWord.Text) && brWord.CellCount < 1) 
+            {
+                // 文字為空字串，且沒有任何點字物件，即視為空的 BrailleWord 物件.
+                return true;
+            }
+            return false;
+        }
 
         /// <summary>
         /// 是否為情境標籤。
@@ -512,11 +535,11 @@ namespace BrailleToolkit
             set { m_NoDigitCell = value; }
         }
 
-		public bool IsEngPhonetic
-		{
-			get { return m_IsEngPhonetic; }
-			set { m_IsEngPhonetic = value; }
-		}
+        public bool IsEngPhonetic
+        {
+            get { return m_IsEngPhonetic; }
+            set { m_IsEngPhonetic = value; }
+        }
 
         /// <summary>
         /// 檢查指定的 BrailleWord 是否為數字編號的起始點字。亦即以 # 開頭的數字。
@@ -561,5 +584,5 @@ namespace BrailleToolkit
                 return false;
             return true;
         }
-	}
+    }
 }

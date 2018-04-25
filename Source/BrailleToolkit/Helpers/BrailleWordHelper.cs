@@ -26,5 +26,15 @@ namespace BrailleToolkit.Extensions
             }
             return sb.ToString();
         }
+
+        public static string ToDotNumberString(this List<BrailleWord> brWordList)
+        {
+            var sb = new StringBuilder();
+            foreach (var brWord in brWordList)
+            {
+                sb.Append(brWord.ToDotNumberString(useParenthesis: true));
+            }
+            return sb.ToString();
+        }
     }
 }

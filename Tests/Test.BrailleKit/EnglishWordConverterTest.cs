@@ -22,7 +22,7 @@ namespace Test.BrailleToolkit
         ///A test for Convert (Stack&lt;char&gt;)
         ///</summary>
         [Test]
-        public void ConvertTest()
+        public void Should_ConvertCommonCharacters_Succeed()
         {
             string msg = "EnglishWordConverter.Convert 測試失敗: ";
 
@@ -37,6 +37,7 @@ namespace Test.BrailleToolkit
             BrailleWord brWord = new BrailleWord(text, "040404");
             expected.Add(brWord);
             List<BrailleWord> actual = target.Convert(charStack, context);
+            
             CollectionAssert.AreEqual(expected, actual, msg + text);
             charStack.Clear();
 
