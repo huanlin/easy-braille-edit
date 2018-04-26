@@ -45,10 +45,12 @@ namespace BrailleToolkit.Converters
 
             text = ch.ToString();
 
-            brWord = base.ConvertToBrailleWord(text);
+            brWord = ConvertToBrailleWord(text);
 
             if (brWord != null)
             {
+                brWord.ContextNames = context.ContextNames;
+
                 // 不加數字點位。
                 brWord.NoDigitCell = true;
 

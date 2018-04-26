@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using BrailleToolkit.Converters;
 using BrailleToolkit.Data;
+using BrailleToolkit.Helpers;
 using EasyBrailleEdit.Common;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
@@ -21,31 +22,22 @@ namespace BrailleToolkit
 	public class ConvertionFailedEventArgs : EventArgs
 	{
 		private CharPosition m_InvalidChar;
-        private string m_OriginalText;
-        private bool m_Stop;    // 中止轉換。
 
-        public string OriginalText
-        {
-            get { return m_OriginalText; }
-        }
+        public string OriginalText { get; private set; }
 
         public CharPosition InvalidChar
         {
             get { return m_InvalidChar; }
         }
 
-        public bool Stop
-        {
-            get { return m_Stop; }
-            set { m_Stop = value; }
-        }
+        public bool Stop { get; set; }
 
-		internal void SetArgs(int lineNumber, int charIndex, string line, char ch)
+        internal void SetArgs(int lineNumber, int charIndex, string line, char ch)
 		{
 			m_InvalidChar.LineNumber = lineNumber;
 			m_InvalidChar.CharIndex = charIndex;
 			m_InvalidChar.CharValue = ch;
-			m_OriginalText = line;
+			OriginalText = line;
 		}
 	}
 
@@ -99,12 +91,6 @@ namespace BrailleToolkit
 	{
 		private static BrailleProcessor s_Processor = null;
         private static string s_DashesForOrgPageNumber;
-
-        // Predefined converters       
-        private ContextTagConverter m_ContextTagConverter;
-        private MathConverter m_MathConverter;
-        private ChineseWordConverter m_ChineseConverter;
-        private EnglishWordConverter m_EnglishConverter;
         private CoordinateConverter m_CoordConverter;
 		private TableConverter m_TableConverter;
 		private PhoneticConverter m_PhoneticConverter;
@@ -112,15 +98,11 @@ namespace BrailleToolkit
         // Extended converters
         private List<WordConverter> m_Converters;
 
-		private Hashtable m_Tags;
+		private Hashtable m_ReplacaebleTags;
         private ContextTagManager m_ContextTagManager;
+        private StringBuilder m_ErrorMsg;           // 轉換過程中發生的錯誤訊息。
 
-		private List<CharPosition> m_InvalidChars;	// 轉換過程中所有無法轉換的字元。
-		private StringBuilder m_ErrorMsg;			// 轉換過程中發生的錯誤訊息。
-
-        private bool m_SuppressEvents;  // 是否抑制轉換的事件觸發。
-
-		private event ConvertionFailedEventHandler m_ConvertionFailedEvent;
+        private event ConvertionFailedEventHandler m_ConvertionFailedEvent;
 		private event TextConvertedEventHandler m_TextConvertedEvent;
        
 
@@ -135,29 +117,27 @@ namespace BrailleToolkit
 		{
             m_Converters = new List<WordConverter>();
 
-            m_ContextTagConverter = new ContextTagConverter();
-            m_ChineseConverter = new ChineseWordConverter(zhuyinConverter);
-            m_EnglishConverter = new EnglishWordConverter();
-            m_MathConverter = new MathConverter();
+            ControlTagConverter = new ContextTagConverter();
+            ChineseConverter = new ChineseWordConverter(zhuyinConverter);
+            EnglishConverter = new EnglishWordConverter();
+            MathConverter = new MathConverter();
             m_CoordConverter = new CoordinateConverter();
 			m_TableConverter = new TableConverter();
 			m_PhoneticConverter = new PhoneticConverter();
 
-			m_Tags = new Hashtable();
-			m_Tags.Add(TextTag.Name, "╴╴"); // key/value = 標籤/替換字元
-			m_Tags.Add(TextTag.BookName, "﹏﹏");
-			m_Tags.Add(TextTag.NumericItem, "#");
-            m_Tags.Add(TextTag.OrgPageNumber, s_DashesForOrgPageNumber);   // 原書頁碼
-            m_Tags.Add(TextTag.Unit1End, new string('ˍ', 20)); // 大單元結束
-            m_Tags.Add(TextTag.Unit2End, new string('﹍', 20)); // 小單元結束
-            m_Tags.Add(TextTag.Unit3End, new string('﹋', 20)); // 小題結束
-            m_Tags.Add(TextTag.BrailleComment, "★");   // 點譯者註
+			m_ReplacaebleTags = new Hashtable();
+			m_ReplacaebleTags.Add(TextTag.NumericItem, "#");
+            m_ReplacaebleTags.Add(TextTag.OrgPageNumber, s_DashesForOrgPageNumber);   // 原書頁碼
+            m_ReplacaebleTags.Add(TextTag.Unit1End, new string('ˍ', 20)); // 大單元結束
+            m_ReplacaebleTags.Add(TextTag.Unit2End, new string('﹍', 20)); // 小單元結束
+            m_ReplacaebleTags.Add(TextTag.Unit3End, new string('﹋', 20)); // 小題結束
+            m_ReplacaebleTags.Add(TextTag.BrailleComment, "★");   // 點譯者註
 
             m_ContextTagManager = new ContextTagManager();
 
-            m_InvalidChars = new List<CharPosition>();
+            InvalidChars = new List<CharPosition>();
 			m_ErrorMsg = new StringBuilder();
-            m_SuppressEvents = false;
+            SuppressEvents = false;
 		}
 
 		/// <summary>
@@ -188,32 +168,16 @@ namespace BrailleToolkit
         /// <summary>
         /// 取得或設定中文點字轉換器。
         /// </summary>
-        public ChineseWordConverter ChineseConverter
-        {
-            get { return m_ChineseConverter; }
-            set { m_ChineseConverter = value; }
-        }
+        public ChineseWordConverter ChineseConverter { get; set; }
 
         /// <summary>
         /// 取得或設定英文點字轉換器。
         /// </summary>
-        public EnglishWordConverter EnglishConverter
-        {
-            get { return m_EnglishConverter; }
-            set { m_EnglishConverter = value; }
-        }
+        public EnglishWordConverter EnglishConverter { get; set; }
 
-        public ContextTagConverter ControlTagConverter
-        {
-            get { return m_ContextTagConverter; }
-            set { m_ContextTagConverter = value; }
-        }
+        public ContextTagConverter ControlTagConverter { get; set; }
 
-        public MathConverter MathConverter
-        {
-            get { return m_MathConverter; }
-            set { m_MathConverter = value; }
-        }
+        public MathConverter MathConverter { get; set; }
 
         /// <summary>
         /// 是否抑制點字轉換的回饋事件。
@@ -222,22 +186,15 @@ namespace BrailleToolkit
         ///     BrailleLine brLine = brProcessor.ConvertLine("測試");
         ///     brProcessor.SuppressEvents = false; // 恢復點字處理器事件
         /// </summary>
-        public bool SuppressEvents
-        {
-            get { return m_SuppressEvents; }
-            set { m_SuppressEvents = value; }
-        }
+        public bool SuppressEvents { get; set; }
 
-        public List<CharPosition> InvalidChars
-        {
-            get { return m_InvalidChars; }
-        }
+        public List<CharPosition> InvalidChars { get; }
 
-		public bool HasError
+        public bool HasError
 		{
 			get
 			{
-				if (m_ErrorMsg.Length > 0 || m_InvalidChars.Count > 0)
+				if (m_ErrorMsg.Length > 0 || InvalidChars.Count > 0)
 				{
 					return true;
 				}
@@ -286,9 +243,9 @@ namespace BrailleToolkit
 		{
             // 將無效字元記錄於內部變數。
 
-			m_InvalidChars.Add(args.InvalidChar);
+			InvalidChars.Add(args.InvalidChar);
 
-            if (m_SuppressEvents)
+            if (SuppressEvents)
                 return;
 
 			if (m_ConvertionFailedEvent != null)
@@ -299,7 +256,7 @@ namespace BrailleToolkit
 
 		protected virtual void OnTextConverted(TextConvertedEventArgs args)
 		{
-            if (m_SuppressEvents)
+            if (SuppressEvents)
                 return;
 
 			if (m_TextConvertedEvent != null)
@@ -316,22 +273,22 @@ namespace BrailleToolkit
 
             if (cvt is ContextTagConverter)
             {
-                m_ContextTagConverter = (ContextTagConverter)cvt;
+                ControlTagConverter = (ContextTagConverter)cvt;
                 return;
             }
             if (cvt is ChineseWordConverter)
             {
-                m_ChineseConverter = (ChineseWordConverter) cvt;
+                ChineseConverter = (ChineseWordConverter) cvt;
                 return;
             }
             if (cvt is EnglishWordConverter)
             {
-                m_EnglishConverter = (EnglishWordConverter) cvt;
+                EnglishConverter = (EnglishWordConverter) cvt;
                 return;
             }
             if (cvt is MathConverter)   // 數學符號轉換器.
             {
-                m_MathConverter = (MathConverter)cvt;
+                MathConverter = (MathConverter)cvt;
                 return;
             }
 			if (cvt is PhoneticConverter)	// 音標轉換器.
@@ -351,22 +308,22 @@ namespace BrailleToolkit
 
             if (cvt is ContextTagConverter)
             {
-                m_ContextTagConverter = null;
+                ControlTagConverter = null;
                 return;
             }
             if (cvt is ChineseWordConverter)
             {
-                m_ChineseConverter = null;
+                ChineseConverter = null;
                 return;
             }
             if (cvt is EnglishWordConverter)
             {
-                m_EnglishConverter = null;
+                EnglishConverter = null;
                 return;
             }
             if (cvt is MathConverter)
             {
-                m_MathConverter = null;
+                MathConverter = null;
                 return;
             }
 			if (cvt is PhoneticConverter)	// 音標轉換器.
@@ -402,7 +359,7 @@ namespace BrailleToolkit
         public void InitializeForConvertion()
         {
 			m_ErrorMsg.Length = 0;
-            m_InvalidChars.Clear();
+            InvalidChars.Clear();
             m_ContextTagManager.Reset();
         }
 
@@ -411,11 +368,11 @@ namespace BrailleToolkit
         /// 此時不考慮一行幾方和斷行的問題，只進行單純的轉換。
         /// 斷行由其他函式負責處理，因為有些點字規則必須在斷行時才能處理。
         /// </summary>
-        /// <param name="lineNumber">字串的行號。此參數只是用來當轉換失敗時，傳給轉換失敗事件處理常式的資訊。</param>
         /// <param name="line">輸入的明眼字串。</param>
+        /// <param name="lineNumber">字串的行號。此參數只是用來當轉換失敗時，傳給轉換失敗事件處理常式的資訊。</param>
         /// <param name="isTitle">輸出參數，是否為標題。</param>
         /// <returns>點字串列。若則傳回 null，表示該列不需要轉成點字。</returns>
-        public BrailleLine ConvertLine(int lineNumber, string line)
+        public BrailleLine ConvertLine(string line, int lineNumber)
         {
             if (line == null)
                 return null;
@@ -439,7 +396,7 @@ namespace BrailleToolkit
             }
 
 			// 預先處理特殊標籤的字元替換。
-			line = PreprocessTagsForLine(line);
+			line = ReplaceTagsWithConvertableText(line);
             if (line == null)
                 return null;
 
@@ -520,15 +477,26 @@ namespace BrailleToolkit
 				}
 			}
 
+            /* 到此階段，一列文字已經被初步轉換成一個包含點字物件串列的 BrailleLine。
+             * 有些可轉換的 context tags 會保留到此階段才處理（可能是刪除或者轉換成特定文字與點字）
+             */
+
+
+            ConvertContextTags(brLine);
+
+            // 注意: 不要隨意調動底下各項檢查規則的順序!
+
+            ChineseBrailleRule.ApplySpecificNameAndBookNameRules(brLine);  // 處理私名號和書名號的規則。
+
             ChineseBrailleRule.ApplyPunctuationRules(brLine);	// 套用中文標點符號規則。
 
 			// 不刪除多餘空白，因為原本輸入時可能就希望縮排。
             //ChineseBrailleRule.ShrinkSpaces(brLine);	// 把連續全形空白刪到只剩一個。
 
 			// 將編號的數字修正成上位點。
-            if (m_EnglishConverter != null)
+            if (EnglishConverter != null)
             {
-                EnglishBrailleRule.FixNumbers(brLine, m_EnglishConverter.BrailleTable as EnglishBrailleTable);
+                EnglishBrailleRule.FixNumbers(brLine, EnglishConverter.BrailleTable as EnglishBrailleTable);
             }
 
             EnglishBrailleRule.ApplyCapitalRule(brLine);    // 套用大寫規則。
@@ -551,7 +519,7 @@ namespace BrailleToolkit
         /// <see cref="BrailleProcessor.ConvertLine(int,string)"/>
         public BrailleLine ConvertLine(string line)
         {
-            return this.ConvertLine(1, line);
+            return ConvertLine(line, 1);
         }
 
 		/// <summary>
@@ -572,10 +540,10 @@ namespace BrailleToolkit
                 if (chars.Count < 1)
                     break;
 
-                // 1. 轉換情境標籤。NOTE: 情境標籤一定要先處理!
-				if (chars.Count > 0 && m_ContextTagConverter != null)
+                // 1. 轉換語境標籤。NOTE: 語境標籤一定要先處理!
+				if (chars.Count > 0 && ControlTagConverter != null)
                 {
-                    brWordList = m_ContextTagConverter.Convert(chars, m_ContextTagManager);
+                    brWordList = ControlTagConverter.Convert(chars, m_ContextTagManager);
                     if (brWordList != null && brWordList.Count > 0)
                         return brWordList;
                 }
@@ -589,9 +557,9 @@ namespace BrailleToolkit
                 }                
 
                 // 3. 轉換數學符號。
-                if (chars.Count > 0 && m_ContextTagManager.IsActive(ContextTagNames.Math) && m_MathConverter != null)
+                if (chars.Count > 0 && m_ContextTagManager.IsActive(ContextTagNames.Math) && MathConverter != null)
                 {
-                    brWordList = m_MathConverter.Convert(chars, m_ContextTagManager);
+                    brWordList = MathConverter.Convert(chars, m_ContextTagManager);
                     if (brWordList != null && brWordList.Count > 0)
                         return brWordList;
                 }
@@ -613,19 +581,19 @@ namespace BrailleToolkit
 				}				
 
                 // 6. 轉換中文。
-				if (chars.Count > 0 && m_ChineseConverter != null)
+				if (chars.Count > 0 && ChineseConverter != null)
                 {
                     // 若成功轉換成點字，就不再 pass 給其它轉換器。
-                    brWordList = m_ChineseConverter.Convert(chars, m_ContextTagManager);
+                    brWordList = ChineseConverter.Convert(chars, m_ContextTagManager);
                     if (brWordList != null && brWordList.Count > 0)
                         return brWordList;
                 }
 
                 // 7. 轉換英文。
-				if (chars.Count > 0 &&  m_EnglishConverter != null)
+				if (chars.Count > 0 &&  EnglishConverter != null)
                 {
                     // 若成功轉換成點字，就不再 pass 給其它轉換器。
-                    brWordList = m_EnglishConverter.Convert(chars, m_ContextTagManager);
+                    brWordList = EnglishConverter.Convert(chars, m_ContextTagManager);
                     if (brWordList != null && brWordList.Count > 0)
                         return brWordList;
                 }
@@ -684,6 +652,79 @@ namespace BrailleToolkit
 			}
 		}
 
+
+        /// <summary>
+        /// 對上一個階段所轉換出來的 BrailleLine 物件逐一找出尚未處理的語境標籤，並轉換成對應的點字。
+        /// </summary>
+        /// <param name="brLine"></param>
+        private void ConvertContextTags(BrailleLine brLine)
+        {
+            int index = 0;
+            while (index < brLine.WordCount)
+            {
+                var brWord = brLine[index];
+
+                if (!brWord.IsContextTag || brWord.ContextTag == null)
+                {
+                    index++;
+                    continue;
+                }
+
+                // BrailleWord 物件如果仍是 context tag，則其 Text 屬性就是 tag name。
+                // 所以可利用 Text 屬性來判斷這是哪一個 context tag
+              
+                var ctag = brWord.ContextTag;
+
+                if (XmlTagHelper.IsBeginTag(brWord.Text))
+                {
+                    // 處理起始標籤的對應文字轉換
+                    if (!String.IsNullOrEmpty(ctag.ConvertablePrefix))
+                    {
+                        brWord.Text = ctag.ConvertablePrefix;
+                        brWord.IsContextTag = false;    // 轉換成文字之後就不是語境標籤了。
+                        brWord.ContextTag = null;
+                        string brCode = ChineseBrailleTable.GetInstance().GetPunctuationCode(ctag.ConvertablePrefix);
+                        if (brCode == null)
+                        {
+                            throw new Exception($"無法轉換語境標籤 '{ctag.TagName}' 的對應文字: {ctag.ConvertablePrefix}");
+                        }
+                        brWord.AddCell(brCode);
+                    }
+                    else
+                    {
+                        // 是起始標籤，但不需要轉換成文字，便可刪除此 BrailleWord。
+                        brWord.Clear();
+                        brLine.RemoveAt(index);
+                        continue;
+                    }
+                }
+                else if (XmlTagHelper.IsEndTag(brWord.Text))
+                {
+                    // 處理結束標籤的對應文字轉換
+                    if (!String.IsNullOrEmpty(ctag.ConvertablePostfix))
+                    {
+                        brWord.Text = ctag.ConvertablePostfix;
+                        brWord.IsContextTag = false;    // 轉換成文字之後就不是語境標籤了。
+                        brWord.ContextTag = null;
+                        string brCode = ChineseBrailleTable.GetInstance().GetPunctuationCode(ctag.ConvertablePostfix);
+                        if (brCode == null)
+                        {
+                            throw new Exception($"無法轉換語境標籤 '{ctag.TagName}' 的對應文字: {ctag.ConvertablePostfix}");
+                        }
+                        brWord.AddCell(brCode);
+                    }
+                    else
+                    {
+                        // 是結束標籤，但不需要轉換成文字，便可刪除此 BrailleWord。
+                        brWord.Clear();
+                        brLine.RemoveAt(index);
+                        continue;
+                    }
+                }
+                index++;
+            }
+        }
+
 		/// <summary>
 		/// 轉換分數。
 		/// </summary>
@@ -694,7 +735,7 @@ namespace BrailleToolkit
 		{
 			char[] charAry = chars.ToArray();
 			string s = new string(charAry);
-			int idxEof = s.IndexOf(ContextTag.GetEndTagName(ContextTagNames.Fraction));	// end of fraction
+			int idxEof = s.IndexOf(XmlTagHelper.GetEndTagName(ContextTagNames.Fraction));	// end of fraction
 			if (idxEof < 0) 
 			{
 				throw new Exception("<分數> 標籤有起始但沒有結束標籤!");
@@ -815,7 +856,7 @@ namespace BrailleToolkit
 		/// </summary>
 		/// <param name="line"></param>
 		/// <returns>傳回置換過的字串。若傳回 null，表示這行不要轉換成點字。</returns>
-		public string PreprocessTagsForLine(string line)
+		public string ReplaceTagsWithConvertableText(string line)
 		{
             // 處理標題標籤 (這是舊的程式碼，保留供參考，若未來有需要類似的前置標籤處理，可依樣畫葫蘆)
             //isTitle = false;
@@ -830,7 +871,7 @@ namespace BrailleToolkit
             //    return title;
             //}
 
-			string result = Regex.Replace(line, RegExpPatterns.Tags, new MatchEvaluator(this.MatchedTagFound));
+			string result = Regex.Replace(line, RegExpPatterns.Tags, new MatchEvaluator(OnMatchedTagFound));
 			return result;
 		}
 
@@ -839,18 +880,18 @@ namespace BrailleToolkit
 		/// </summary>
 		/// <param name="token"></param>
 		/// <returns>傳回用來把這次找到的 token 置換掉的字串。</returns>
-		private string MatchedTagFound(Match token)
+		private string OnMatchedTagFound(Match token)
 		{
-			if (m_Tags.ContainsKey(token.Value)) 
+			if (m_ReplacaebleTags.ContainsKey(token.Value)) 
 			{
-				return m_Tags[token.Value].ToString();
+				return m_ReplacaebleTags[token.Value].ToString();
 			}
 
 			// 結束標籤
 			if (token.Value.StartsWith("</")) 
 			{
                 string key = token.Value.Remove(1, 1);  // 把 '/' 字元去掉，即得到起始標籤名稱。
-                if (m_Tags.ContainsKey(key))
+                if (m_ReplacaebleTags.ContainsKey(key))
                 {
                     return " ";
                 }
@@ -863,10 +904,10 @@ namespace BrailleToolkit
 
         #region 格式化、編排、與修正函式
 
-		/// <summary>
-		/// 編排點字文件。
-		/// </summary>
-		public void FormatDocument(BrailleDocument doc)
+        /// <summary>
+        /// 編排點字文件，包括斷行、移除所有語境標籤。
+        /// </summary>
+        public void FormatDocument(BrailleDocument doc)
 		{
             ContextTagManager context = new ContextTagManager();
 
@@ -879,7 +920,7 @@ namespace BrailleToolkit
 		}
 
         /// <summary>
-        /// 處理縮排情境標籤：碰到縮排標籤時，將縮排次數更新至 ContextTagManager 物件，並移除此縮排標籤。
+        /// 處理縮排語境標籤：碰到縮排標籤時，將縮排次數更新至 ContextTagManager 物件，並移除此縮排標籤。
         /// 
         /// NOTE: 縮排標籤必須位於列首，一列可有多個連續縮排標籤，例如：＜縮排＞＜縮排＞。
         /// </summary>
@@ -908,7 +949,7 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// 編排指定的列。此函式會將指定的列斷行。
+        /// 編排指定的列。此函式會將指定的列斷行，並移除所有語境標籤。
         /// </summary>
         /// <param name="brDoc">點字文件。</param>
         /// <param name="lineIndex">欲重新編排的列索引。</param>
@@ -917,34 +958,60 @@ namespace BrailleToolkit
         {
             BrailleLine brLine = brDoc.Lines[lineIndex];
 
-            RemoveContextTagsButTitle(brLine);   // 清除情境標籤，除了標題標籤。
+            var formattedLines = FormatLine(brLine, brDoc.CellsPerLine, context);
 
-            if (brLine.WordCount == 0) 
+            if (formattedLines.Count < 1 || brLine.IsEmpty())
             {
                 brDoc.RemoveLine(lineIndex);
                 return 0;
             }
 
-            List<BrailleLine> newLines;
-            newLines = BreakLine(brLine, brDoc.CellsPerLine, context);
-
-            if (newLines == null)   // 沒有斷行？
+            if (formattedLines.Count == 1)   // 沒有斷行？
             {
                 return 1;
             }
 
-            // 移除原始的 line
+            // 有斷行，先移除原始的 line，再加入新的斷行結果。
             brLine.Clear();
             brDoc.RemoveLine(lineIndex);
 
             // 加入斷行後的 lines
-            brDoc.Lines.InsertRange(lineIndex, newLines);
+            brDoc.Lines.InsertRange(lineIndex, formattedLines);
 
-            return newLines.Count;
+            return formattedLines.Count;
         }
 
         /// <summary>
-        /// 移除所有情境標籤，除了標題標籤。
+        /// 對指定的 BrailleLine 格式化，包括斷行、移除語境標籤。
+        /// </summary>
+        /// <param name="brLine"></param>
+        /// <param name="context"></param>
+        /// <returns>可能是空的串列、經過格式化的單行串列，或者因斷行而產生的多行串列。</returns>
+        public List<BrailleLine> FormatLine(BrailleLine brLine, int cellsPerLine, ContextTagManager context)
+        {
+            var outputLines = new List<BrailleLine>();
+
+            RemoveContextTagsButTitle(brLine);   // 清除語境標籤，除了標題標籤。
+
+            if (brLine.IsEmpty())
+            {
+                return outputLines;
+            }
+
+            outputLines.Add(brLine);
+
+            var newLines = BreakLine(brLine, cellsPerLine, context);
+
+            if (newLines == null || newLines.Count < 1)   // 沒有斷行？
+            {
+                return outputLines;
+            }
+
+            return newLines;
+        }
+
+        /// <summary>
+        /// 移除所有語境標籤，除了標題標籤。
         /// </summary>
         public void RemoveContextTagsButTitle(BrailleLine brLine)
         {

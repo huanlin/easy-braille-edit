@@ -39,7 +39,7 @@ namespace BrailleToolkit.Data
 		/// </summary>
 		/// <param name="text">欲搜尋的注音符號。例如："ㄅ"。</param>
 		/// <returns>若有找到，則傳回對應的點字碼，否則傳回空字串。</returns>
-		public string FindPhonetic(string text)
+		public string GetPhoneticCode(string text)
 		{
 			CheckLoaded();
 
@@ -55,7 +55,7 @@ namespace BrailleToolkit.Data
 		/// </summary>
 		/// <param name="text">結合韻的注音符號，不含聲調。例如 "ㄨㄛ"。</param>
 		/// <returns>若是結合韻，則傳回對應的點字碼，否則傳回空字串。</returns>
-		public string FindJoined(string text)
+		public string GetPhoneticJoinedCode(string text)
 		{
 			CheckLoaded();
 
@@ -71,7 +71,7 @@ namespace BrailleToolkit.Data
 		/// </summary>
 		/// <param name="text">某個單音注音符號，例如 "ㄓ"。
 		/// <returns>若是特殊單音字，則傳回對應的點字碼，否則傳回空字串。</returns>
-		public string FindMono(string text)
+		public string GetPhoneticMonoCode(string text)
 		{
 			CheckLoaded();
 
@@ -87,7 +87,7 @@ namespace BrailleToolkit.Data
 		/// </summary>
 		/// <param name="text">欲尋找的聲調符號，全形空白代表一聲。</param>
 		/// <returns>若有找到，則傳回對應的點字碼，否則傳回空字串。</returns>
-		public string FindTone(string text)
+		public string GetPhoneticToneCode(string text)
 		{
 			CheckLoaded();
 
@@ -99,11 +99,11 @@ namespace BrailleToolkit.Data
 		}
 
 		/// <summary>
-		/// 尋找注音的標點符號。
+		/// 尋找標點符號。
 		/// </summary>
 		/// <param name="text">欲尋找的標點符號。</param>
 		/// <returns>若有找到，則傳回對應的點字碼，否則傳回空字串。</returns>
-		public string FindPunctuation(string text)
+		public string GetPunctuationCode(string text)
 		{
 			CheckLoaded();
 

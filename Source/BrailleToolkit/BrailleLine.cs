@@ -13,35 +13,34 @@ namespace BrailleToolkit
     [DataContract]
     public class BrailleLine : ICloneable
     {
-        private List<BrailleWord> m_Words;
-
         public BrailleLine()
         {
-            m_Words = new List<BrailleWord>();
+            Words = new List<BrailleWord>();
         }
 
         public void Clear()
         {
-            m_Words.Clear();
+            Words.Clear();
+        }
+
+        public bool IsEmpty()
+        {
+            return WordCount < 1;
         }
 
         [DataMember]
-        public List<BrailleWord> Words
-        {
-            get { return m_Words; }
-            set { m_Words = value; }
-        }
+        public List<BrailleWord> Words { get; private set; }
 
         public int WordCount
         {
-            get { return m_Words.Count; }
+            get { return Words.Count; }
         }
 
         public BrailleWord this[int index]
         {
             get
             {
-                return m_Words[index];
+                return Words[index];
             }
         }
 
@@ -53,7 +52,7 @@ namespace BrailleToolkit
             get
             {
                 int cnt = 0;
-                foreach (BrailleWord brWord in m_Words)
+                foreach (BrailleWord brWord in Words)
                 {
                     cnt += brWord.Cells.Count;
                 }
@@ -68,7 +67,7 @@ namespace BrailleToolkit
         public List<BrailleCell> GetBrailleCells()
         {
             var list = new List<BrailleCell>();
-            foreach (var brWord in m_Words)
+            foreach (var brWord in Words)
             {
                 list.AddRange(brWord.Cells);
             }
@@ -91,9 +90,9 @@ namespace BrailleToolkit
 
             int cellCnt = 0;
             int index = 0;
-            while (index < m_Words.Count)
+            while (index < Words.Count)
             {
-                cellCnt += m_Words[index].Cells.Count;
+                cellCnt += Words[index].Cells.Count;
                 if (cellCnt > cellsPerLine)
                 {
                     break;
@@ -113,10 +112,10 @@ namespace BrailleToolkit
         {
             BrailleLine brLine = new BrailleLine();
             BrailleWord newWord = null;
-            while (index < m_Words.Count && count > 0)
+            while (index < Words.Count && count > 0)
             {
-                //newWord = m_Words[index].Copy();
-                newWord = m_Words[index]; 
+                //newWord = Words[index].Copy();
+                newWord = Words[index]; 
                 brLine.Words.Add(newWord);
 
                 index++;
@@ -128,16 +127,16 @@ namespace BrailleToolkit
 
         public void RemoveAt(int index)
         {
-            m_Words.RemoveAt(index);
+            Words.RemoveAt(index);
         }
 
         public void RemoveRange(int index, int count)
         {
-            if ((index + count) > m_Words.Count)    // 防止要取的數量超出邊界。
+            if ((index + count) > Words.Count)    // 防止要取的數量超出邊界。
             {
-                count = m_Words.Count - index;
+                count = Words.Count - index;
             }
-            m_Words.RemoveRange(index, count);
+            Words.RemoveRange(index, count);
         }
 
         /// <summary>
@@ -149,12 +148,12 @@ namespace BrailleToolkit
             if (brLine == null || brLine.WordCount < 1)
                 return;
 
-            m_Words.AddRange(brLine.Words);
+            Words.AddRange(brLine.Words);
         }
 
         public void Insert(int index, BrailleWord brWord)
         {
-            m_Words.Insert(index, brWord);
+            Words.Insert(index, brWord);
         }
 
         /// <summary>
@@ -163,11 +162,11 @@ namespace BrailleToolkit
         public void TrimStart()
         {
             int i = 0;
-            while (i < m_Words.Count)
+            while (i < Words.Count)
             {
-                if (BrailleWord.IsBlank(m_Words[i]) || BrailleWord.IsEmpty(m_Words[i]))
+                if (BrailleWord.IsBlank(Words[i]) || BrailleWord.IsEmpty(Words[i]))
                 {
-                    m_Words.RemoveAt(i);
+                    Words.RemoveAt(i);
                     continue;
                 }
                 break;
@@ -179,12 +178,12 @@ namespace BrailleToolkit
         /// </summary>
         public void TrimEnd()
         {
-            int i = m_Words.Count - 1;
+            int i = Words.Count - 1;
             while (i >= 0)
             {
-                if (BrailleWord.IsBlank(m_Words[i]) || BrailleWord.IsEmpty(m_Words[i]))
+                if (BrailleWord.IsBlank(Words[i]) || BrailleWord.IsEmpty(Words[i]))
                 {
-                    m_Words.RemoveAt(i);
+                    Words.RemoveAt(i);
                     i--;
                     continue;
                 }
@@ -205,7 +204,7 @@ namespace BrailleToolkit
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (BrailleWord brWord in m_Words)
+            foreach (BrailleWord brWord in Words)
             {
                 sb.Append(brWord.ToString());
             }
@@ -250,7 +249,7 @@ namespace BrailleToolkit
         /// <returns></returns>
         public bool ContainsTitleTag()
         {
-            if (m_Words.Count > 0 && m_Words[0].Text.Equals(ContextTagNames.Title))
+            if (Words.Count > 0 && Words[0].Text.Equals(ContextTagNames.Title))
             {
                 return true;
             }
@@ -266,10 +265,10 @@ namespace BrailleToolkit
 
             for (int i = this.WordCount - 1; i >= 0; i--)
             {
-                brWord = this.m_Words[i];
+                brWord = this.Words[i];
                 if (brWord.IsContextTag)
                 {
-                    this.m_Words.RemoveAt(i);
+                    this.Words.RemoveAt(i);
                 }
             }
         }
@@ -292,7 +291,7 @@ namespace BrailleToolkit
             StringBuilder sb = new StringBuilder();
             for (i = startIndex; i < this.WordCount; i++)
             {
-                sb.Append(m_Words[i].Text);
+                sb.Append(Words[i].Text);
             }
 
             int idx = sb.ToString().IndexOf(value, comparisonType);
@@ -304,7 +303,7 @@ namespace BrailleToolkit
             // 有找到，但這是字元索引，還必須修正為點字索引。
             for (i = startIndex; i < this.WordCount; i++)
             {
-                idx = idx - m_Words[i].Text.Length + 1;
+                idx = idx - Words[i].Text.Length + 1;
             }
 
             return startIndex + idx;
@@ -321,7 +320,7 @@ namespace BrailleToolkit
             BrailleLine brLine = new BrailleLine();
             BrailleWord newWord = null;
 
-            foreach (BrailleWord brWord in m_Words)
+            foreach (BrailleWord brWord in Words)
             {
                 newWord = brWord.Copy();
                 brLine.Words.Add(newWord);

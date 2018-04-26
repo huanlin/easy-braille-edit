@@ -135,7 +135,7 @@ namespace BrailleToolkit
                 if (line == null)
                     break;
                 lineNumber++;
-                ProcessLine(lineNumber, line);
+                ProcessLine(line, lineNumber);
             }
 
             m_Processor.FormatDocument(this);   // 斷行
@@ -242,9 +242,9 @@ namespace BrailleToolkit
             File.WriteAllText(filename, jsonStr);
         }
 
-        private void ProcessLine(int lineNumber, string line)
+        private void ProcessLine(string line, int lineNumber)
         {
-            BrailleLine brLine = m_Processor.ConvertLine(lineNumber, line);
+            BrailleLine brLine = m_Processor.ConvertLine(line, lineNumber);
             if (brLine != null) 
             {
                 AddLine(brLine);

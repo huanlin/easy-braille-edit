@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 using BrailleToolkit.Data;
+using BrailleToolkit.Helpers;
 using Huanlin.Common.Helpers;
 using NChinese.Phonetic;
 
@@ -24,22 +25,17 @@ namespace BrailleToolkit
     public class BrailleWord
     {
         private static BrailleWord m_Blank;
-
-        private string m_Text;	// 字元。可能是一個英數字、中文字、全形標點符號、或雙字元標點符號，例如：破折號。
-        private BrailleLanguage m_Language;     // 語言國別。用來識別是中文還是英文。
-        private BrailleCellList m_CellList;	    // 點字。        
         private List<string> m_PhoneticCodes;   // 所有注音組字字根（以支援破音字）。
         private int m_ActivePhoneticIndex;      // 目前使用的注音組字字根索引。
-        private bool m_DontBreakLineHere;       // 設定/判別在斷行時是否能斷在這個字。
 
         [NonSerialized]
         private string m_PhoneticCode;          // 注音字根（ㄅㄆㄇㄈ）。
 
         [NonSerialized]
-        private bool m_IsPolyphonic;          // 是否為多音字。
+        private bool m_IsPolyphonic;            // 是否為多音字。
 
         [NonSerialized]
-        private bool m_IsContextTag;            // 是否為情境標籤（情境標籤不會包含實際可印的點字）
+        private bool m_IsContextTag;            
 
         [NonSerialized]
         private bool m_NoDigitCell;             // 是否不加數符。
@@ -54,30 +50,17 @@ namespace BrailleToolkit
             m_Blank = BrailleWord.NewBlank();
         }
 
-        /// <summary>
-        /// 建立並傳回情境標籤的 BrailleWord。
-        /// </summary>
-        /// <param name="tagName"></param>
-        /// <returns></returns>
-        public static BrailleWord CreateAsContextTag(string tagName)
-        {
-            BrailleWord brWord = new BrailleWord();
-            brWord.Text = tagName;
-            brWord.IsContextTag = true;
-
-            return brWord;
-        }
-
         public BrailleWord()
         {
-            m_Text = "";
-            m_Language = BrailleLanguage.Neutral;
-            m_CellList = new BrailleCellList();
+            Text = String.Empty;
+            Language = BrailleLanguage.Neutral;
+            CellList = new BrailleCellList();
 
             m_PhoneticCodes = new List<string>();
             m_ActivePhoneticIndex = -1;
 
-            m_DontBreakLineHere = false;
+            DontBreakLineHere = false;
+            ContextNames = String.Empty;
 
             m_IsContextTag = false;
             m_NoDigitCell = false;
@@ -87,32 +70,32 @@ namespace BrailleToolkit
         public BrailleWord(string aWord, BrailleCellCode brCode)
             : this()
         {
-            m_Text = aWord;
-            m_CellList.Add(BrailleCell.GetInstance(brCode));
+            Text = aWord;
+            CellList.Add(BrailleCell.GetInstance(brCode));
         }
 
         public BrailleWord(string aWord, string brCode) : this()
         {
-            m_Text = aWord;
+            Text = aWord;
             AddCell(brCode);
         }
 
         public BrailleWord(string aWord, byte brCode) : this()
         {
-            m_Text = aWord;
-            m_CellList.Add(BrailleCell.GetInstance(brCode));
+            Text = aWord;
+            CellList.Add(BrailleCell.GetInstance(brCode));
         }
 
         public BrailleWord(string aWord, string phCode, string brCode) : this(aWord, brCode)
         {
-            m_Language = BrailleLanguage.Chinese;
+            Language = BrailleLanguage.Chinese;
             m_PhoneticCodes.Add(phCode);
             m_ActivePhoneticIndex = 0;
         }
 
         public override int GetHashCode()
         {
-            return m_Text.GetHashCode();
+            return Text.GetHashCode();
         }
 
         public override bool Equals(object obj)
@@ -122,11 +105,11 @@ namespace BrailleToolkit
 
             BrailleWord brWord = (BrailleWord)obj;
 
-            if (m_CellList.Count != brWord.Cells.Count)
+            if (CellList.Count != brWord.Cells.Count)
                 return false;
-            for (int i = 0; i < m_CellList.Count; i++)
+            for (int i = 0; i < CellList.Count; i++)
             {				
-                if (!m_CellList[i].Equals(brWord.Cells[i]))
+                if (!CellList[i].Equals(brWord.Cells[i]))
                     return false;
             }
 
@@ -146,7 +129,7 @@ namespace BrailleToolkit
 
         public override string ToString()
         {
-            return m_Text;
+            return Text;
         }
 
         public string ToPositionNumberString(bool useParenthesis)
@@ -178,41 +161,36 @@ namespace BrailleToolkit
 
         public void Clear()
         {
-            m_CellList.Clear();
+            Text = String.Empty;
+            CellList.Clear();
+            ContextTag = null;
+            ContextNames = String.Empty;
         }
 
+        /// <summary>
+        /// 顯示文字。可能是一個英數字、中文字、全形標點符號、或雙字元標點符號，例如：破折號。
+        /// </summary>
         [DataMember]
-        public string Text
-        {
-            get { return m_Text; }
-            set { m_Text = value; }			
-        }
+        public string Text { get; set; }
 
         public int CellCount
         {
-            get { return m_CellList.Count; }
+            get { return CellList.Count; }
         }
         
         public List<BrailleCell> Cells
         {
             get
             {
-                return m_CellList.Items;
+                return CellList.Items;
             }
         }
 
+        /// <summary>
+        /// 點字串列。
+        /// </summary>
         [DataMember]
-        public BrailleCellList CellList
-        {
-            get
-            {
-                return m_CellList;
-            }
-            set
-            {
-                m_CellList = value;
-            }
-        }
+        public BrailleCellList CellList { get; set; }
 
         [DataMember]
         public string PhoneticCode
@@ -271,12 +249,11 @@ namespace BrailleToolkit
             set { m_IsPolyphonic = value; }
         }
 
+        /// <summary>
+        /// 設定/判別在斷行時是否能斷在這個字。
+        /// </summary>
         [DataMember]
-        public bool DontBreakLineHere
-        {
-            get { return m_DontBreakLineHere; }
-            set { m_DontBreakLineHere = value; }
-        }
+        public bool DontBreakLineHere { get; set; }
 
         public List<string> PhoneticCodes
         {
@@ -304,16 +281,55 @@ namespace BrailleToolkit
             }
         }
 
-        public BrailleLanguage Language
+        /// <summary>
+        /// 語言國別。用來識別是中文還是英文。
+        /// </summary>
+        public BrailleLanguage Language { get; set; }
+
+        /// <summary>
+        /// 以空白區隔的 context 名稱，不含 tag 的角括號。例如 "數學 私名號"。
+        /// </summary>
+        [DataMember]
+        public string ContextNames { get; set; } 
+
+        /// <summary>
+        /// ContextTag 屬性會用在轉換點字的過程中暫時保留的語境標籤。
+        /// 這些語境標籤在整個轉點字程序完成時都會被移除（或轉換成對應的點字）。
+        /// 是否可序列化：否。
+        /// </summary>
+        public ContextTag ContextTag { get; set; }
+
+
+        /// <summary>
+        /// 此 word 是否在指定的語境中？
+        /// </summary>
+        /// <param name="contextName">去除左右角括號的語境名稱。</param>
+        /// <returns></returns>
+        public bool IsInContext(string contextName)
         {
-            get
+            return (ContextNames.IndexOf(contextName) >= 0);
+        }
+
+        public void EnterContext(string contextName)
+        {
+            contextName = XmlTagHelper.RemoveBracket(contextName);
+            if (ContextNames.IndexOf(contextName) >= 0)
+                return;
+            ContextNames = $"{ContextNames} {contextName}";
+        }
+
+        public void LeaveContext(string contextName)
+        {
+            contextName = XmlTagHelper.RemoveBracket(contextName);
+            if (ContextNames.IndexOf(contextName) < 0)
+                return;
+            var names = ContextNames.Replace(contextName, String.Empty).Split(' ');
+            var sb = new StringBuilder();
+            foreach (var s in names)
             {
-                return m_Language;
+                sb.Append($"{s} ");
             }
-            set
-            {
-                m_Language = value;
-            }
+            ContextNames = sb.ToString().TrimEnd();
         }
 
         public void SetPhoneticCodes(string[] phCodes)
@@ -329,24 +345,22 @@ namespace BrailleToolkit
         public BrailleWord Copy()
         {
             BrailleWord newBrWord = new BrailleWord();
-            newBrWord.Text = m_Text;
-            newBrWord.Language = m_Language;
-            newBrWord.DontBreakLineHere = m_DontBreakLineHere;
+            newBrWord.Text = Text;
+            newBrWord.Language = Language;
+            newBrWord.DontBreakLineHere = DontBreakLineHere;
             newBrWord.NoDigitCell = m_NoDigitCell;
 
-            foreach (BrailleCell brCell in m_CellList.Items)
+            foreach (BrailleCell brCell in CellList.Items)
             {
                 newBrWord.Cells.Add(brCell);
             }
 
-            newBrWord.PhoneticCode = this.PhoneticCode;
-            newBrWord.IsPolyphonic = this.IsPolyphonic;
+            newBrWord.PhoneticCode = PhoneticCode;
+            newBrWord.IsPolyphonic = IsPolyphonic;
+            newBrWord.IsContextTag = IsContextTag;
+            newBrWord.ContextTag = ContextTag;
+            newBrWord.ContextNames = ContextNames;
 
-/* PhoneticCodes 已經要淘汰
-            newBrWord.PhoneticCodes.Clear();
-            newBrWord.PhoneticCodes.AddRange(m_PhoneticCodes);
-            newBrWord.ActivePhoneticIndex = m_ActivePhoneticIndex;
-*/
             return newBrWord;
         }
 
@@ -356,19 +370,25 @@ namespace BrailleToolkit
         /// <param name="brWord"></param>
         public void Copy(BrailleWord brWord)
         {
-            System.Diagnostics.Debug.Assert(brWord != null, "參數 brWord 不可為 NULL!");
-
-            m_Text = brWord.Text;
-            m_Language = brWord.Language;
-
-            m_CellList.Clear();
-            foreach (BrailleCell brCell in brWord.CellList.Items)
+            if (brWord == null)
             {
-                m_CellList.Add(brCell);
+                throw new ArgumentNullException("參數 brWord 不可為 null!");
             }
 
-            m_PhoneticCode = brWord.PhoneticCode;
-            m_IsPolyphonic = brWord.m_IsPolyphonic;
+            Text = brWord.Text;
+            Language = brWord.Language;
+
+            CellList.Clear();
+            foreach (BrailleCell brCell in brWord.CellList.Items)
+            {
+                CellList.Add(brCell);
+            }
+
+            PhoneticCode = brWord.PhoneticCode;
+            IsPolyphonic = brWord.IsPolyphonic;
+            IsContextTag = brWord.IsContextTag;
+            ContextTag = brWord.ContextTag;
+            ContextNames = brWord.ContextNames;
 /*
             // 複製所有注音字根與點字串列, for 向下相容.
             if (brWord.PhoneticCodes != null)
@@ -396,7 +416,7 @@ namespace BrailleToolkit
                 string s = brCode.Substring(i, 2);
                 byte aByte = StrHelper.HexStrToByte(s);
                 BrailleCell cell = BrailleCell.GetInstance(aByte);
-                m_CellList.Add(cell);
+                CellList.Add(cell);
             }
         }
 
@@ -404,9 +424,9 @@ namespace BrailleToolkit
         {
             get
             {
-                if (m_Text.Length == 1)
+                if (Text.Length == 1)
                 {
-                    if (Char.IsWhiteSpace(m_Text[0]))
+                    if (Char.IsWhiteSpace(Text[0]))
                     {
                         return true;
                     }
@@ -419,9 +439,9 @@ namespace BrailleToolkit
         {
             get
             {
-                if (m_Text.Length == 1)
+                if (Text.Length == 1)
                 {
-                    if (CharHelper.IsAsciiLetter(m_Text[0]))
+                    if (CharHelper.IsAsciiLetter(Text[0]))
                     {
                         return true;
                     }
@@ -434,9 +454,9 @@ namespace BrailleToolkit
         {
             get
             {
-                if (m_Text.Length == 1)
+                if (Text.Length == 1)
                 {
-                    if (CharHelper.IsAsciiDigit(m_Text[0]))
+                    if (CharHelper.IsAsciiDigit(Text[0]))
                     {
                         return true;
                     }
@@ -449,9 +469,9 @@ namespace BrailleToolkit
         {
             get
             {
-                if (m_Text.Length == 1)
+                if (Text.Length == 1)
                 {
-                    if (CharHelper.IsAsciiLetterOrDigit(m_Text[0]))
+                    if (CharHelper.IsAsciiLetterOrDigit(Text[0]))
                     {
                         return true;
                     }
@@ -472,7 +492,7 @@ namespace BrailleToolkit
             {
                 if (!String.IsNullOrEmpty(m_PhoneticCode))
                     return true;
-                if (!String.IsNullOrEmpty(m_Text) && Zhuyin.IsTone(m_Text[0]))
+                if (!String.IsNullOrEmpty(Text) && Zhuyin.IsTone(Text[0]))
                     return true;
                 if (m_PhoneticCodes != null)
                 {
@@ -519,7 +539,9 @@ namespace BrailleToolkit
         }
 
         /// <summary>
-        /// 是否為情境標籤。
+        /// 是否為語境標籤。此屬性與 ContextNames 沒有絕對關係。
+        /// 若為 true，代表此 BraillWord 在原始文件中是一個語境標籤，而且目前還沒有轉換成對應的點字。
+        /// 若為 false，代表此 BraillWord 不是語境標籤，或者已經被轉換成對應的點字。
         /// </summary>
         public bool IsContextTag
         {
@@ -527,9 +549,13 @@ namespace BrailleToolkit
             set
             {
                 m_IsContextTag = value;
-                if (m_IsContextTag)    // 如果是控制字，就要清除點字串列
+                if (m_IsContextTag)    // 如果是語境標籤，就要清除點字串列
                 {
-                    m_CellList.Clear();
+                    CellList.Clear();
+                }
+                else
+                {
+                    ContextTag = null; // 若不是語境標籤，應清除 ContextTag 參考
                 }
             }
         }
@@ -584,7 +610,7 @@ namespace BrailleToolkit
         public static bool IsChinesePunctuation(BrailleWord brWord)
         {
             ChineseBrailleTable chtBrlTbl = ChineseBrailleTable.GetInstance();
-            string brCode = chtBrlTbl.FindPunctuation(brWord.Text);
+            string brCode = chtBrlTbl.GetPunctuationCode(brWord.Text);
             if (String.IsNullOrEmpty(brCode))
                 return false;
             return true;

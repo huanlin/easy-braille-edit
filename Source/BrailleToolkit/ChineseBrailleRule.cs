@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using BrailleToolkit.Extensions;
+using BrailleToolkit.Helpers;
 
 namespace BrailleToolkit
 {
@@ -6,6 +9,59 @@ namespace BrailleToolkit
     {
         const string OpeningSymbols = "「『（【｛＂‘";    // 左開放符號。
         const string ClosingSymbols = "」』）】｝＂’";  // 右封閉符號。
+    
+
+        private static void AddOneSpaceAfterContext_UnlessNextWordIsPunctuation(
+            string contextName, BrailleLine brLine, ref int wordIdx)
+        {
+            if (wordIdx >= brLine.WordCount)
+                return;
+
+            var brWord = brLine[wordIdx];
+            if (brWord.IsInContext(contextName))
+            {
+                // 持續往下移動，直到碰到非此 context 的字。
+                BrailleWord nonContextNeighbor = null;
+                wordIdx++;
+                while (wordIdx < brLine.WordCount)
+                {
+                    brWord = brLine[wordIdx];
+                    if (!brWord.IsInContext(contextName))
+                    {
+                        nonContextNeighbor = brWord;
+                        break;
+                    }
+                    wordIdx++;
+                }
+                if (nonContextNeighbor != null)
+                {
+                    if (!BrailleWordHelper.IsChinesePunctuation(nonContextNeighbor))
+                    {
+                        int insertPosition = wordIdx - 1;
+                        if (!BrailleWord.IsBlank(brLine[insertPosition]))
+                        {
+                            brLine.Insert(insertPosition, BrailleWord.NewBlank());
+                        }
+                    }
+                    return;
+                }
+                return;
+            }
+            wordIdx++;
+        }
+
+        public static void ApplySpecificNameAndBookNameRules(BrailleLine brLine)
+        {
+            var specificName = XmlTagHelper.RemoveBracket(ContextTagNames.SpecificName);
+            var bookName = XmlTagHelper.RemoveBracket(ContextTagNames.BookName);
+
+            int wordIdx = 0;
+            while (wordIdx < brLine.WordCount)
+            {
+                AddOneSpaceAfterContext_UnlessNextWordIsPunctuation(specificName, brLine, ref wordIdx);
+                AddOneSpaceAfterContext_UnlessNextWordIsPunctuation(bookName, brLine, ref wordIdx);
+            }
+        }
 
         /// <summary>
         /// 根據標點符號規則調整一整行點字。
@@ -27,7 +83,7 @@ namespace BrailleToolkit
                 }
 
                 text = brWord.Text;
-                if (text.Length == 3) 
+                if (text.Length == 3)
                 {
                     // 判斷是否為特殊的編號（選擇題的答案編號）
                     if (text[0] == '【' && Char.IsDigit(text[1]) && text[2] == '】')
@@ -120,7 +176,7 @@ namespace BrailleToolkit
                     case "√":   // 打勾符號，前後須加空方，後面接逗號時需特殊處理。
                         if ((wordIdx + 1) < brLine.WordCount)
                         {
-                            string text2 = brLine[wordIdx + 1].Text;                            
+                            string text2 = brLine[wordIdx + 1].Text;
                             if (text2.Equals("，") || text2.Equals(","))
                             {
                                 // 打勾符號後面若跟著逗號，則可連書，且該逗號需用第 6 點。
@@ -229,8 +285,8 @@ namespace BrailleToolkit
             if (!BrailleWord.IsBlank(brWord))  // 若原本已有空方，就不再多加。
             {
                 // 句號可與標點符號連書而無須加空方。例外：句號後面接前引號 "「" 時需加空方。
-                if (OpeningSymbols.IndexOf(brWord.Text) >= 0 || 
-                    BrailleGlobals.ChinesePunctuations.IndexOf(brWord.Text) < 0)  
+                if (OpeningSymbols.IndexOf(brWord.Text) >= 0 ||
+                    !BrailleWordHelper.IsChinesePunctuation(brWord))
                 {
                     brLine.Words.Insert(index, BrailleWord.NewBlank());
                     wordOffset = 1;
@@ -384,7 +440,7 @@ namespace BrailleToolkit
                     if (beginIdx >= 0)
                     {
                         endIdx = wordIdx;
-                        RemoveDigitCell(brLine, beginIdx+1, endIdx-1);
+                        RemoveDigitCell(brLine, beginIdx + 1, endIdx - 1);
                     }
                 }
                 wordIdx++;
@@ -397,7 +453,7 @@ namespace BrailleToolkit
         /// <param name="brLine"></param>
         /// <param name="beginIdx"></param>
         /// <param name="endIdx"></param>
-        public static void RemoveDigitCell(BrailleLine brLine, int beginIdx, int endIdx) 
+        public static void RemoveDigitCell(BrailleLine brLine, int beginIdx, int endIdx)
         {
             if (beginIdx < 0 || endIdx < 0 || beginIdx > endIdx)
                 return;
@@ -411,7 +467,7 @@ namespace BrailleToolkit
                 brWord = brLine[wordIdx];
                 text = brWord.Text;
 
-                if (text.Length > 0 && Char.IsDigit(text[0]) && 
+                if (text.Length > 0 && Char.IsDigit(text[0]) &&
                     brWord.Cells[0].Value == (byte)BrailleCellCode.Digit)
                 {
                     brWord.Cells.RemoveAt(0);	// 移除小數點位.

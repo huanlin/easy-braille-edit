@@ -18,9 +18,6 @@ namespace Test.BrailleToolkit
             Shared.SetupLogger();
         }
 
-        /// <summary>
-        ///A test for Load ()
-        ///</summary>
         [Test]
 		public void Should_LoadFromFileAndConvert_Succeed()
 		{
@@ -32,6 +29,17 @@ namespace Test.BrailleToolkit
 
 			brDoc.LoadAndConvert();
 		}
+
+        [Test]
+        public void Should_ConvertFraction_Succeed()
+        {
+            BrailleProcessor processor =
+                BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
+
+            BrailleDocument brDoc = new BrailleDocument(processor, 32);
+
+            brDoc.Convert("<分數>1/2</分數>");
+        }
 
     }
 

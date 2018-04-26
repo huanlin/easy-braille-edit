@@ -152,6 +152,8 @@ namespace BrailleToolkit.Converters
                 if (brWord == null)
                     break;
 
+                brWord.ContextNames = context.ContextNames;
+
                 if (!isExtracted)
                 {
                     charStack.Pop();
@@ -267,7 +269,7 @@ namespace BrailleToolkit.Converters
                 {
                     // 注意: 不要指定 brWord.PhoneticCode，因為注音符號本身只是個中文符號，
                     //       它並不是中文字，沒有合法的注音組字字根，因此不可指定注音碼。
-                    brCode = _brailleTable.FindPhonetic(text);
+                    brCode = _brailleTable.GetPhoneticCode(text);
                     brWord.AddCell(brCode);
                     return brWord;
                 }
@@ -276,7 +278,7 @@ namespace BrailleToolkit.Converters
                 {
                     // 注意: 不要指定 brWord.PhoneticCode，因為音調記號本身只是個中文符號，
                     //       它並不是中文字，沒有合法的注音組字字根，因此不可指定注音碼。
-                    brCode = _brailleTable.FindTone(text);
+                    brCode = _brailleTable.GetPhoneticToneCode(text);
                     brWord.AddCell(brCode);
 
                     return brWord;
@@ -333,7 +335,7 @@ namespace BrailleToolkit.Converters
             // 不是中文字，或者無法取得注音字根.
 
             // 處理標點符號
-            string puncBrCode = _brailleTable.FindPunctuation(text);
+            string puncBrCode = _brailleTable.GetPunctuationCode(text);
             if (!String.IsNullOrEmpty(puncBrCode))
             {
                 brWord.AddCell(puncBrCode);
@@ -374,10 +376,10 @@ namespace BrailleToolkit.Converters
             string tonePhCode = phcode.Substring(3, 1);		// 音調
 
             // 取出注音符號各部份的點字碼。
-            string firstBrCode = _brailleTable.FindPhonetic(firstPhCode);
-            string secondBrCode = _brailleTable.FindPhonetic(secondPhCode);
-            string thirdBrCode = _brailleTable.FindPhonetic(thirdPhCode);
-            string toneBrCode = _brailleTable.FindTone(tonePhCode);
+            string firstBrCode = _brailleTable.GetPhoneticCode(firstPhCode);
+            string secondBrCode = _brailleTable.GetPhoneticCode(secondPhCode);
+            string thirdBrCode = _brailleTable.GetPhoneticCode(thirdPhCode);
+            string toneBrCode = _brailleTable.GetPhoneticToneCode(tonePhCode);
 
             if (firstBrCode == null && secondBrCode == null && thirdBrCode == null)
             {
@@ -389,7 +391,7 @@ namespace BrailleToolkit.Converters
             // 處理特殊的單音字。
             if (StrHelper.IsEmpty(secondPhCode) && StrHelper.IsEmpty(thirdPhCode))
             {
-                string monoBrCode = _brailleTable.FindMono(firstPhCode);
+                string monoBrCode = _brailleTable.GetPhoneticMonoCode(firstPhCode);
                 if (String.IsNullOrEmpty(monoBrCode))
                 {
                     throw new Exception("無效的注音符號: " + phcode);
@@ -397,7 +399,7 @@ namespace BrailleToolkit.Converters
                 cellList.Add(monoBrCode);
 
                 // 特殊單音字要附加 'ㄦ'
-                string erBrCode = _brailleTable.FindPhonetic("ㄦ");
+                string erBrCode = _brailleTable.GetPhoneticCode("ㄦ");
                 if (String.IsNullOrEmpty(erBrCode))
                 {
                     throw new Exception("點字對照表中無此符號: ㄦ");
@@ -411,7 +413,7 @@ namespace BrailleToolkit.Converters
             }
 
             // 處理結合韻。				
-            string joinedBrCode = _brailleTable.FindJoined(joinedPhCode);
+            string joinedBrCode = _brailleTable.GetPhoneticJoinedCode(joinedPhCode);
             if (!String.IsNullOrEmpty(joinedBrCode))	// 是結合韻？
             {
                 cellList.Add(firstBrCode);	// 加入第一個注音符號

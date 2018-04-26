@@ -43,11 +43,13 @@ namespace BrailleToolkit.Converters
 
 			text = ch.ToString();
 
-			brWord = base.ConvertToBrailleWord(text);
+			brWord = ConvertToBrailleWord(text);
 
 			if (brWord != null)
 			{
-				if (brWordList == null)
+                brWord.ContextNames = context.ContextNames;
+
+                if (brWordList == null)
 				{
 					brWordList = new List<BrailleWord>();
 				}

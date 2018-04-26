@@ -66,13 +66,15 @@ namespace BrailleToolkit.Converters
 
 				text = ch.ToString();
 
-				brWord = base.ConvertToBrailleWord(text);
+				brWord = ConvertToBrailleWord(text);
 
 				if (brWord == null)
 					break;
 
-				// 調整橫線的點字
-				if ("─".Equals(brWord.Text))
+                brWord.ContextNames = context.ContextNames;
+
+                // 調整橫線的點字
+                if ("─".Equals(brWord.Text))
 				{
 					string cellCode;
 

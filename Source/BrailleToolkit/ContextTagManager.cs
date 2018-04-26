@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BrailleToolkit.Helpers;
 
 namespace BrailleToolkit
 {
@@ -9,16 +10,33 @@ namespace BrailleToolkit
     /// </summary>
     public class ContextTagManager
     {
-        private List<ContextTag> m_Tags;
+        private HashSet<ContextTag> m_Tags;
 
         public ContextTagManager()
         {
-            m_Tags = new List<ContextTag>();
+            m_Tags = new HashSet<ContextTag>();
 
             foreach (string tagName in ContextTag.AllTagNames) 
             {
                 m_Tags.Add(ContextTag.CreateInstance(tagName));
             }
+
+            ContextNames = String.Empty;
+        }
+
+        public string ContextNames { get; private set; }
+
+        public void UpdateContextNames()
+        {
+            var sb = new StringBuilder();
+            foreach (var tag in m_Tags)
+            {
+                if (tag.IsActive)
+                {
+                    sb.Append($"{XmlTagHelper.RemoveBracket(tag.TagName)} ");
+                }
+}
+            ContextNames = sb.ToString().TrimEnd();
         }
 
         /// <summary>
@@ -30,6 +48,19 @@ namespace BrailleToolkit
             {
                 tag.Reset();
             }
+            ContextNames = String.Empty;
+        }
+
+        public void EnterContext(ContextTag tag)
+        {
+            tag.Enter();
+            UpdateContextNames();
+        }
+
+        public void LeaveContext(ContextTag tag)
+        {
+            tag.Leave();
+            UpdateContextNames();
         }
 
         /// <summary>
@@ -48,14 +79,14 @@ namespace BrailleToolkit
 
             isBeginTag = false;
 
-            foreach (ContextTag tag in m_Tags)
+            foreach (var tag in m_Tags)
             {
                 beginTag = tag.TagName;
                 endTag = beginTag.Insert(1, "/");
                 if (s.StartsWith(beginTag))
                 {
                     // 進入此情境
-                    tag.Enter();
+                    EnterContext(tag);
 
                     result = tag;
                     isBeginTag = true;
@@ -64,13 +95,14 @@ namespace BrailleToolkit
                 else if (s.StartsWith(endTag)) // 結束標籤
                 {
                     // 離開此情境
-                    tag.Leave();
+                    LeaveContext(tag);
 
                     result = tag;
                     isBeginTag = false;
                     break;
                 }
             }
+            
             return result;
         }
 
@@ -98,7 +130,7 @@ namespace BrailleToolkit
                 if (s.StartsWith(beginTag))
                 {
                     // 進入此情境
-                    tag.Enter();
+                    EnterContext(tag);
 
                     result = tag;
                     break;
@@ -106,7 +138,7 @@ namespace BrailleToolkit
                 else if (s.StartsWith(endTag)) // 結束標籤
                 {
                     // 離開此情境
-                    tag.Leave();
+                    LeaveContext(tag);
 
                     result = tag;
                     break;

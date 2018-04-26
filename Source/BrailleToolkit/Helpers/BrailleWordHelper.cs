@@ -9,6 +9,16 @@ namespace BrailleToolkit.Extensions
 {
     public static class BrailleWordHelper
     {
+
+        public static bool IsChinesePunctuation(BrailleWord brWord)
+        {
+            if (brWord == null)
+            {
+                throw new ArgumentNullException("呼叫 IsChinesePunctuation() 時傳入了 null 參數", nameof(brWord));
+            }
+            return (BrailleGlobals.ChinesePunctuations.IndexOf(brWord.Text) >= 0);
+        }
+
         public static string ToString(this List<BrailleWord> brWordList)
         {
             var sb = new StringBuilder();

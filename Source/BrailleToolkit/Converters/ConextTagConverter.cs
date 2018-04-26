@@ -46,18 +46,22 @@ namespace BrailleToolkit.Converters
 
             if (ctag != null)
             {
-                string tagName = ctag.TagName;
-                if (isBeginTag == false)
-                {
-                    tagName = ctag.EndTagName;
-                }
+                // 控制字（語境字）
 
-                // 轉換成控制字
+                // var brWord = ctag.ToBrailleWord(isBeginTag);
+                var brWord = new BrailleWord();
+
+                brWord.Text = isBeginTag ? ctag.TagName : ctag.EndTagName;
+                brWord.ContextTag = ctag;
+                brWord.IsContextTag = true;
+                brWord.ContextNames = context.ContextNames;
+
                 brWordList = new List<BrailleWord>();
-                brWordList.Add(BrailleWord.CreateAsContextTag(tagName));
+                brWordList.Add(brWord);
+
 
                 // 將此標籤從堆疊中移除。
-                for (int i = 0; i < tagName.Length; i++)
+                for (int i = 0; i < brWord.Text.Length; i++)
                 {
                     charStack.Pop();
                 }

@@ -395,9 +395,9 @@ namespace BrailleToolkit
                     {
                         case '＋':
                         case '－':
-                        case '×':   // 全型乘號 (VS2005 編輯器無法正確顯示)
-                        case '÷':   // 全型除號 (VS2005 編輯器無法正確顯示)
-						case '（':
+                        case '×':   // 全型乘號 (有些編輯器無法正確顯示)
+                        case '÷':   // 全型除號 (有些編輯器無法正確顯示)
+                        case '（':
 						case '【':	// // 用粗中刮弧把數字包起來時，代表題號，不用加空方.
                             return false;
                     }
@@ -414,14 +414,19 @@ namespace BrailleToolkit
                 {
                     switch (currChar) 
                     {
-                        case '∘':  // 溫度符號
+                        case '。':   // 句號
+                        case '，':   // 逗號
+                        case '；':   // 分號
+                        case '∘':    // 溫度符號
                         case '℃':
                         case '＋':
                         case '－':
-                        case '×':   // 全型乘號 (VS2005 編輯器無法正確顯示)
-                        case '÷':   // 全型除號 (VS2005 編輯器無法正確顯示)
-						case '）':
-						case '】':	// 用粗中刮弧把數字包起來時，代表題號，不用加空方.
+                        case '×':   // 全型乘號 (有些編輯器無法正確顯示)
+                        case '÷':   // 全型除號 (有些編輯器無法正確顯示)
+                        case '）':
+                        case '」':
+                        case '』':
+                        case '】':	// 用粗中刮弧把數字包起來時，代表題號，不用加空方.
                             return false;
                     }                    
                 }

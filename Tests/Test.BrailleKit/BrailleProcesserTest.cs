@@ -219,11 +219,11 @@ namespace Test.BrailleToolkit
         {
             BrailleProcessor target = BrailleProcessor.GetInstance();
 
-            string line = "<書名號>哈利波特</書名號>, <書名號>地下室手記</書名號>";
-            string expected = "﹏﹏哈利波特 , ﹏﹏地下室手記 ";
-            string actual = target.PreprocessTagsForLine(line);
+            string line = "<編號>1</編號>";
+            string expected = "#1 ";
+            string actual = target.ReplaceTagsWithConvertableText(line);
 
-            Assert.AreEqual(expected, actual, "BrailleProcesser.PreprocessTags 測試失敗!");
+            Assert.AreEqual(expected, actual);
         }
 
         [TestCase(
@@ -281,24 +281,17 @@ namespace Test.BrailleToolkit
 
 
         [TestCase("<私名號>台北</私名號>。", "(56 56)(124 2456 2)(135 356 4)(36)")]
+        [TestCase("<書名號>魔戒</書名號>。", "(6 36)(134 126 2)(13 346 5)(36)")]
         public void Should_NoSpace_BetweenSpecificNameAndPunctuation(string inputText, string expectedPositionNumbers)
         {
-            /*
-             *
-            測試私名號、書名號。
-            line = "<私名號>蔡煥麟</私名號>，<書名號>倚天屠龍記</書名號>";
-            expected = "╴╴蔡煥麟 ，﹏﹏倚天屠龍記 ";
-            brLine = target.ConvertLine(line);
-            actual = brLine.ToString();
-            Assert.AreEqual(expected, actual, msg + line);
-             */
-
             BrailleProcessor processor =
                 BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
 
-            BrailleLine brLine = processor.ConvertLine(inputText);
+            BrailleLine brLine = processor.ConvertLine(inputText);            
 
-            var result = brLine.ToPositionNumberString();
+            var lines = processor.FormatLine(brLine, BrailleConst.DefaultCellsPerLine, new ContextTagManager());
+
+            var result = lines[0].ToPositionNumberString();
             Assert.AreEqual(result, expectedPositionNumbers);
         }
 
@@ -309,6 +302,7 @@ namespace Test.BrailleToolkit
                 BrailleProcessor.GetInstance(new ZhuyinReverseConverter(null));
 
             BrailleLine brLine = processor.ConvertLine(inputText);
+
             var result = brLine.ToPositionNumberString();
             Assert.AreEqual(result, expectedPositionNumbers);
         }

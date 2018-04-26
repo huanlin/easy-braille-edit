@@ -114,6 +114,8 @@ namespace BrailleToolkit.Converters
                 if (brWord == null)
                      break;
 
+                brWord.ContextNames = context.ContextNames;
+
                 if (!isExtracted)
                 {
                     charStack.Pop();
