@@ -99,7 +99,6 @@ namespace BrailleToolkit
         private List<WordConverter> m_Converters;
 
 		private Hashtable m_ReplacaebleTags;
-        private ContextTagManager m_ContextTagManager;
         private StringBuilder m_ErrorMsg;           // 轉換過程中發生的錯誤訊息。
 
         private event ConvertionFailedEventHandler m_ConvertionFailedEvent;
@@ -133,7 +132,7 @@ namespace BrailleToolkit
             m_ReplacaebleTags.Add(TextTag.Unit3End, new string('﹋', 20)); // 小題結束
             m_ReplacaebleTags.Add(TextTag.BrailleComment, "★");   // 點譯者註
 
-            m_ContextTagManager = new ContextTagManager();
+            ContextManager = new ContextTagManager();
 
             InvalidChars = new List<CharPosition>();
 			m_ErrorMsg = new StringBuilder();
@@ -207,11 +206,13 @@ namespace BrailleToolkit
 			get { return m_ErrorMsg.ToString(); }
 		}
 
+        public ContextTagManager ContextManager { get; private set; }
+
         #endregion
 
-		#region 事件
+        #region 事件
 
-		public event ConvertionFailedEventHandler ConvertionFailed
+        public event ConvertionFailedEventHandler ConvertionFailed
 		{
 			add
 			{
@@ -360,7 +361,7 @@ namespace BrailleToolkit
         {
 			m_ErrorMsg.Length = 0;
             InvalidChars.Clear();
-            m_ContextTagManager.Reset();
+            ContextManager.Reset();
         }
 
         /// <summary>
@@ -457,7 +458,7 @@ namespace BrailleToolkit
 				}				
 
 				// 如果進入分數情境，就把整個分數處理完。
-				if (m_ContextTagManager.IsActive(ContextTagNames.Fraction))
+				if (ContextManager.IsActive(ContextTagNames.Fraction))
 				{
 					try
 					{
@@ -543,39 +544,39 @@ namespace BrailleToolkit
                 // 1. 轉換語境標籤。NOTE: 語境標籤一定要先處理!
 				if (chars.Count > 0 && ControlTagConverter != null)
                 {
-                    brWordList = ControlTagConverter.Convert(chars, m_ContextTagManager);
+                    brWordList = ControlTagConverter.Convert(chars, ContextManager);
                     if (brWordList != null && brWordList.Count > 0)
                         return brWordList;
                 }
 
                 // 2. 轉換座標符號
-				if (chars.Count > 0 && m_CoordConverter != null && m_ContextTagManager.IsActive(ContextTagNames.Coordinate))
+				if (chars.Count > 0 && m_CoordConverter != null && ContextManager.IsActive(ContextTagNames.Coordinate))
                 {
-                    brWordList = m_CoordConverter.Convert(chars, m_ContextTagManager);
+                    brWordList = m_CoordConverter.Convert(chars, ContextManager);
                     if (brWordList != null && brWordList.Count > 0)
                         return brWordList;
                 }                
 
                 // 3. 轉換數學符號。
-                if (chars.Count > 0 && m_ContextTagManager.IsActive(ContextTagNames.Math) && MathConverter != null)
+                if (chars.Count > 0 && ContextManager.IsActive(ContextTagNames.Math) && MathConverter != null)
                 {
-                    brWordList = MathConverter.Convert(chars, m_ContextTagManager);
+                    brWordList = MathConverter.Convert(chars, ContextManager);
                     if (brWordList != null && brWordList.Count > 0)
                         return brWordList;
                 }
 
 				// 4. 轉換表格符號。
-				if (chars.Count > 0 && m_ContextTagManager.IsActive(ContextTagNames.Table) && m_TableConverter != null)
+				if (chars.Count > 0 && ContextManager.IsActive(ContextTagNames.Table) && m_TableConverter != null)
 				{
-					brWordList = m_TableConverter.Convert(chars, m_ContextTagManager);
+					brWordList = m_TableConverter.Convert(chars, ContextManager);
 					if (brWordList != null && brWordList.Count > 0)
 						return brWordList;
 				}
 
 				// 5. 轉換音標符號.
-				if (chars.Count > 0 && m_ContextTagManager.IsActive(ContextTagNames.Phonetic) && m_PhoneticConverter != null)
+				if (chars.Count > 0 && ContextManager.IsActive(ContextTagNames.Phonetic) && m_PhoneticConverter != null)
 				{
-					brWordList = m_PhoneticConverter.Convert(chars, m_ContextTagManager);
+					brWordList = m_PhoneticConverter.Convert(chars, ContextManager);
 					if (brWordList != null && brWordList.Count > 0)
 						return brWordList;
 				}				
@@ -584,7 +585,7 @@ namespace BrailleToolkit
 				if (chars.Count > 0 && ChineseConverter != null)
                 {
                     // 若成功轉換成點字，就不再 pass 給其它轉換器。
-                    brWordList = ChineseConverter.Convert(chars, m_ContextTagManager);
+                    brWordList = ChineseConverter.Convert(chars, ContextManager);
                     if (brWordList != null && brWordList.Count > 0)
                         return brWordList;
                 }
@@ -593,7 +594,7 @@ namespace BrailleToolkit
 				if (chars.Count > 0 &&  EnglishConverter != null)
                 {
                     // 若成功轉換成點字，就不再 pass 給其它轉換器。
-                    brWordList = EnglishConverter.Convert(chars, m_ContextTagManager);
+                    brWordList = EnglishConverter.Convert(chars, ContextManager);
                     if (brWordList != null && brWordList.Count > 0)
                         return brWordList;
                 }
@@ -605,7 +606,7 @@ namespace BrailleToolkit
 				foreach (WordConverter cvt in m_Converters)
 				{
 					// 若其中一個轉換器成功轉換成點字，就不再 pass 給其它轉換器。
-					brWordList = cvt.Convert(chars, m_ContextTagManager);
+					brWordList = cvt.Convert(chars, ContextManager);
 					if (brWordList != null && brWordList.Count > 0)
 						return brWordList;
 				}
@@ -1332,7 +1333,7 @@ namespace BrailleToolkit
         /// <returns>若傳入的字串不是原書頁碼，則傳回 -1，否則傳回原書頁碼。</returns>
         public static int GetOrgPageNumber(string line)
         {
-            if (BrailleProcessor.IsOrgPageNumber(line))
+            if (IsOrgPageNumber(line))
             {
                 line = line.Remove(0, 36);
 				try
