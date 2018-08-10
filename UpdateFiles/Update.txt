@@ -22,6 +22,6 @@ Serilog.dll                      ; 2.7.1
 Serilog.Settings.AppSettings.dll ; 2.2.1
 Serilog.Sinks.File.dll           ; 4.0.1
 Serilog.Sinks.RollingFile.dll    ; 3.3.1
-;System.ValueTuple.dll            ; 4.6.26515
-;System.Net.Http.dll              ; 4.6.1055
+System.ValueTuple.dll            ; 4.6.26515
+System.Net.Http.dll              ; 4.6.1055
 SourceGrid.dll                   ; 4.40
