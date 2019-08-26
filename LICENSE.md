@@ -1,6 +1,6 @@
 # The MIT License
 
-Copyright (C) 2007-2018 Michael Tsai (蔡煥麟).
+Copyright (C) 2007-2019 Michael Tsai (蔡煥麟).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
