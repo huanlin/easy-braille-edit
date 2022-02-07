@@ -7,8 +7,8 @@
 ' - 特定版本號碼代表若 client 端版本比這裡指定的版本還要舊，則下載。
 '===================================================================
 AppConfig.Default.ini                                  ; ?
-EasyBrailleEdit.exe.config                             ; ?
-Txt2Brl.exe.config                                     ; ? 
+EasyBrailleEdit.dll.config                             ; ?
+Txt2Brl.dll.config                                     ; ? 
 EasyBrailleEdit.deps.json                              ; ?
 EasyBrailleEdit.runtimeconfig.json                     ; ?
 Txt2Brl.deps.json                                      ; ?
