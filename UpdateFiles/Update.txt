@@ -60,4 +60,4 @@ System.ServiceModel.Syndication.dll                    ; 6.0.21.52210
 System.ServiceProcess.ServiceController.dll            ; 6.0.21.52210           
 System.Speech.dll                                      ; 6.0.21.52210           
 System.Web.Services.Description.dll                    ; 4.900.21.52002         
-zh-Hant/ScintillaNET_FindReplaceTools.resources.dll    ; 1.5.2.0
+zh-Hant/ScintillaNET_FindReplaceDialog.resources.dll   ; 1.5.2.0
