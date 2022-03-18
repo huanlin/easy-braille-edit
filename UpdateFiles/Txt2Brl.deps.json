@@ -6,14 +6,14 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "Txt2Brl/4.1.2": {
+      "Txt2Brl/4.1.4": {
         "dependencies": {
           "BrailleToolkit": "1.0.0",
           "CommandLineParser": "2.8.0",
           "EasyBrailleEdit.Common": "1.0.0",
           "Huanlin.Common": "5.1.0",
-          "MinVer": "2.5.0",
-          "NChinese": "0.7.0",
+          "MinVer": "3.0.0",
+          "NChinese": "0.7.1",
           "Serilog": "2.10.0",
           "Serilog.Settings.AppSettings": "2.2.2",
           "Serilog.Sinks.File": "5.0.0"
@@ -82,8 +82,8 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "MinVer/2.5.0": {},
-      "NChinese/0.7.0": {
+      "MinVer/3.0.0": {},
+      "NChinese/0.7.1": {
         "dependencies": {
           "Serilog": "2.10.0",
           "System.ValueTuple": "4.5.0"
@@ -91,7 +91,7 @@
         "runtime": {
           "lib/net6.0/NChinese.dll": {
             "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.7.0.0"
+            "fileVersion": "0.7.1.0"
           }
         }
       },
@@ -970,7 +970,7 @@
         "dependencies": {
           "EasyBrailleEdit.Common": "1.0.0",
           "Huanlin.Common": "5.1.0",
-          "NChinese": "0.7.0",
+          "NChinese": "0.7.1",
           "Serilog": "2.10.0",
           "Serilog.Sinks.File": "5.0.0"
         },
@@ -989,7 +989,7 @@
     }
   },
   "libraries": {
-    "Txt2Brl/4.1.2": {
+    "Txt2Brl/4.1.4": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -1043,19 +1043,19 @@
       "path": "microsoft.win32.primitives/4.3.0",
       "hashPath": "microsoft.win32.primitives.4.3.0.nupkg.sha512"
     },
-    "MinVer/2.5.0": {
+    "MinVer/3.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+vgY+COxnu93nZEVYScloRuboNRIYkElokxTdtKLt6isr/f6GllPt0oLfrHj7fzxgj7SC5xMZg5c2qvd6qyHDQ==",
-      "path": "minver/2.5.0",
-      "hashPath": "minver.2.5.0.nupkg.sha512"
+      "sha512": "sha512-nI92y6XDCQVS18HtP5cByo0lQtlMHcw9kgNAYjIwpmPMtRNc5rHVuPbZV5CSMAh0rJhxNDpNb/n/3R/nf+12pg==",
+      "path": "minver/3.0.0",
+      "hashPath": "minver.3.0.0.nupkg.sha512"
     },
-    "NChinese/0.7.0": {
+    "NChinese/0.7.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-XyIiUTh/rNIsLsctyUw3ZwClJxPUgE4Qoar6jhzA0BnXOIDfPZ1Ao/HLbvORPPtkt9Q577/VZU5vBTr9Y5yJbA==",
-      "path": "nchinese/0.7.0",
-      "hashPath": "nchinese.0.7.0.nupkg.sha512"
+      "sha512": "sha512-KJDkOHMTkyL/vUu2nUpR8AlvcrQBgv7FJ7ct6e/FbPRDfW/dTAwVkm8L37Y9kkeIp6wkDeskkEtdMnqVumfJ5Q==",
+      "path": "nchinese/0.7.1",
+      "hashPath": "nchinese.0.7.1.nupkg.sha512"
     },
     "NETStandard.Library/1.6.1": {
       "type": "package",
