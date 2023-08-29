@@ -1,20 +1,20 @@
 {
   "runtimeTarget": {
-    "name": ".NETCoreApp,Version=v6.0",
+    "name": ".NETCoreApp,Version=v7.0",
     "signature": ""
   },
   "compilationOptions": {},
   "targets": {
-    ".NETCoreApp,Version=v6.0": {
-      "Txt2Brl/4.1.4": {
+    ".NETCoreApp,Version=v7.0": {
+      "Txt2Brl/4.2.3-alpha.0.1": {
         "dependencies": {
           "BrailleToolkit": "1.0.0",
-          "CommandLineParser": "2.8.0",
+          "CommandLineParser": "2.9.1",
           "EasyBrailleEdit.Common": "1.0.0",
-          "Huanlin.Common": "5.1.0",
-          "MinVer": "3.0.0",
-          "NChinese": "0.7.1",
-          "Serilog": "2.10.0",
+          "Huanlin.Common": "5.2.0",
+          "MinVer": "4.3.0",
+          "NChinese": "1.1.0",
+          "Serilog": "3.0.1",
           "Serilog.Settings.AppSettings": "2.2.2",
           "Serilog.Sinks.File": "5.0.0"
         },
@@ -22,34 +22,34 @@
           "Txt2Brl.dll": {}
         }
       },
-      "CommandLineParser/2.8.0": {
+      "CommandLineParser/2.9.1": {
         "runtime": {
           "lib/netstandard2.0/CommandLine.dll": {
-            "assemblyVersion": "2.8.0.0",
-            "fileVersion": "2.8.0.0"
+            "assemblyVersion": "2.9.1.0",
+            "fileVersion": "2.9.1.0"
           }
         }
       },
-      "Huanlin.Common/5.1.0": {
+      "Huanlin.Common/5.2.0": {
         "dependencies": {
-          "Microsoft.AspNet.WebApi.Client": "5.2.7"
+          "Microsoft.AspNet.WebApi.Client": "5.2.9"
         },
         "runtime": {
-          "lib/net6.0/Huanlin.Common.dll": {
+          "lib/net7.0/Huanlin.Common.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.1.0.0"
+            "fileVersion": "5.2.0.0"
           }
         }
       },
-      "Microsoft.AspNet.WebApi.Client/5.2.7": {
+      "Microsoft.AspNet.WebApi.Client/5.2.9": {
         "dependencies": {
           "Newtonsoft.Json": "10.0.1",
           "Newtonsoft.Json.Bson": "1.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/System.Net.Http.Formatting.dll": {
-            "assemblyVersion": "5.2.7.0",
-            "fileVersion": "5.2.61128.0"
+            "assemblyVersion": "5.2.9.0",
+            "fileVersion": "5.2.61129.10"
           }
         }
       },
@@ -82,16 +82,16 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "MinVer/3.0.0": {},
-      "NChinese/0.7.1": {
+      "MinVer/4.3.0": {},
+      "NChinese/1.1.0": {
         "dependencies": {
-          "Serilog": "2.10.0",
+          "Serilog": "3.0.1",
           "System.ValueTuple": "4.5.0"
         },
         "runtime": {
-          "lib/net6.0/NChinese.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.7.1.0"
+          "lib/net7.0/NChinese.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.1.0.0"
           }
         }
       },
@@ -239,17 +239,17 @@
       "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
-      "Serilog/2.10.0": {
+      "Serilog/3.0.1": {
         "runtime": {
-          "lib/netstandard2.1/Serilog.dll": {
+          "lib/net7.0/Serilog.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.10.0.0"
+            "fileVersion": "3.0.1.0"
           }
         }
       },
       "Serilog.Settings.AppSettings/2.2.2": {
         "dependencies": {
-          "Serilog": "2.10.0",
+          "Serilog": "3.0.1",
           "System.Configuration.ConfigurationManager": "4.4.1"
         },
         "runtime": {
@@ -261,7 +261,7 @@
       },
       "Serilog.Sinks.File/5.0.0": {
         "dependencies": {
-          "Serilog": "2.10.0"
+          "Serilog": "3.0.1"
         },
         "runtime": {
           "lib/net5.0/Serilog.Sinks.File.dll": {
@@ -969,9 +969,9 @@
       "BrailleToolkit/1.0.0": {
         "dependencies": {
           "EasyBrailleEdit.Common": "1.0.0",
-          "Huanlin.Common": "5.1.0",
-          "NChinese": "0.7.1",
-          "Serilog": "2.10.0",
+          "Huanlin.Common": "5.2.0",
+          "NChinese": "1.1.0",
+          "Serilog": "3.0.1",
           "Serilog.Sinks.File": "5.0.0"
         },
         "runtime": {
@@ -989,31 +989,31 @@
     }
   },
   "libraries": {
-    "Txt2Brl/4.1.4": {
+    "Txt2Brl/4.2.3-alpha.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "CommandLineParser/2.8.0": {
+    "CommandLineParser/2.9.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-eco2HlKQBY4Joz9odHigzGpVzv6pjsXnY5lziioMveQxr+i2Z7xYcIOMeZTgYiqnMtMAbXMXsVhrNfWO5vJS8Q==",
-      "path": "commandlineparser/2.8.0",
-      "hashPath": "commandlineparser.2.8.0.nupkg.sha512"
+      "sha512": "sha512-OE0sl1/sQ37bjVsPKKtwQlWDgqaxWgtme3xZz7JssWUzg5JpMIyHgCTY9MVMxOg48fJ1AgGT3tgdH5m/kQ5xhA==",
+      "path": "commandlineparser/2.9.1",
+      "hashPath": "commandlineparser.2.9.1.nupkg.sha512"
     },
-    "Huanlin.Common/5.1.0": {
+    "Huanlin.Common/5.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hquKFIU2Kq7i0tU0qzXljUbQKEW+zR9pRsXpvlotl4ZMIY56A+1sb+2p8QqqjSC/tyaesyoorjNFYmQWlbtWsA==",
-      "path": "huanlin.common/5.1.0",
-      "hashPath": "huanlin.common.5.1.0.nupkg.sha512"
+      "sha512": "sha512-v5M9mjDI+jYhBTmvwlnk1a3hx6JYtM//n6yD3wsP7iCbpAtqoi1QXoKroIpkY9ADdXnhwMAPM8X77u3OGI0XMA==",
+      "path": "huanlin.common/5.2.0",
+      "hashPath": "huanlin.common.5.2.0.nupkg.sha512"
     },
-    "Microsoft.AspNet.WebApi.Client/5.2.7": {
+    "Microsoft.AspNet.WebApi.Client/5.2.9": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-/76fAHknzvFqbznS6Uj2sOyE9rJB3PltY+f53TH8dX9RiGhk02EhuFCWljSj5nnqKaTsmma8DFR50OGyQ4yJ1g==",
-      "path": "microsoft.aspnet.webapi.client/5.2.7",
-      "hashPath": "microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512"
+      "sha512": "sha512-cuVhPjjNMSEFpKXweMNBbsG4RUFuuZpFBm8tSyw309U9JEjcnbB6n3EPb4xwgcy9bJ38ctIbv5G8zXUBhlrPWw==",
+      "path": "microsoft.aspnet.webapi.client/5.2.9",
+      "hashPath": "microsoft.aspnet.webapi.client.5.2.9.nupkg.sha512"
     },
     "Microsoft.CSharp/4.3.0": {
       "type": "package",
@@ -1043,19 +1043,19 @@
       "path": "microsoft.win32.primitives/4.3.0",
       "hashPath": "microsoft.win32.primitives.4.3.0.nupkg.sha512"
     },
-    "MinVer/3.0.0": {
+    "MinVer/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-nI92y6XDCQVS18HtP5cByo0lQtlMHcw9kgNAYjIwpmPMtRNc5rHVuPbZV5CSMAh0rJhxNDpNb/n/3R/nf+12pg==",
-      "path": "minver/3.0.0",
-      "hashPath": "minver.3.0.0.nupkg.sha512"
+      "sha512": "sha512-YNVAW3loCFW4kTwensApaZUl+7xREK75QQNOFSbsbXx2sCSm9/IHBjUHsJGn3u0UA5r/sAqrdYBNUlOFfLhUrA==",
+      "path": "minver/4.3.0",
+      "hashPath": "minver.4.3.0.nupkg.sha512"
     },
-    "NChinese/0.7.1": {
+    "NChinese/1.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-KJDkOHMTkyL/vUu2nUpR8AlvcrQBgv7FJ7ct6e/FbPRDfW/dTAwVkm8L37Y9kkeIp6wkDeskkEtdMnqVumfJ5Q==",
-      "path": "nchinese/0.7.1",
-      "hashPath": "nchinese.0.7.1.nupkg.sha512"
+      "sha512": "sha512-vfyn2WcIUn7HMjEfrKtpwCd3zwogQKZoE6vhJglOFDu3Z68KoD8Oip2wEbWqfvSoIAr/vUnOZEC/EXShJLCrJQ==",
+      "path": "nchinese/1.1.0",
+      "hashPath": "nchinese.1.1.0.nupkg.sha512"
     },
     "NETStandard.Library/1.6.1": {
       "type": "package",
@@ -1190,12 +1190,12 @@
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
     },
-    "Serilog/2.10.0": {
+    "Serilog/3.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+QX0hmf37a0/OZLxM3wL7V6/ADvC1XihXN4Kq/p6d8lCPfgkRdiuhbWlMaFjR9Av0dy5F0+MBeDmDdRZN/YwQA==",
-      "path": "serilog/2.10.0",
-      "hashPath": "serilog.2.10.0.nupkg.sha512"
+      "sha512": "sha512-E4UmOQ++eNJax1laE+lws7E3zbhKgHsGJbO7ra0yE5smUh+5FfUPIKKBxM3MO1tK4sgpQke6/pLReDxIc/ggNw==",
+      "path": "serilog/3.0.1",
+      "hashPath": "serilog.3.0.1.nupkg.sha512"
     },
     "Serilog.Settings.AppSettings/2.2.2": {
       "type": "package",
