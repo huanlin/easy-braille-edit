@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v7.0": {
-      "Txt2Brl/4.2.1-alpha.0.27": {
+      "Txt2Brl/4.2.4": {
         "dependencies": {
           "BrailleToolkit": "1.0.0",
           "CommandLineParser": "2.9.1",
@@ -989,7 +989,7 @@
     }
   },
   "libraries": {
-    "Txt2Brl/4.2.1-alpha.0.27": {
+    "Txt2Brl/4.2.4": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
